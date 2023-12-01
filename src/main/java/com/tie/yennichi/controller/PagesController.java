@@ -1,4 +1,4 @@
-package com.tie_japanese.yen_nichi.controller;
+package com.tie.yennichi.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

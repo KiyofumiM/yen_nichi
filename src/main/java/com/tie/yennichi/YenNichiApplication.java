@@ -1,4 +1,4 @@
-package com.tie_japanese.yen_nichi;
+package com.tie.yennichi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

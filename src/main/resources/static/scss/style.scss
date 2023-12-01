@@ -12,6 +12,7 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   width: 100%;
   z-index: 10000;
+  height: 60px;
 }
 #messages {
   ul{
@@ -35,9 +36,9 @@ h1, h2, h3, h4, h5, h6 {
 nav.navbar {
   background-color: rgba(253,239,242,0.5);
   border: 1px solid transparent;
-  border-color: white;
+  border-color:#19448e;
   border-width: 0 0 1px;
-  margin-bottom: 20px ;
+  margin-bottom: 0px ;
   padding: 0;
   a {
     color: #164a84;

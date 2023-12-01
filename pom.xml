@@ -9,11 +9,11 @@
 		<version>2.7.17</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.tie_japanese.yen_nichi</groupId>
-	<artifactId>yen_nichi</artifactId>
+	<groupId>com.tie.yennichi</groupId>
+	<artifactId>yennichi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>yen_nichi</name>
-	<description>yen_nichi</description>
+	<name>yennichi</name>
+	<description>yennichi</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -48,6 +48,34 @@
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
 		</dependency>
 	</dependencies>
 
