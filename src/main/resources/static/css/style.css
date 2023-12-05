@@ -71,14 +71,32 @@ nav.navbar {
   .users-new-wrapper main {
     padding-top: 80px; }
 
+.contents-index-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/images/cherryblossom.png");
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fef4f4; }
+  .contents-index-wrapper .container {
+    padding-top: 80px; }
+    .contents-index-wrapper .container h3 {
+      font-size: 36px;
+      margin-bottom: 10px; }
+    .contents-index-wrapper .container h4 {
+      margin-bottom: 30px; }
+
 .topics-new-wrapper, .comments-new-wrapper {
-  padding-top: 80px; }
+  padding-top: 80px;
+  background-color: #fafafa; }
   .topics-new-wrapper #description, .comments-new-wrapper #description {
     height: 80px; }
 
 .topics-index-wrapper {
   padding: 80px 0 20px;
-  background-image: url("/images/cherryblossom.png");
+  background-image: url("/images/maple.png");
   background-color: #fafafa;
   min-height: calc(100vh - 180px);
   overflow: hidden; }
@@ -89,7 +107,7 @@ nav.navbar {
     border: 1px solid #e6ecf0;
     border-radius: 6px; }
     .topics-index-wrapper main .author {
-      margin-top: 10px;
+      margin: 10px;
       padding: 0 20px; }
     .topics-index-wrapper main .image {
       margin: 10px 0;

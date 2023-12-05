@@ -1,88 +1,73 @@
 package com.tie.yennichi;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.OrRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.tie.yennichi.filter.FormAuthenticationProvider;
 import com.tie.yennichi.repository.UserRepository;
 
 @Configuration
-@EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    protected static Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    UserDetailsService service;
+
     @Autowired
     private FormAuthenticationProvider authenticationProvider;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
-            throws Exception {
-        MvcRequestMatcher h2RequestMatcher = new MvcRequestMatcher(introspector, "/**");
-        h2RequestMatcher.setServletPath("/h2-console");
+    private static final String[] URLS = { "/css/**", "/images/**", "/scripts/**", "/h2-console/**" , "/favicon.ico"};
 
-        RequestMatcher publicMatchers = new OrRequestMatcher(
-                new AntPathRequestMatcher("/"),
-                new AntPathRequestMatcher("/error"),
-                new AntPathRequestMatcher("/h2-console/**"),
-                new AntPathRequestMatcher("/login"),
-                new AntPathRequestMatcher("/users/new"),
-                new AntPathRequestMatcher("/user"),
-                new AntPathRequestMatcher("/css/**"),
-                new AntPathRequestMatcher("/images/**"),
-                new AntPathRequestMatcher("/scripts/**"));
+    /**
+    * 認証から除外する
+    */
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(URLS);
+    }
 
+    /**
+    * 認証を設定する
+    */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-        http.authorizeHttpRequests(authz -> authz
-                .requestMatchers(publicMatchers)
-                .permitAll()
-                .anyRequest().authenticated()) // antMatchersで指定したパス以外認証する
-                .formLogin(login -> login
-                        .loginProcessingUrl("/login") // ログイン情報の送信先
-                        .loginPage("/login") // ログイン画面
-                        .defaultSuccessUrl("/topics") // ログイン成功時の遷移先
-                        .failureUrl("/login-failure") // ログイン失敗時の遷移先
-                        .permitAll()) // 未ログインでもアクセス可能
-                .logout(logout -> logout
-                        .logoutSuccessUrl("/logout-complete") // ログアウト成功時の遷移先
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                        .permitAll())
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(h2RequestMatcher))
-                .headers(headers -> headers.frameOptions(
-                        frame -> frame.sameOrigin()))
-                .cors(cors -> cors.disable());
+        http.authorizeRequests().antMatchers("/login", "/logout-complete", "/users/new", "/user").permitAll()
+                .anyRequest().authenticated()
+                // ログアウト処理
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-complete").clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true).permitAll().and().csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                // form
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/contents").failureUrl("/login-failure")
+                .permitAll();
         // @formatter:on
-
-        return http.build();
     }
 
-    public FormAuthenticationProvider userDetailsService() {
-        return this.authenticationProvider;
-    }
-
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder = http
-                .getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.authenticationProvider(authenticationProvider);
-        return authenticationManagerBuilder.build();
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider);
     }
 
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

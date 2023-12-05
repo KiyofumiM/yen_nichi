@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>YenNichi learning</title>
+</head>
+
+<body>
+	<div class="topics-index-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="col-3">
+				<a class="btn w-55 btn-outline-light" href="/learning/new">
+					<img src="/images/icons/posting.png" th:src="@{/images/icons/posting.png}">
+					<br>
+					<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84">
+						新規投稿
+					</h6>
+				</a>
+			</div>
+			<div class="row" th:each="learning : ${list}">
+				<div class="col-md-6 mx-auto">
+
+					<!-- 内容表示部分 -->
+					<main>
+						<!-- <h2 class="author" th:text="${topic.user.name}"></h2> -->
+						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${learning.imageData}"
+							class="image" />
+						<pre class="description" th:text="${learning.description}"></pre>
+					</main>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

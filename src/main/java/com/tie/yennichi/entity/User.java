@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,6 +21,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
+
 
 @Entity
 @Table(name = "users")
@@ -85,4 +88,8 @@ public class User extends AbstractEntity implements UserDetails, UserInf {
     public boolean isEnabled() {
         return true;
     }
+    
+    @OneToMany
+    @JoinColumn(name = "topicId")
+    private List<Learning> Learnings;
 }

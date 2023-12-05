@@ -5,7 +5,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg fixed-top navbar-dark" layout:fragment="nav">
 		<div class="container">
-			<a class="navbar-brand" th:href="@{/pages/topic}">
+			<a class="navbar-brand" th:href="@{/contents}">
 				<img src="/images/icons/logo.png" th:src="@{/images/icons/logo.png}" class="brand">
 			</a>
 
@@ -17,7 +17,7 @@
 				<ul class="navbar-nav ms-auto">
 					<th:block sec:authorize="isAuthenticated()">
 						<li class="nav-item">
-							<a class="navbar-brand" th:href="@{/pages/topics}">
+							<a class="navbar-brand" th:href="@{/contents}">
 								<img src="/images/icons/go_top.png" th:src="@{/images/icons/go_top.png}">
 							</a>
 						</li>
