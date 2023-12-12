@@ -3,8 +3,10 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <body>
-	<nav class="navbar navbar-expand-lg fixed-top navbar-dark" layout:fragment="nav">
+	<nav class="navbar navbar-expand-lg fixed-top navbar-primary" layout:fragment="nav">
 		<div class="container">
+
+			<!-- アプリロゴ -->
 			<a class="navbar-brand" th:href="@{/contents}">
 				<img src="/images/icons/logo.png" th:src="@{/images/icons/logo.png}" class="brand">
 			</a>
@@ -16,52 +18,84 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
 					<th:block sec:authorize="isAuthenticated()">
+
+						<!-- ホームにリンク -->
 						<li class="nav-item">
-							<a class="navbar-brand" th:href="@{/contents}">
+							<a class="btn w-55 btn-outline-light" href="/contents">
 								<img src="/images/icons/go_top.png" th:src="@{/images/icons/go_top.png}">
 							</a>
 						</li>
 
+						<!-- 各コンテンツにリンク -->
 						<li class="nav-item">
-							<a class="nav-link" th:href="@{/favorites}">
-								<img src="/images/icons/heart_black.png" th:src="@{/images/icons/heart_black.png}">
+							<div class="dropdown">
+								<a class="btn w-55 btn-outline-light dropdown-toggle" href="#" role="button"
+									id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+									<img scr="/images/icons/learning" th:src="@{/images/icons/learning.png}">
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<li><a class="dropdown-item" href="learning">言葉を広げる</a></li>
+									<li><a class="dropdown-item" href="calendar">イベント共有</a></li>
+									<li><a class="dropdown-item" href="board">掲示板</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<!-- 各コンテンツお気に入りにリンク -->
+						<li class="nav-item">
+							<div class="dropdown">
+								<a class="btn w-55 btn-outline-light dropdown-toggle" href="#" role="button"
+									id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+									<img scr="/images/icons/heart-black" th:src="@{/images/icons/heart-black.png}">
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<li><a class="dropdown-item" href="favorite_learning">言葉を広げる</a></li>
+									<li><a class="dropdown-item" href="favorite_event">イベント共有</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<!-- ユーザ設定にリンク -->
+						<li class="nav-item">
+							<a class="btn w-55 btn-outline-light" href="/users/update">
+								<img src="/images/icons/setting.png" th:src="@{/images/icons/user2.png}">
 							</a>
 						</li>
 
+						<!-- 使い方にリンク -->
 						<li class="nav-item">
-							<a class="nav-link" th:href="@{/users/update}">
-								<img src="/images/icons/setting.png" th:src="@{/images/icons/setting.png}">
-							</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/question}">
+							<a class="btn w-55 btn-outline-light" href="/question">
 								<img scr="/images/icons/question.png" th:src="@{/images/icons/question.png}">
 							</a>
 						</li>
 
+						<!-- 質問投稿にリンク -->
 						<li class="nav-item">
-							<a class="nav-link" th:href="@{/ask}">
+							<a class="btn w-55 btn-outline-light" href="/ask">
 								<img src="/images/icons/ask.png" th:src="@{/images/icons/ask.png}">
 							</a>
 						</li>
 
+						<!-- ログアウトにリンク -->
 						<li class="nav-item">
-							<a th:href="@{/logout}" class="nav-link convert" data-method="post" th:data-_csrf="${_csrf.token}">
+							<a th:href="@{/logout}" class="nav-link convert" data-method="post"
+								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/logout.png" th:src="@{/images/icons/logout.png}">
 							</a>
 						</li>
 					</th:block>
 
 					<th:block sec:authorize="!isAuthenticated()">
+						<!-- 新規登録 -->
 						<li class="nav-item">
-							<a class="nav-link" th:href="@{/users/new}">
+							<a class="btn w-55 btn-outline-light" href="/users/new">
 								<img src="/images/icons/user.png" th:src="@{/images/icons/user.png}">
 							</a>
 						</li>
 
+						<!-- ログイン　-->
 						<li class="nav-item">
-							<a class="nav-link" th:href="@{/login}">
+							<a class="btn w-55 btn-outline-light" href="/login">
 								<img src="/images/icons/login.png" th:src="@{/images/icons/login.png}">
 							</a>
 						</li>

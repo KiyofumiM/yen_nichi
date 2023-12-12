@@ -39,148 +39,190 @@ import com.tie.yennichi.form.LearningForm;
 import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.LearningRepository;
 
+import com.tie.yennichi.entity.GoodLearning;
+import com.tie.yennichi.form.GoodLearningForm;
+
+import com.tie.yennichi.entity.FavoriteLearning;
+import com.tie.yennichi.form.FavoriteLearningForm;
+
+import com.tie.yennichi.entity.CommentLearning;
+import com.tie.yennichi.form.CommentLearningForm;
+
 @Controller
 public class LearningController {
 	protected static Logger log = LoggerFactory.getLogger(LearningController.class);
 
-    @Autowired
-    private ModelMapper modelMapper;
+	@Autowired
+	private ModelMapper modelMapper;
 
-    @Autowired
-    private LearningRepository repository;
+	@Autowired
+	private LearningRepository repository;
 
-    @Autowired
-    private HttpServletRequest request;
+	@Autowired
+	private HttpServletRequest request;
 
-    @Value("${image.local:false}")
-    private String imageLocal;
+	@Value("${image.local:false}")
+	private String imageLocal;
 
-    @GetMapping(path = "/learning")
-    public String index(Principal principal, Model model) throws IOException {
-        Authentication authentication = (Authentication) principal;
-        UserInf user = (UserInf) authentication.getPrincipal();
+	@GetMapping(path = "/learning")
+	public String index(Principal principal, Model model) throws IOException {
+		Authentication authentication = (Authentication) principal;
+		UserInf user = (UserInf) authentication.getPrincipal();
 
-        Iterable<Learning> learning = repository.findAllByOrderByUpdatedAtDesc();
-        List<LearningForm> list = new ArrayList<>();
-        for (Learning entity : learning) {
-            LearningForm form = getLearning(user, entity);
-            //System.out.println(entity.user.name);
-            list.add(form);
-        }
-        model.addAttribute("list", list);
-
-        return "learning/index";
-    }
+		List<Learning> learning = (List<Learning>) repository.findAllByOrderByUpdatedAtDesc();
+		List<LearningForm> list = new ArrayList<>();
+		for (Learning entity : learning) {
+			LearningForm form = getLearning(user, entity);
+			list.add(form);
+		}
+		model.addAttribute("list", list);
+		
+		return "learning/index";
+	}
 
 	public LearningForm getLearning(UserInf user, Learning entity) throws FileNotFoundException, IOException {
-        modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        modelMapper.typeMap(Learning.class, LearningForm.class).addMappings(mapper -> mapper.skip(LearningForm::setUser));
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
+		modelMapper.typeMap(Learning.class, LearningForm.class)
+				.addMappings(mapper -> mapper.skip(LearningForm::setUser));
+		modelMapper.typeMap(Learning.class, LearningForm.class)
+				.addMappings(mapper -> mapper.skip(LearningForm::setFavorites));
+		modelMapper.typeMap(Learning.class, LearningForm.class).addMappings(mapper -> mapper.skip(LearningForm::setComments));
+		modelMapper.typeMap(FavoriteLearning.class, FavoriteLearningForm.class)
+				.addMappings(mapper -> mapper.skip(FavoriteLearningForm::setLearning));
+		
+		boolean isImageLocal = false;
+		if (imageLocal != null) {
+			isImageLocal = new Boolean(imageLocal);
+		}
+		LearningForm form = modelMapper.map(entity, LearningForm.class);
 
-        boolean isImageLocal = false;
-        if (imageLocal != null) {
-            isImageLocal = new Boolean(imageLocal);
-        }
-        LearningForm form = modelMapper.map(entity, LearningForm.class);
+		if (isImageLocal) {
+			try (InputStream is = new FileInputStream(new File(entity.getPath()));
+					ByteArrayOutputStream os = new ByteArrayOutputStream()) {
+				byte[] indata = new byte[10240 * 16];
+				int size;
+				while ((size = is.read(indata, 0, indata.length)) > 0) {
+					os.write(indata, 0, size);
+				}
+				StringBuilder data = new StringBuilder();
+				data.append("data:");
+				data.append(getMimeType(entity.getPath()));
+				data.append(";base64,");
 
-        if (isImageLocal) {
-            try (InputStream is = new FileInputStream(new File(entity.getPath()));
-                    ByteArrayOutputStream os = new ByteArrayOutputStream()) {
-                byte[] indata = new byte[10240 * 16];
-                int size;
-                while ((size = is.read(indata, 0, indata.length)) > 0) {
-                    os.write(indata, 0, size);
-                }
-                StringBuilder data = new StringBuilder();
-                data.append("data:");
-                data.append(getMimeType(entity.getPath()));
-                data.append(";base64,");
+				data.append(new String(Base64Utils.encode(os.toByteArray()), "ASCII"));
+				form.setImageData(data.toString());
+			}
+		}
 
-                data.append(new String(Base64Utils.encode(os.toByteArray()), "ASCII"));
-                form.setImageData(data.toString());
-            }
-        }
+		UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);
+		form.setUser(userForm);
 
-        UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);
-        form.setUser(userForm);
+		List<GoodLearningForm> goods = new ArrayList<GoodLearningForm>();
+		for (GoodLearning favoriteLearningEntity : entity.getGoods()) {
+			GoodLearningForm good_learning = modelMapper.map(favoriteLearningEntity,
+					GoodLearningForm.class);
+			goods.add(good_learning);
+			if (user.getUserId().equals(favoriteLearningEntity.getUserId())) {
+				form.setGood(good_learning);
+			}
+		}
+		form.setGoods(goods);
+		
+		List<FavoriteLearningForm> favorites = new ArrayList<FavoriteLearningForm>();
+		for (FavoriteLearning favoriteLearningEntity : entity.getFavorites()) {
+			FavoriteLearningForm favorite_learning = modelMapper.map(favoriteLearningEntity,
+					FavoriteLearningForm.class);
+			favorites.add(favorite_learning);
+			if (user.getUserId().equals(favoriteLearningEntity.getUserId())) {
+				form.setFavorite(favorite_learning);
+			}
+		}
+		form.setFavorites(favorites);
+		
+		List<CommentLearningForm> comments = new ArrayList<CommentLearningForm>();
+		for (CommentLearning commentLearningEntity : entity.getComments()) {
+			CommentLearningForm comment = modelMapper.map(commentLearningEntity, CommentLearningForm.class);
+			comments.add(comment);
+		}
+		form.setComments(comments);
+		return form;
+	}
 
-        return form;
-    }
+	private String getMimeType(String path) {
+		String extension = FilenameUtils.getExtension(path);
+		String mimeType = "image/";
+		switch (extension) {
+		case "jpg":
+		case "jpeg":
+			mimeType += "jpeg";
+			break;
+		case "png":
+			mimeType += "png";
+			break;
+		case "gif":
+			mimeType += "gif";
+			break;
+		}
+		return mimeType;
+	}
 
-    private String getMimeType(String path) {
-        String extension = FilenameUtils.getExtension(path);
-        String mimeType = "image/";
-        switch (extension) {
-        case "jpg":
-        case "jpeg":
-            mimeType += "jpeg";
-            break;
-        case "png":
-            mimeType += "png";
-            break;
-        case "gif":
-            mimeType += "gif";
-            break;
-        }
-        return mimeType;
-    }
+	@GetMapping(path = "/learning/new")
+	public String newTopic(Model model) {
+		model.addAttribute("form", new LearningForm());
+		return "learning/new";
+	}
 
-    @GetMapping(path = "/learning/new")
-    public String newTopic(Model model) {
-        model.addAttribute("form", new LearningForm());
-        return "learning/new";
-    }
+	@RequestMapping(value = "/learning", method = RequestMethod.POST)
+	public String create(Principal principal, @Validated @ModelAttribute("form") LearningForm form,
+			BindingResult result, Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs)
+			throws IOException {
+		if (result.hasErrors()) {
+			model.addAttribute("hasMessage", true);
+			model.addAttribute("class", "alert-danger");
+			model.addAttribute("message", "投稿に失敗しました。");
+			return "learning/new";
+		}
 
-    @RequestMapping(value = "/learning", method = RequestMethod.POST)
-    public String create(Principal principal, @Validated @ModelAttribute("form") LearningForm form, BindingResult result,
-            Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs)
-            throws IOException {
-        if (result.hasErrors()) {
-            model.addAttribute("hasMessage", true);
-            model.addAttribute("class", "alert-danger");
-            model.addAttribute("message", "投稿に失敗しました。");
-            return "learning/new";
-        }
+		boolean isImageLocal = false;
+		if (imageLocal != null) {
+			isImageLocal = new Boolean(imageLocal);
+		}
 
-        boolean isImageLocal = false;
-        if (imageLocal != null) {
-            isImageLocal = new Boolean(imageLocal);
-        }
+		Learning entity = new Learning();
+		Authentication authentication = (Authentication) principal;
+		UserInf user = (UserInf) authentication.getPrincipal();
+		entity.setUserId(user.getUserId());
+		File destFile = null;
+		if (isImageLocal) {
+			destFile = saveImageLocal(image, entity);
+			entity.setPath(destFile.getAbsolutePath());
+		} else {
+			entity.setPath("");
+		}
+		entity.setDescription(form.getDescription());
+		repository.saveAndFlush(entity);
 
-        Learning entity = new Learning();
-        Authentication authentication = (Authentication) principal;
-        UserInf user = (UserInf) authentication.getPrincipal();
-        entity.setUserId(user.getUserId());
-        File destFile = null;
-        if (isImageLocal) {
-            destFile = saveImageLocal(image, entity);
-            entity.setPath(destFile.getAbsolutePath());
-        } else {
-            entity.setPath("");
-        }
-        entity.setDescription(form.getDescription());
-        repository.saveAndFlush(entity);
+		redirAttrs.addFlashAttribute("hasMessage", true);
+		redirAttrs.addFlashAttribute("class", "alert-info");
+		redirAttrs.addFlashAttribute("message", "投稿に成功しました。");
 
-        redirAttrs.addFlashAttribute("hasMessage", true);
-        redirAttrs.addFlashAttribute("class", "alert-info");
-        redirAttrs.addFlashAttribute("message", "投稿に成功しました。");
+		return "redirect:/learning";
+	}
 
-        return "redirect:/learning";
-    }
+	private File saveImageLocal(MultipartFile image, Learning entity) throws IOException {
+		File uploadDir = new File("/uploads");
+		uploadDir.mkdir();
 
-    private File saveImageLocal(MultipartFile image, Learning entity) throws IOException {
-        File uploadDir = new File("/uploads");
-        uploadDir.mkdir();
+		String uploadsDir = "/uploads/";
+		String realPathToUploads = request.getServletContext().getRealPath(uploadsDir);
+		if (!new File(realPathToUploads).exists()) {
+			new File(realPathToUploads).mkdir();
+		}
+		String fileName = image.getOriginalFilename();
+		File destFile = new File(realPathToUploads, fileName);
+		image.transferTo(destFile);
 
-        String uploadsDir = "/uploads/";
-        String realPathToUploads = request.getServletContext().getRealPath(uploadsDir);
-        if (!new File(realPathToUploads).exists()) {
-            new File(realPathToUploads).mkdir();
-        }
-        String fileName = image.getOriginalFilename();
-        File destFile = new File(realPathToUploads, fileName);
-        image.transferTo(destFile);
-
-        return destFile;
-    }
+		return destFile;
+	}
 
 }

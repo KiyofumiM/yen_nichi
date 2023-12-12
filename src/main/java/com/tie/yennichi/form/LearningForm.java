@@ -1,5 +1,7 @@
 package com.tie.yennichi.form;
 
+import java.util.List;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -31,4 +33,13 @@ public class LearningForm {
     
     private UserForm user;
 
+    private List<GoodLearningForm> goods;
+    
+    private GoodLearningForm good;
+    
+    private List<FavoriteLearningForm> favorites;
+    
+    private FavoriteLearningForm favorite;
+    
+    private List<CommentLearningForm> comments;
 }

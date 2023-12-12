@@ -38,7 +38,7 @@ nav.navbar {
   margin-bottom: 0px;
   padding: 0; }
   nav.navbar a {
-    color: #164a84; }
+    color: #19448e; }
   nav.navbar img {
     height: 60px; }
 
@@ -88,10 +88,11 @@ nav.navbar {
     .contents-index-wrapper .container h4 {
       margin-bottom: 30px; }
 
-.topics-new-wrapper, .comments-new-wrapper {
+.topics-new-wrapper {
   padding-top: 80px;
+  background-image: url("/images/maple.png");
   background-color: #fafafa; }
-  .topics-new-wrapper #description, .comments-new-wrapper #description {
+  .topics-new-wrapper #description {
     height: 80px; }
 
 .topics-index-wrapper {
@@ -123,6 +124,9 @@ nav.navbar {
         .topics-index-wrapper main .icons .icon img {
           width: 35px;
           height: 30px; }
+        .topics-index-wrapper main .icons .icon .good-on {
+          -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+          filter: invert(59%) sepia(64%) saturate(1989%) hue-rotate(167deg) brightness(95%) contrast(86%); }
         .topics-index-wrapper main .icons .icon .favorite-on {
           -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
           filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8); }
@@ -136,9 +140,66 @@ nav.navbar {
       overflow: auto;
       white-space: pre-wrap;
       word-wrap: break-word;
-      background-color: white;
+      background-color: #FAFFF5;
       border: none; }
     .topics-index-wrapper main .comments ul li {
+      list-style: none; }
+
+.events-new-wrapper {
+  padding-top: 80px;
+  background-image: url("/images/KiyomizuTemple.png");
+  background-color: #fafafa; }
+  .events-new-wrapper #description {
+    height: 80px; }
+
+.events-index-wrapper {
+  padding: 80px 0 20px;
+  background-image: url("/images/KiyomizuTemple.png");
+  background-color: #fafafa;
+  min-height: calc(100vh - 180px);
+  overflow: hidden; }
+  .events-index-wrapper main {
+    background-color: #FAFFF5;
+    padding: 20px 0;
+    margin-top: 30px;
+    border: 1px solid #e6ecf0;
+    border-radius: 6px; }
+    .events-index-wrapper main .author {
+      margin: 10px;
+      padding: 0 20px; }
+    .events-index-wrapper main .image {
+      margin: 10px 0;
+      width: 100%; }
+    .events-index-wrapper main .icons {
+      display: flex;
+      flex-direction: row; }
+      .events-index-wrapper main .icons .icon {
+        display: block;
+        width: 35px;
+        height: 30px;
+        margin-left: 20px; }
+        .events-index-wrapper main .icons .icon img {
+          width: 35px;
+          height: 30px; }
+        .events-index-wrapper main .icons .icon .good-on {
+          -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+          filter: invert(59%) sepia(64%) saturate(1989%) hue-rotate(167deg) brightness(95%) contrast(86%); }
+        .events-index-wrapper main .icons .icon .favorite-on {
+          -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+          filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8); }
+      .events-index-wrapper main .icons .count {
+        display: flex;
+        width: 10px;
+        height: 30px;
+        align-items: flex-end; }
+    .events-index-wrapper main .description {
+      padding: 10px 20px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background-color: white;
+      border: none; }
+    .events-index-wrapper main .comments ul li {
       list-style: none; }
 
 /*# sourceMappingURL=style.css.map */

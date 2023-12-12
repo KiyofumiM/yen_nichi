@@ -3,30 +3,25 @@
 	layout:decorate="~{layouts/layout}">
 
 <head>
-	<title>YenNichi learning</title>
+	<title>Yen Nichi Comments</title>
 </head>
 
 <body>
 	<div class="topics-new-wrapper" layout:fragment="contents">
 		<div class="container">
-			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
 			<div class="row">
 				<div class="col-md-6 mx-auto">
-					<h1 class="text-center">言葉の追加</h1>
 					<br>
-					<form class="new_learning" id="new_learning" method="post" th:action="@{/learning}"
-						th:object="${form}" enctype="multipart/form-data">
+					<br>
+					<h1 class="text-center">コメントの投稿</h1>
+					
+					<br>
+					
+					<form class="new_comment" id="new_comment"
+						th:action="@{/learning/__${form.learningId}__/comment_learning}" th:object="${form}">
 						<div layout:replace="~{layouts/common::messages}"></div>
-						<input type="hidden" th:field="*{id}" />
 						<div class="mb-3">
-							<label class="form-label text-black" for="topic_image">画像</label>
-							<input type="file" class="form-control-file" th:field="*{image}" />
-							<p th:if="${#fields.hasErrors('image')}" class="error-message" th:errors="*{image}"></p>
-						</div>
-						<div class="mb-3">
-							<h3>
-								<label class="form-label text-black" for="learning_description">言葉</label>
-							</h3>
+							<label class="form-label text-black" for="comment_learning_description">内容</label>
 							<textarea class="form-control" th:field="*{description}" rows="10"
 								th:errorclass="error-field"></textarea>
 							<p th:if="${#fields.hasErrors('description')}" class="error-message"
@@ -34,7 +29,7 @@
 						</div>
 						
 						<br>
-						<br>
+						
 						<input type="submit" value="投稿" class="btn w-100 btn-outline-success" />
 					</form>
 				</div>
@@ -43,7 +38,13 @@
 		<br>
 		<br>
 		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 	</div>
+
 </body>
 
 </html>
