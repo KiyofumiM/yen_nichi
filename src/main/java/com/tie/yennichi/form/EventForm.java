@@ -1,7 +1,5 @@
 package com.tie.yennichi.form;
 
-import java.util.List;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -13,7 +11,7 @@ import com.tie.yennichi.validation.constraints.ImageNotEmpty;
 import lombok.Data;
 
 @Data
-public class LearningForm {
+public class EventForm {
 
     private Long id;
 
@@ -28,21 +26,15 @@ public class LearningForm {
     private String path;
 
     @NotEmpty
+    private String event_at;
+    
+    @NotEmpty
     @Size(max = 20)
     private String title;
     
     @Size(max = 1000)
     private String description;
-    
+
     private UserForm user;
 
-    private List<GoodLearningForm> goods;
-    
-    private GoodLearningForm good;
-    
-    private List<FavoriteLearningForm> favorites;
-    
-    private FavoriteLearningForm favorite;
-    
-    private List<CommentLearningForm> comments;
 }

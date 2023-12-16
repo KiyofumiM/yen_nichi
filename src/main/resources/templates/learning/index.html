@@ -30,27 +30,24 @@
 						<h2 class="author" th:text="${learning.user.name}"></h2>
 						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${learning.imageData}"
 							class="image" />
-						<h3>
-							<pre class=" description" th:text="${learning.description}">
-							</pre>
-						</h3>
-
+						<h3 class="title" th:text="${learning.title}"></h3>
+						<pre class="description" th:text="${learning.description}"></pre>
 						<!-- リアクション部分 -->
 						<div class="icons">
 							<!-- goods -->
-							<a th:if="${learning.good != null}" rel="nofollow" class="icon convert"
-								data-method="delete" href="/favorite?learning_id=1" th:href="@{'/good'}"
-								th:data-learning_id="${learning.id}" th:data-_csrf="${_csrf.token}">
+							<a th:if="${learning.good != null}" rel="nofollow" class="icon convert" data-method="delete"
+								href="/favorite?learning_id=1" th:href="@{'/good'}" th:data-learning_id="${learning.id}"
+								th:data-_csrf="${_csrf.token}">
 								<img class="good-on" src="/images/icons/good_white.png"
 									th:src="@{/images/icons/good_white.png}" />
 							</a>
-							<a th:if="${learning.good == null}" rel="nofollow" class="icon convert"
-								data-method="post" href="/favorite?learning_id=1" th:href="@{'/good'}"
-								th:data-learning_id="${learning.id}" th:data-_csrf="${_csrf.token}">
+							<a th:if="${learning.good == null}" rel="nofollow" class="icon convert" data-method="post"
+								href="/favorite?learning_id=1" th:href="@{'/good'}" th:data-learning_id="${learning.id}"
+								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/good_black.png" th:src="@{/images/icons/good_black.png}" />
 							</a>
 							<span class="count" th:text="${#lists.size(learning.goods)}">0</span>
-							
+
 							<!-- favorites -->
 							<a th:if="${learning.favorite != null}" rel="nofollow" class="icon convert"
 								data-method="delete" href="/favorite?learning_id=1" th:href="@{'/favorite'}"

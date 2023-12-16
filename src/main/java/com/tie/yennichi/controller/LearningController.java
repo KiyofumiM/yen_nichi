@@ -199,6 +199,7 @@ public class LearningController {
 		} else {
 			entity.setPath("");
 		}
+		entity.setTitle(form.getTitle());
 		entity.setDescription(form.getDescription());
 		repository.saveAndFlush(entity);
 

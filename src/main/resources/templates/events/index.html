@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Yen NIchi Events</title>
+</head>
+
+<body>
+	<div class="events-index-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row" th:each="event : ${list}">
+				<a th:id="${event.id}"></a>
+				<div class="col-md-6 mx-auto">
+					<main>
+						<h2 class="author" th:text="${event.user.name}"></h2>
+						<h4 class="title" th:text="${event.event_at}"></h4>
+						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${event.imageData}"
+							class="image" />
+						<img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${event.path}"
+							class="image" />
+						
+						<h3 class="title" th:text="${event.title}"></h3>
+						<pre class="description" th:text="${event.description}"></pre>
+
+						<!-- 一覧に戻るボタン -->
+						<div class="col-md-11" align="right">
+							<a class="btn w-55 btn-outline-light" href="/calendars">
+								<img src="/images/icons/calendar2.png" th:src="@{/images/icons/calendar2.png}">
+								<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84">
+									一覧に戻る
+								</h6>
+							</a>
+						</div>
+					</main>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+
+</html>
