@@ -40,6 +40,9 @@ import com.tie.yennichi.form.EventForm;
 import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.EventRepository;
 
+import com.tie.yennichi.entity.GoodEvent;
+import com.tie.yennichi.form.GoodEventForm;
+
 @Controller
 public class EventsController {
 
@@ -76,7 +79,9 @@ public class EventsController {
     public EventForm getEvent(UserInf user, Event entity) throws FileNotFoundException, IOException {
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
         modelMapper.typeMap(Event.class, EventForm.class).addMappings(mapper -> mapper.skip(EventForm::setUser));
-
+        modelMapper.typeMap(Event.class, EventForm.class).addMappings(mapper -> mapper.skip(EventForm::setGoods));
+        modelMapper.typeMap(GoodEvent.class, GoodEventForm.class).addMappings(mapper -> mapper.skip(GoodEventForm::setEvent));
+        
         boolean isImageLocal = false;
         if (imageLocal != null) {
             isImageLocal = new Boolean(imageLocal);
@@ -103,7 +108,18 @@ public class EventsController {
 
         UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);
         form.setUser(userForm);
+        
+        List<GoodEventForm> goods = new ArrayList<GoodEventForm>();
+        
+        for (GoodEvent goodEventEntity : entity.getGoods()) {
+        	GoodEventForm good = modelMapper.map(goodEventEntity, GoodEventForm.class);
+        	goods.add(good);
+        	if (user.getUserId().equals(good.getUserId())) {
+        		form.setGood(good);
+        	}
+        }
 
+        form.setGoods(goods);
         return form;
     }
 
@@ -163,9 +179,6 @@ public class EventsController {
         entity.setTitle(form.getTitle());
         entity.setDescription(form.getDescription());
         repository.saveAndFlush(entity);
-        
-        System.out.println("開催日入力テスト");
-        System.out.println(entity);
         
         redirAttrs.addFlashAttribute("hasMessage", true);
         redirAttrs.addFlashAttribute("class", "alert-info");

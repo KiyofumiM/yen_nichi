@@ -18,10 +18,8 @@
 						<h2 class="author" th:text="${learning.user.name}"></h2>
 						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${learning.imageData}"
 							class="image" />
-						<h3>
-						<pre class=" description" th:text="${learning.description}">
-							</pre>
-						</h3>
+						<h3 class="title" th:text="${learning.title}"></h3>
+						<pre class="description" th:text="${learning.description}"></pre>
 						<div class="icons">
 							<!-- favorites -->
 							<a th:if="${learning.favorite != null}" rel="nofollow" class="icon convert"

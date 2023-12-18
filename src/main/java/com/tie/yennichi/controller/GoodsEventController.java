@@ -20,34 +20,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.tie.yennichi.entity.GoodLearning;
-import com.tie.yennichi.entity.Learning;
+import com.tie.yennichi.entity.GoodEvent;
+import com.tie.yennichi.entity.Event;
 import com.tie.yennichi.entity.UserInf;
-import com.tie.yennichi.form.LearningForm;
-import com.tie.yennichi.repository.GoodLearningRepository;
+import com.tie.yennichi.form.EventForm;
+import com.tie.yennichi.repository.GoodEventRepository;
 
 @Controller
-public class GoodsLearningController {
+public class GoodsEventController {
 	@Autowired
     private MessageSource messageSource;
 
     @Autowired
-    private GoodLearningRepository repository;
+    private GoodEventRepository repository;
 
     @Autowired
-    private LearningController learningController;
+    private EventsController eventsController;
 
-    @RequestMapping(value = "/goodL", method = RequestMethod.POST)
-    public String create(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,
+    @RequestMapping(value = "/good_event", method = RequestMethod.POST)
+    public String create(Principal principal, @RequestParam("event_id") long eventId, RedirectAttributes redirAttrs,
             Locale locale) {
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
         Long userId = user.getUserId();
-        List<GoodLearning> results = repository.findByUserIdAndLearningId(userId, learningId);
+        List<GoodEvent> results = repository.findByUserIdAndEventId(userId, eventId);
         if (results.size() == 0) {
-            GoodLearning entity = new GoodLearning();
+            GoodEvent entity = new GoodEvent();
             entity.setUserId(userId);
-            entity.setLearningId(learningId);
+            entity.setEventId(eventId);
             repository.saveAndFlush(entity);
 
             redirAttrs.addFlashAttribute("hasMessage", true);
@@ -55,26 +55,26 @@ public class GoodsLearningController {
             redirAttrs.addFlashAttribute("message", "いいねに登録しました");
         }
 
-        return "redirect:/learning";
+        return "redirect:/event";
     }
 
-    @RequestMapping(value = "/goodL", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/good_event", method = RequestMethod.DELETE)
     @Transactional
-    public String destroy(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,
+    public String destroy(Principal principal, @RequestParam("event_id") long eventId, RedirectAttributes redirAttrs,
             Locale locale) {
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
         Long userId = user.getUserId();
-        List<GoodLearning> results = repository.findByUserIdAndLearningId(userId, learningId);;
+        List<GoodEvent> results = repository.findByUserIdAndEventId(userId, eventId);;
         
         if (results.size() == 1) {
-            repository.deleteByUserIdAndLearningId(user.getUserId(), learningId);
+            repository.deleteByUserIdAndEventId(user.getUserId(), eventId);
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
             redirAttrs.addFlashAttribute("message", "いいねから削除しました");
         }
-        return "redirect:/learning";
+        return "redirect:/event";
     }
 
 }

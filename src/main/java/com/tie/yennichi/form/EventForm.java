@@ -1,5 +1,7 @@
 package com.tie.yennichi.form;
 
+import java.util.List;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -37,4 +39,7 @@ public class EventForm {
 
     private UserForm user;
 
+    private List<GoodEventForm> goods;
+    
+    private GoodEventForm good;
 }

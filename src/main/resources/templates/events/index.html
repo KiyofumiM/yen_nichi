@@ -19,10 +19,29 @@
 							class="image" />
 						<img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${event.path}"
 							class="image" />
-						
+
 						<h3 class="title" th:text="${event.title}"></h3>
 						<pre class="description" th:text="${event.description}"></pre>
-
+						
+						<!-- リアクション部分 -->
+						<div class="icons">
+							<h5 class="title" th:text="${event}"></h5>
+							<h3 class="title" th:text="${event.good != null}"></h3>
+							<!-- goods -->
+							<a th:if="${event.good != null}" rel="nofollow" class="icon convert" data-method="delete"
+								href="/good?event_id=1" th:href="@{'/good_event'}" th:data-event_id="${event.id}"
+								th:data-_csrf="${_csrf.token}">
+								<img class="good-on" src="/images/icons/good_white.png"
+									th:src="@{/images/icons/good_white.png}" />
+							</a>
+							<a th:if="${event.good == null}" rel="nofollow" class="icon convert" data-method="post"
+								href="/good_event?event_id=1" th:href="@{'/good_event'}" th:data-event_id="${event.id}"
+								th:data-_csrf="${_csrf.token}">
+								<img src="/images/icons/good_black.png" th:src="@{/images/icons/good_black.png}" />
+							</a>
+							<h3  th:text="${#lists.size(event.goods)}"></h3>
+							<span class="count" th:text="${#lists.size(event.goods)}">0</span>
+						</div>
 						<!-- 一覧に戻るボタン -->
 						<div class="col-md-11" align="right">
 							<a class="btn w-55 btn-outline-light" href="/calendars">
