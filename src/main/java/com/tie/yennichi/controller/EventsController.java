@@ -43,6 +43,12 @@ import com.tie.yennichi.repository.EventRepository;
 import com.tie.yennichi.entity.GoodEvent;
 import com.tie.yennichi.form.GoodEventForm;
 
+import com.tie.yennichi.entity.FavoriteEvent;
+import com.tie.yennichi.form.FavoriteEventForm;
+
+import com.tie.yennichi.entity.CommentEvent;
+import com.tie.yennichi.form.CommentEventForm;
+
 @Controller
 public class EventsController {
 
@@ -79,9 +85,14 @@ public class EventsController {
     public EventForm getEvent(UserInf user, Event entity) throws FileNotFoundException, IOException {
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
         modelMapper.typeMap(Event.class, EventForm.class).addMappings(mapper -> mapper.skip(EventForm::setUser));
+        
         modelMapper.typeMap(Event.class, EventForm.class).addMappings(mapper -> mapper.skip(EventForm::setGoods));
         modelMapper.typeMap(GoodEvent.class, GoodEventForm.class).addMappings(mapper -> mapper.skip(GoodEventForm::setEvent));
         
+        modelMapper.typeMap(Event.class, EventForm.class).addMappings(mapper -> mapper.skip(EventForm::setFavorites));
+        modelMapper.typeMap(FavoriteEvent.class, FavoriteEventForm.class).addMappings(mapper -> mapper.skip(FavoriteEventForm::setEvent));
+        
+		modelMapper.typeMap(Event.class, EventForm.class).addMappings(mapper -> mapper.skip(EventForm::setComments));
         boolean isImageLocal = false;
         if (imageLocal != null) {
             isImageLocal = new Boolean(imageLocal);
@@ -120,6 +131,25 @@ public class EventsController {
         }
 
         form.setGoods(goods);
+        
+        List<FavoriteEventForm> favorites = new ArrayList<FavoriteEventForm>();
+        for (FavoriteEvent favoriteEventEntity : entity.getFavorites()) {
+        	FavoriteEventForm favorite = modelMapper.map(favoriteEventEntity, FavoriteEventForm.class);
+        	favorites.add(favorite);
+        	if (user.getUserId().equals(favorite.getUserId())) {
+        		form.setFavorite(favorite);
+        	}
+        }
+
+        form.setFavorites(favorites);
+        
+        List<CommentEventForm> comments = new ArrayList<CommentEventForm>();
+		for (CommentEvent commentEventEntity : entity.getComments()) {
+			CommentEventForm comment = modelMapper.map(commentEventEntity, CommentEventForm.class);
+			comments.add(comment);
+		}
+		form.setComments(comments);
+		
         return form;
     }
 

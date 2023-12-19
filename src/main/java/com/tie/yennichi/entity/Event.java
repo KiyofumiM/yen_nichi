@@ -49,4 +49,14 @@ public class Event extends AbstractEntity implements Serializable {
     @OneToMany
     @JoinColumn(name = "eventId", insertable = false, updatable = false)
     private List<GoodEvent> goods;
+    
+    
+    @OneToMany
+    @JoinColumn(name = "eventId", insertable = false, updatable = false)
+    private List<FavoriteEvent> favorites;
+    
+
+    @OneToMany
+    @JoinColumn(name = "eventId", insertable = false, updatable = false)
+    private List<CommentEvent> comments;
 }

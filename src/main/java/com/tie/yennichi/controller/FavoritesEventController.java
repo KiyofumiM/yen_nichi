@@ -20,61 +20,76 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.tie.yennichi.entity.GoodEvent;
+import com.tie.yennichi.entity.FavoriteEvent;
 import com.tie.yennichi.entity.Event;
 import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.form.EventForm;
-import com.tie.yennichi.repository.GoodEventRepository;
+import com.tie.yennichi.repository.FavoriteEventRepository;
 
 @Controller
-public class GoodsEventController {
+public class FavoritesEventController {
 	@Autowired
     private MessageSource messageSource;
 
     @Autowired
-    private GoodEventRepository repository;
+    private FavoriteEventRepository repository;
 
     @Autowired
-    private EventsController eventsController;
+    private EventsController eventController;
 
-    @RequestMapping(value = "/good_event", method = RequestMethod.POST)
-    public String create(Principal principal, @RequestParam("event_id") long eventId, RedirectAttributes redirAttrs,
+    @GetMapping(path = "/favorite_event")
+    public String index(Principal principal, Model model) throws IOException {
+        Authentication authentication = (Authentication) principal;
+        UserInf user = (UserInf) authentication.getPrincipal();
+        List<FavoriteEvent> event = repository.findByUserIdOrderByUpdatedAtDesc(user.getUserId());
+        List<EventForm> list = new ArrayList<>();
+        for (FavoriteEvent entity : event) {
+            Event EventEntity = entity.getEvent();
+            EventForm form = eventController.getEvent(user, EventEntity);
+            list.add(form);
+        }
+        model.addAttribute("list", list);
+
+        return "favorite/events";
+    }
+
+    @RequestMapping(value = "/favorite_event", method = RequestMethod.POST)
+    public String create(Principal principal, @RequestParam("learning_id") long eventId, RedirectAttributes redirAttrs,
             Locale locale) {
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
         Long userId = user.getUserId();
-        List<GoodEvent> results = repository.findByUserIdAndEventId(userId, eventId);
+        List<FavoriteEvent> results = repository.findByUserIdAndEventId(userId, eventId);
         if (results.size() == 0) {
-            GoodEvent entity = new GoodEvent();
+            FavoriteEvent entity = new FavoriteEvent();
             entity.setUserId(userId);
             entity.setEventId(eventId);
             repository.saveAndFlush(entity);
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", "いいねに登録しました");
+            redirAttrs.addFlashAttribute("message", "お気に入りに登録しました");
         }
 
         return "redirect:/events";
     }
 
-    @RequestMapping(value = "/good_event", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/favorite_event", method = RequestMethod.DELETE)
     @Transactional
     public String destroy(Principal principal, @RequestParam("event_id") long eventId, RedirectAttributes redirAttrs,
             Locale locale) {
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
         Long userId = user.getUserId();
-        List<GoodEvent> results = repository.findByUserIdAndEventId(userId, eventId);;
+        List<FavoriteEvent> results = repository.findByUserIdAndEventId(userId, eventId);;
         
         if (results.size() == 1) {
             repository.deleteByUserIdAndEventId(user.getUserId(), eventId);
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", "いいねから削除しました");
+            redirAttrs.addFlashAttribute("message", "お気に入りから削除しました");
         }
         return "redirect:/events";
     }
-
 }

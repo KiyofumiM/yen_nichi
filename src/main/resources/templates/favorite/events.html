@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Yen NIchi Events</title>
+</head>
+
+<body>
+	<div class="events-index-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row" th:each="event : ${list}">
+				<a th:id="${event.id}"></a>
+				<div class="col-md-6 mx-auto">
+					<main>
+						<h2 class="author" th:text="${event.user.name}"></h2>
+						<h4 class="title" th:text="${event.event_at}"></h4>
+						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${event.imageData}"
+							class="image" />
+						<img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${event.path}"
+							class="image" />
+
+						<h3 class="title" th:text="${event.title}"></h3>
+						<pre class="description" th:text="${event.description}"></pre>
+
+						<!-- リアクション部分 -->
+						<div class="icons">
+							<!-- favorites -->
+							<a th:if="${event.favorite != null}" rel="nofollow" class="icon convert"
+								data-method="delete" href="/favorite_event?learning_id=1" th:href="@{'/favorite_event'}"
+								th:data-event_id="${event.id}" th:data-_csrf="${_csrf.token}">
+								<img class="favorite-on" src="/images/icons/heart.png"
+									th:src="@{/images/icons/heart.png}" />
+							</a>
+							<a th:if="${event.favorite == null}" rel="nofollow" class="icon convert" data-method="post"
+								href="/favorite_event?event_id=1" th:href="@{'/favorite_event'}"
+								th:data-learning_id="${event.id}" th:data-_csrf="${_csrf.token}">
+								<img src="/images/icons/heart-black.png" th:src="@{/images/icons/heart-black.png}" />
+							</a>
+							<span class="count" th:text="${#lists.size(event.favorites)}">0</span>
+
+						</div>
+					</main>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -42,4 +42,11 @@ public class EventForm {
     private List<GoodEventForm> goods;
     
     private GoodEventForm good;
+    
+    private List<FavoriteEventForm> favorites;
+    
+    private FavoriteEventForm favorite;
+    
+    
+    private List<CommentEventForm> comments;
 }
