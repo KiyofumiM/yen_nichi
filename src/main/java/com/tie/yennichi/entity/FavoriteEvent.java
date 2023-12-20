@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "event_learning")
+@Table(name = "favorite_event")
 @Data
 public class FavoriteEvent extends AbstractEntity implements Serializable {
     private static final long serialVersionUID = 1L;

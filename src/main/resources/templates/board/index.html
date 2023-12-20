@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Yen Nichi bulletin board</title>
+</head>
+
+<body>
+	<div class="board-index-wrapper" layout:fragment="contents">
+		<div class="container">
+
+			<!-- 新規投稿ボタン -->
+			<div class="col-md-9" align="right">
+				<a class="btn w-55 btn-outline-light" href="/board/new">
+					<img src="/images/icons/posting.png" th:src="@{/images/icons/posting.png}">
+					<br>
+					<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84">
+						新規投稿
+					</h6>
+				</a>
+			</div>
+
+			<div class="row" th:each="board : ${list}">
+				<div class="col-md-6 mx-auto">
+					<main>
+						<h5 class="author" th:text="${board.user.name}"></h5>
+						<h3 class="title" th:text="${board.title}"></h3>
+						<pre class="description" th:text="${board.description}"></pre>
+					</main>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

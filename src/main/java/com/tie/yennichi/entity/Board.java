@@ -15,18 +15,15 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "comment_event")
+@Table(name = "board")
 @Data
-public class CommentEvent extends AbstractEntity implements Serializable {
+public class Board extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "comment_id_seq")
+	@SequenceGenerator(name = "board_id_seq")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(nullable = false)
-	private Long eventId;
 	
 	@Column(nullable = false)
     private Long userId;
@@ -34,7 +31,10 @@ public class CommentEvent extends AbstractEntity implements Serializable {
 	@ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
-
+	
+	@Column(nullable = false, length = 20)
+	private String title;
+	
 	@Column(nullable = false, length = 1000)
 	private String description;
 }

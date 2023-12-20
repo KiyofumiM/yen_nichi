@@ -17,7 +17,7 @@ import lombok.Data;
 @Entity
 @Table(name = "comment_learning")
 @Data
-public class CommentLearning {
+public class CommentLearning extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

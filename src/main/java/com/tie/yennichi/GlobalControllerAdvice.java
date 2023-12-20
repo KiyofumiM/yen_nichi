@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
-@Component
+// @ControllerAdvice
+// @Component
 public class GlobalControllerAdvice {
 
     @Autowired
