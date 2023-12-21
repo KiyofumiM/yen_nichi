@@ -55,7 +55,6 @@ public class Event extends AbstractEntity implements Serializable {
     @JoinColumn(name = "eventId", insertable = false, updatable = false)
     private List<FavoriteEvent> favorites;
     
-
     @OneToMany
     @JoinColumn(name = "eventId", insertable = false, updatable = false)
     private List<CommentEvent> comments;

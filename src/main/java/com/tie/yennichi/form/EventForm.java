@@ -47,6 +47,5 @@ public class EventForm {
     
     private FavoriteEventForm favorite;
     
-    
     private List<CommentEventForm> comments;
 }

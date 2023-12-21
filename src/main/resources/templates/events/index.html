@@ -54,7 +54,7 @@
 							<span class="count" th:text="${#lists.size(event.favorites)}">0</span>
 
 							<!-- comments -->
-							<a href="/event/1/comments_event/new"
+							<a href="/event/1/comments/event"
 								th:href="@{'/event/{id}/comments_event/new'(id=${event.id})}" class="icon"
 								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />

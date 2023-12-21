@@ -31,7 +31,15 @@ import com.tie.yennichi.form.BoardForm;
 import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.BoardRepository;
 
-import java.text.SimpleDateFormat;
+import com.tie.yennichi.entity.GoodBoard;
+import com.tie.yennichi.form.GoodBoardForm;
+
+import com.tie.yennichi.entity.CommentBoard;
+import com.tie.yennichi.entity.CommentEvent;
+import com.tie.yennichi.entity.Event;
+import com.tie.yennichi.form.CommentBoardForm;
+import com.tie.yennichi.form.CommentEventForm;
+import com.tie.yennichi.form.EventForm;
 
 @Controller
 public class BoardsController {
@@ -48,21 +56,21 @@ public class BoardsController {
 	private BoardRepository repository;
 
 	@GetMapping(path = "/board")
-    public String index(Principal principal, Model model) throws IOException {
-        Authentication authentication = (Authentication) principal;
-        UserInf user = (UserInf) authentication.getPrincipal();
+	public String index(Principal principal, Model model) throws IOException {
+		Authentication authentication = (Authentication) principal;
+		UserInf user = (UserInf) authentication.getPrincipal();
 
-        Iterable<Board> board = repository.findAllByOrderByUpdatedAtDesc();
-        List<BoardForm> list = new ArrayList<>();
-        for (Board entity : board) {
-            BoardForm form = getBoard(user, entity);
-            list.add(form);
-        }
-        model.addAttribute("list", list);
+		Iterable<Board> board = repository.findAllByOrderByUpdatedAtDesc();
+		List<BoardForm> list = new ArrayList<>();
+		for (Board entity : board) {
+			BoardForm form = getBoard(user, entity);
+			list.add(form);
+		}
+		model.addAttribute("list", list);
 
-        return "board/index";
-    }
-	
+		return "board/index";
+	}
+
 	@GetMapping(path = "/board/new")
 	public String newBoard(Model model) {
 		model.addAttribute("form", new BoardForm());
@@ -73,10 +81,35 @@ public class BoardsController {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.typeMap(Board.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setUser));
 
+		modelMapper.typeMap(Board.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setGoods));
+		modelMapper.typeMap(GoodBoard.class, GoodBoardForm.class)
+				.addMappings(mapper -> mapper.skip(GoodBoardForm::setBoard));
+
+		modelMapper.typeMap(Event.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setComments));
+		
 		BoardForm form = modelMapper.map(entity, BoardForm.class);
 		UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);
 		form.setUser(userForm);
 
+		List<GoodBoardForm> goods = new ArrayList<GoodBoardForm>();
+
+		for (GoodBoard goodBoardEntity : entity.getGoods()) {
+			GoodBoardForm good = modelMapper.map(goodBoardEntity, GoodBoardForm.class);
+			goods.add(good);
+			if (user.getUserId().equals(good.getUserId())) {
+				form.setGood(good);
+			}
+		}
+
+		form.setGoods(goods);
+		
+		List<CommentBoardForm> comments = new ArrayList<CommentBoardForm>();
+		for (CommentBoard commentBoardEntity : entity.getComments()) {
+			CommentBoardForm comment = modelMapper.map(commentBoardEntity, CommentBoardForm.class);
+			comments.add(comment);
+		}
+		form.setComments(comments);
+		
 		return form;
 	}
 

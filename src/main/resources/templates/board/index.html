@@ -27,6 +27,40 @@
 						<h5 class="author" th:text="${board.user.name}"></h5>
 						<h3 class="title" th:text="${board.title}"></h3>
 						<pre class="description" th:text="${board.description}"></pre>
+
+						<!-- リアクション部分 -->
+						<div class="icons">
+							<!-- goods -->
+							<a th:if="${board.good != null}" rel="nofollow" class="icon convert" data-method="delete"
+								href="/good_board?event_id=1" th:href="@{'/good_board'}" th:data-board_id="${board.id}"
+								th:data-_csrf="${_csrf.token}">
+								<img class="good-on" src="/images/icons/good_white.png"
+									th:src="@{/images/icons/good_white.png}" />
+							</a>
+							<a th:if="${board.good == null}" rel="nofollow" class="icon convert" data-method="post"
+								href="/good_board?board_id=1" th:href="@{'/good_board'}" th:data-board_id="${board.id}"
+								th:data-_csrf="${_csrf.token}">
+								<img src="/images/icons/good_black.png" th:src="@{/images/icons/good_black.png}" />
+							</a>
+							<span class="count" th:text="${#lists.size(board.goods)}">0</span>
+							
+							<!-- comments -->
+							<a href="/board/1/comments/board"
+								th:href="@{'/board/{id}/comments_board/new'(id=${board.id})}" class="icon"
+								th:data-_csrf="${_csrf.token}">
+								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
+							</a>
+							<span class="count" th:text="${#lists.size(board.comments)}">0</span>
+						</div>
+						
+						<!-- コメント表示 -->
+						<div class="comments">
+							<h4 class="text-center">コメント</h4>
+							<ul th:each="comment : ${board.comments}">
+								<h4 class="author" th:text="${comment.user.name}"></h4>
+								<pre class="description" th:text="${comment.description}"></pre>
+							</ul>
+						</div>
 					</main>
 				</div>
 			</div>

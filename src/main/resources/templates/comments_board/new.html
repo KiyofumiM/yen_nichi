@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<div class="events-new-wrapper" layout:fragment="contents">
+	<div class="board-new-wrapper" layout:fragment="contents">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 mx-auto">
@@ -18,10 +18,10 @@
 					<br>
 					
 					<form class="new_comment" id="new_comment"
-						th:action="@{/event/__${form.eventId}__/comment_event}" th:object="${form}">
+						th:action="@{/board/__${form.boardId}__/comments_board}" th:object="${form}">
 						<div layout:replace="~{layouts/common::messages}"></div>
 						<div class="mb-3">
-							<label class="form-label text-black" for="comment_event_description">内容</label>
+							<label class="form-label text-black" for="comment_board_description">内容</label>
 							<textarea class="form-control" th:field="*{description}" rows="10"
 								th:errorclass="error-field"></textarea>
 							<p th:if="${#fields.hasErrors('description')}" class="error-message"

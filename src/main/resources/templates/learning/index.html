@@ -63,7 +63,7 @@
 							<span class="count" th:text="${#lists.size(learning.favorites)}">0</span>
 
 							<!-- comments -->
-							<a href="/learning/1/comments_learning/new"
+							<a href="/learning/1/comments_learning"
 								th:href="@{'/learning/{id}/comments_learning/new'(id=${learning.id})}" class="icon"
 								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
