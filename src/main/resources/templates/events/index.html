@@ -68,6 +68,7 @@
 							<ul th:each="comment : ${event.comments}">
 								<h4 class="author" th:text="${comment.user.name}"></h4>
 								<pre class="description" th:text="${comment.description}"></pre>
+								<br>
 							</ul>
 						</div>
 						

@@ -3,12 +3,9 @@ package com.tie.yennichi.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -35,11 +32,7 @@ import com.tie.yennichi.entity.GoodBoard;
 import com.tie.yennichi.form.GoodBoardForm;
 
 import com.tie.yennichi.entity.CommentBoard;
-import com.tie.yennichi.entity.CommentEvent;
-import com.tie.yennichi.entity.Event;
 import com.tie.yennichi.form.CommentBoardForm;
-import com.tie.yennichi.form.CommentEventForm;
-import com.tie.yennichi.form.EventForm;
 
 @Controller
 public class BoardsController {
@@ -48,9 +41,6 @@ public class BoardsController {
 
 	@Autowired
 	private ModelMapper modelMapper;
-
-	// @Autowired
-	// private HttpServletRequest request;
 
 	@Autowired
 	private BoardRepository repository;
@@ -85,7 +75,7 @@ public class BoardsController {
 		modelMapper.typeMap(GoodBoard.class, GoodBoardForm.class)
 				.addMappings(mapper -> mapper.skip(GoodBoardForm::setBoard));
 
-		modelMapper.typeMap(Event.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setComments));
+		modelMapper.typeMap(Board.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setComments));
 		
 		BoardForm form = modelMapper.map(entity, BoardForm.class);
 		UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);

@@ -43,7 +43,7 @@
 								<img src="/images/icons/good_black.png" th:src="@{/images/icons/good_black.png}" />
 							</a>
 							<span class="count" th:text="${#lists.size(board.goods)}">0</span>
-							
+
 							<!-- comments -->
 							<a href="/board/1/comments/board"
 								th:href="@{'/board/{id}/comments_board/new'(id=${board.id})}" class="icon"
@@ -52,13 +52,14 @@
 							</a>
 							<span class="count" th:text="${#lists.size(board.comments)}">0</span>
 						</div>
-						
+
 						<!-- コメント表示 -->
 						<div class="comments">
 							<h4 class="text-center">コメント</h4>
 							<ul th:each="comment : ${board.comments}">
 								<h4 class="author" th:text="${comment.user.name}"></h4>
 								<pre class="description" th:text="${comment.description}"></pre>
+								<br>
 							</ul>
 						</div>
 					</main>
