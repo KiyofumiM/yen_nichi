@@ -34,7 +34,7 @@ public class Board extends AbstractEntity implements Serializable {
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
 	
-	@Column(nullable = false, length = 20)
+	@Column(nullable = false, length = 30)
 	private String title;
 	
 	@Column(nullable = false, length = 1000)

@@ -7,6 +7,12 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
+  datasource:
+   driver-class-name: org.postgresql.Driver
+   url: jdbc:postgresql://localhost:5432/yennichi
+   username: ${psql.user}
+   password: ${psql.password}
+   
   mail:
     default-encoding: UTF-8
     protocol: smtp
