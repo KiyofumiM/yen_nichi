@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tie.yennichi.entity.GoodBoard;
-import com.tie.yennichi.entity.Board;
 import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.form.BoardForm;
 import com.tie.yennichi.repository.GoodBoardRepository;
@@ -52,7 +51,7 @@ public class GoodBoardsController {
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", "いいねに登録しました");
+            redirAttrs.addFlashAttribute("message", messageSource.getMessage("goods.create.flash", new String[] {}, locale));
         }
 
         return "redirect:/board";
@@ -72,7 +71,7 @@ public class GoodBoardsController {
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", "いいねから削除しました");
+            redirAttrs.addFlashAttribute("message", messageSource.getMessage("goods.destroy.flash", new String[] {}, locale));
         }
         return "redirect:/board";
     }

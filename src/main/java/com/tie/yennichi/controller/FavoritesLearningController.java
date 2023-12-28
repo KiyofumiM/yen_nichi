@@ -68,7 +68,7 @@ public class FavoritesLearningController {
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", "お気に入りに登録しました");
+            redirAttrs.addFlashAttribute("message", messageSource.getMessage("favorites.create.flash", new String[] {}, locale));
         }
 
         return "redirect:/learning";
@@ -88,7 +88,7 @@ public class FavoritesLearningController {
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", "お気に入りから削除しました");
+            redirAttrs.addFlashAttribute("message", messageSource.getMessage("favorites.destroy.flash", new String[] {}, locale));
         }
         return "redirect:/learning";
     }

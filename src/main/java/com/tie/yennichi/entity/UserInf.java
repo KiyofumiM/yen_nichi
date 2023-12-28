@@ -7,4 +7,12 @@ public interface UserInf {
     String getUsername();
     
     String getName();
+    
+    void setUserId(Long id);
+
+    void setUsername(String username);
+    
+    void setName(String name);
+    
+    void setPassword(String password);
 }

@@ -3,9 +3,9 @@ package com.tie.yennichi.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.Principal;
-// import java.util.ArrayList;
-// import java.util.List;
+
 import java.util.Locale;
+import org.springframework.context.MessageSource;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -34,6 +34,9 @@ import com.tie.yennichi.service.SendMailService;
 @Controller
 public class ContactsController {
 
+	@Autowired
+	private MessageSource messageSource;
+	
 	protected static Logger log = LoggerFactory.getLogger(BoardsController.class);
 
 	@Autowired
@@ -64,11 +67,11 @@ public class ContactsController {
 
 	@RequestMapping(value = "/contact", method = RequestMethod.POST)
 	public String create(Principal principal, @Validated @ModelAttribute("form") ContactForm form, BindingResult result,
-			Model model, RedirectAttributes redirAttrs) throws IOException {
+			Model model, RedirectAttributes redirAttrs, Locale locale) throws IOException {
 		if (result.hasErrors()) {
 			model.addAttribute("hasMessage", true);
 			model.addAttribute("class", "alert-danger");
-			model.addAttribute("message", "送信に失敗しました");
+			model.addAttribute("message", messageSource.getMessage("contact.create.flash.1", new String[] {}, locale));
 			return "contact/new";
 		}
 
@@ -82,7 +85,7 @@ public class ContactsController {
 
 		redirAttrs.addFlashAttribute("hasMessage", true);
 		redirAttrs.addFlashAttribute("class", "alert-info");
-		redirAttrs.addFlashAttribute("message", "送信に成功しました");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("contact.create.flash.2", new String[] {}, locale));
 
 		// post E-mail
 		Context context = new Context();
@@ -96,5 +99,10 @@ public class ContactsController {
 		
 		return "contact/success";
 	}
+	
+    @RequestMapping("contact/success")
+    public String close() {
+        return "contact/success";
+    }
 
 }

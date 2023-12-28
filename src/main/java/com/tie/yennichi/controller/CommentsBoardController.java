@@ -47,7 +47,7 @@ public class CommentsBoardController {
         if (result.hasErrors()) {
             model.addAttribute("hasMessage", true);
             model.addAttribute("class", "alert-danger");
-            model.addAttribute("message", "投稿に失敗しました。");
+            model.addAttribute("message", messageSource.getMessage("comments.create.flash.1", new String[] {}, locale));
             return "comments_board/new";
         }
         
@@ -60,7 +60,7 @@ public class CommentsBoardController {
 
         redirAttrs.addFlashAttribute("hasMessage", true);
         redirAttrs.addFlashAttribute("class", "alert-info");
-        redirAttrs.addFlashAttribute("message", "投稿に成功しました。");
+        redirAttrs.addFlashAttribute("message", messageSource.getMessage("comments.create.flash.2", new String[] {}, locale));
 
         return "redirect:/board";
     }

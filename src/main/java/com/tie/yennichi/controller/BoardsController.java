@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Locale;
+import org.springframework.context.MessageSource;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -37,6 +39,9 @@ import com.tie.yennichi.form.CommentBoardForm;
 @Controller
 public class BoardsController {
 
+	@Autowired
+	private MessageSource messageSource;
+	
 	protected static Logger log = LoggerFactory.getLogger(BoardsController.class);
 
 	@Autowired
@@ -105,11 +110,11 @@ public class BoardsController {
 
 	@RequestMapping(value = "/board", method = RequestMethod.POST)
 	public String create(Principal principal, @Validated @ModelAttribute("form") BoardForm form, BindingResult result,
-			Model model, RedirectAttributes redirAttrs) throws IOException {
+			Model model, RedirectAttributes redirAttrs, Locale locale) throws IOException {
 		if (result.hasErrors()) {
 			model.addAttribute("hasMessage", true);
 			model.addAttribute("class", "alert-danger");
-			model.addAttribute("message", "投稿に失敗しました");
+			model.addAttribute("message", messageSource.getMessage("topics.create.flash.1", new String[] {}, locale));
 			return "board/new";
 		}
 
@@ -123,7 +128,7 @@ public class BoardsController {
 
 		redirAttrs.addFlashAttribute("hasMessage", true);
 		redirAttrs.addFlashAttribute("class", "alert-info");
-		redirAttrs.addFlashAttribute("message", "投稿に成功しました");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
 
 		return "redirect:/board";
 	}

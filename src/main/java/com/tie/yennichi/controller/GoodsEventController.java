@@ -47,7 +47,7 @@ public class GoodsEventController {
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", "いいねに登録しました");
+            redirAttrs.addFlashAttribute("message", messageSource.getMessage("goods.create.flash", new String[] {}, locale));
         }
 
         return "redirect:/events";
@@ -67,7 +67,7 @@ public class GoodsEventController {
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", "いいねから削除しました");
+            redirAttrs.addFlashAttribute("message", messageSource.getMessage("goods.destroy.flash", new String[] {}, locale));
         }
         return "redirect:/events";
     }

@@ -39,6 +39,9 @@ import com.tie.yennichi.form.LearningForm;
 import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.LearningRepository;
 
+import java.util.Locale;
+import org.springframework.context.MessageSource;
+
 import com.tie.yennichi.entity.GoodLearning;
 import com.tie.yennichi.form.GoodLearningForm;
 
@@ -52,6 +55,9 @@ import com.tie.yennichi.form.CommentLearningForm;
 public class LearningController {
 	protected static Logger log = LoggerFactory.getLogger(LearningController.class);
 
+	@Autowired
+	private MessageSource messageSource;
+	
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -174,12 +180,12 @@ public class LearningController {
 
 	@RequestMapping(value = "/learning", method = RequestMethod.POST)
 	public String create(Principal principal, @Validated @ModelAttribute("form") LearningForm form,
-			BindingResult result, Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs)
+			BindingResult result, Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs, Locale locale)
 			throws IOException {
 		if (result.hasErrors()) {
 			model.addAttribute("hasMessage", true);
 			model.addAttribute("class", "alert-danger");
-			model.addAttribute("message", "投稿に失敗しました。");
+			model.addAttribute("message", messageSource.getMessage("topics.create.flash.1", new String[] {}, locale));
 			return "learning/new";
 		}
 
@@ -205,7 +211,7 @@ public class LearningController {
 
 		redirAttrs.addFlashAttribute("hasMessage", true);
 		redirAttrs.addFlashAttribute("class", "alert-info");
-		redirAttrs.addFlashAttribute("message", "投稿に成功しました。");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
 
 		return "redirect:/learning";
 	}

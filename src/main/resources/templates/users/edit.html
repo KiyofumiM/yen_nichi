@@ -12,8 +12,8 @@
 			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
 			<div class="row">
 				<main class="col-md-4 mx-auto">
-					<h1 class="text-center text-white" th:text="#{users.new.title}">Sign in</h1>
-					<form method="post" th:action="@{/user}" th:object="${form}">
+					<h1 class="text-center text-white" th:text="#{users.edit.title}">Update user Infomation</h1>
+					<form method="post" th:action="@{/user/edit}" th:object="${form}">
 						<div layout:replace="~{layouts/common::messages}"></div>
 						<div class="mb-3">
 							<label class="form-label text-white" for="user_name" th:text="#{users.new.name}">Name</label>
@@ -22,8 +22,8 @@
 						</div>
 						<div class="mb-3">
 							<label class="form-label text-white" for="user_email" th:text="#{users.new.email}">Email</label>
-							<input type="text" class="form-control" th:field="*{email}" th:placeholder="#{users.new.email.placeholder}" />
-							<p th:if="${#fields.hasErrors('email')}" class="error-message" th:errors="*{email}" th:placeholder="#{users.new.email.placeholder}"></p>
+							<input type="text" class="form-control" th:field="*{email}" th:placeholder="#{users.new.email.placeholder}"  />
+							<p th:if="${#fields.hasErrors('email')}" class="error-message" th:errors="*{email}"></p>
 						</div>
 						<div class="mb-3">
 							<label class="form-label text-white" for="user_password" th:text="#{users.new.password}">Password</label>
@@ -32,8 +32,7 @@
 							</p>
 						</div>
 						<div class="mb-3">
-							<label class="form-label text-white" for="user_password_confirmation" th:text="#{users.new.password_confirmation}">Password
-								confirmation</label>
+							<label class="form-label text-white" for="user_password_confirmation" th:text="#{users.new.password_confirmation}">Password　confirmation</label>
 							<input type="password" class="form-control" th:field="*{passwordConfirmation}" th:placeholder="#{users.new.password.placeholder}" />
 							<p th:if="${#fields.hasErrors('passwordConfirmation')}" class="error-message"
 								th:errors="*{passwordConfirmation}"></p>
@@ -41,7 +40,7 @@
 
 						<br>
 
-						<input type="submit" value="登録" class="btn w-100 btn-outline-primary" th:value="#{users.new.submit}"/>
+						<input type="submit" value="更新" class="btn w-100 btn-outline-success" th:value="#{users.edit.submit}"/>
 					</form>
 				</main>
 			</div>

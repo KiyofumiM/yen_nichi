@@ -15,7 +15,7 @@
 				<a class="btn w-55 btn-outline-light" href="/board/new">
 					<img src="/images/icons/posting.png" th:src="@{/images/icons/posting.png}">
 					<br>
-					<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84">
+					<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84" th:text="#{topics.new.title}">
 						新規投稿
 					</h6>
 				</a>
@@ -55,7 +55,7 @@
 
 						<!-- コメント表示 -->
 						<div class="comments">
-							<h4 class="text-center">コメント</h4>
+							<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
 							<ul th:each="comment : ${board.comments}">
 								<h4 class="author" th:text="${comment.user.name}"></h4>
 								<pre class="description" th:text="${comment.description}"></pre>

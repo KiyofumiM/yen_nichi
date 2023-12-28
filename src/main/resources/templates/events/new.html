@@ -12,7 +12,7 @@
 			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
 			<div class="row">
 				<div class="col-md-6 mx-auto">
-					<h1 class="text-center text-black">イベント情報</h1>
+					<h1 class="text-center text-black" th:text="#{event.new.title}">イベント情報</h1>
 
 					<br><br>
 
@@ -21,7 +21,7 @@
 						<div layout:replace="~{layouts/common::messages}"></div>
 						<input type="hidden" th:field="*{id}" />
 						<div class="mb-3">
-							<label class="form-label text-black" for="image">画像</label>
+							<label class="form-label text-black" for="image" th:text="#{event.new.image}">画像</label>
 							<input type="file" class="form-control-file" th:field="*{image}" />
 							<p th:if="${#fields.hasErrors('image')}" class="error-message" th:errors="*{image}"></p>
 						</div>
@@ -29,13 +29,13 @@
 						<br>
 						
 						<div class="mb-3">
-							<label class="form-label text-black" for="event_at">行われる日</label>
+							<label class="form-label text-black" for="event_at" th:text="#{event.new.eventAt}">行われる日</label>
 							<input type="date" min="2020-01-01" max="2043-12-31" id="event_at" name="event_at" required>
 
 							<br><br>
 							
 							<div class="mb-3">
-								<label class="form-label text-black" for="title">タイトル</label>
+								<label class="form-label text-black" for="title" th:text="#{event.new.topicTitle}">タイトル</label>
 								<textarea class="form-control" th:field="*{title}" rows="10"
 									th:errorclass="error-field"></textarea>
 								<p th:if="${#fields.hasErrors('title')}" class="error-message" th:errors="*{title}"></p>
@@ -44,7 +44,7 @@
 							<br>
 							
 							<div class="mb-3">
-								<label class="form-label text-black" for="description">詳細</label>
+								<label class="form-label text-black" for="description" th:text="#{event.new.description}">詳細</label>
 								<textarea class="form-control" th:field="*{description}" rows="10"
 									th:errorclass="error-field"></textarea>
 								<p th:if="${#fields.hasErrors('description')}" class="error-message"
@@ -53,7 +53,7 @@
 
 							<br>
 
-							<input type="submit" value="投稿" class="btn w-100 btn-outline-success" />
+							<input type="submit" value="投稿" class="btn w-100 btn-outline-success"  th:value="#{topics.new.submit}"/>
 					</form>
 				</div>
 			</div>

@@ -33,7 +33,6 @@ public class ViewEventsController {
             Iterable<Event> events = repository.findAll();
             List<ViewEventFrom> form = new ArrayList<ViewEventFrom>();
             
-            System.out.println("投稿テスト");
             for (Event entity : events) {
             	ViewEventFrom event = new ViewEventFrom();
                 event.setTitle(entity.getTitle());

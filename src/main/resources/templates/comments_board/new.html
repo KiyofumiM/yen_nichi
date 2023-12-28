@@ -13,7 +13,7 @@
 				<div class="col-md-6 mx-auto">
 					<br>
 					<br>
-					<h1 class="text-center">コメントの投稿</h1>
+					<h1 class="text-center" th:text="#{comments.new.title}">コメントの投稿</h1>
 					
 					<br>
 					
@@ -21,7 +21,7 @@
 						th:action="@{/board/__${form.boardId}__/comments_board}" th:object="${form}">
 						<div layout:replace="~{layouts/common::messages}"></div>
 						<div class="mb-3">
-							<label class="form-label text-black" for="comment_board_description">内容</label>
+							<label class="form-label text-black" for="comment_board_description" th:text="#{comments.new.description}">内容</label>
 							<textarea class="form-control" th:field="*{description}" rows="10"
 								th:errorclass="error-field"></textarea>
 							<p th:if="${#fields.hasErrors('description')}" class="error-message"
@@ -30,7 +30,7 @@
 						
 						<br>
 						
-						<input type="submit" value="投稿" class="btn w-100 btn-outline-success" />
+						<input type="submit" value="投稿" class="btn w-100 btn-outline-success" th:value="#{comments.new.submit}"/>
 					</form>
 				</div>
 			</div>

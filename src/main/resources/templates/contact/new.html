@@ -12,7 +12,7 @@
 			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
 			<div class="row">
 				<div class="col-md-6 mx-auto">
-					<h1 class="text-center">お問い合わせ</h1>
+					<h1 class="text-center" th:text="#{contact.new.title}">お問い合わせ</h1>
 					<form class="new_contact" id="new_contact" method="post" th:action="@{/contact}" th:object="${form}"
 						enctype="multipart/form-data">
 						<div layout:replace="~{layouts/common::messages}"></div>
@@ -21,7 +21,7 @@
 						
 						<input type="hidden" th:field="*{id}" />
 						<div class="mb-3">
-							<label class="form-label text-black" for="contact_title">タイトル</label>
+							<label class="form-label text-black" for="contact_title" th:text="#{contact.new.mailTitle}">タイトル</label>
 							<textarea class="form-control" th:field="*{title}" rows="10"
 								th:errorclass="error-field"></textarea>
 							<p th:if="${#fields.hasErrors('description')}" class="error-message"
@@ -29,7 +29,7 @@
 								
 							<br><br>
 							
-							<label class="form-label text-black" for="contact_description">内容</label>
+							<label class="form-label text-black" for="contact_description" th:text="#{contact.new.description}">内容</label>
 							<textarea class="form-control" th:field="*{description}" rows="10"
 								th:errorclass="error-field"></textarea>
 							<p th:if="${#fields.hasErrors('description')}" class="error-message"
@@ -38,7 +38,7 @@
 						
 						<br><br>
 						
-						<input type="submit" value="送信" class="btn w-100 btn-outline-success" />
+						<input type="submit" value="送信" class="btn w-100 btn-outline-success" th:value="#{topics.new.submit}"/>
 					</form>
 					
 					<br>
