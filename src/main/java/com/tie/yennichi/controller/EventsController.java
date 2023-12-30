@@ -14,6 +14,7 @@ import java.util.Locale;
 import org.springframework.context.MessageSource;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.modelmapper.ModelMapper;
@@ -43,8 +44,9 @@ import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.EventRepository;
 
 import com.tie.yennichi.entity.GoodEvent;
+import com.tie.yennichi.entity.Learning;
 import com.tie.yennichi.form.GoodEventForm;
-
+import com.tie.yennichi.form.LearningForm;
 import com.tie.yennichi.entity.FavoriteEvent;
 import com.tie.yennichi.form.FavoriteEventForm;
 
@@ -83,6 +85,7 @@ public class EventsController {
             list.add(form);
         }
         model.addAttribute("list", list);
+        model.addAttribute("userId", user.getUserId());
 
         return "events/index";
     }
@@ -237,5 +240,67 @@ public class EventsController {
 
         return destFile;
     }
+    
+	// 登録情報を取得して表示
+	@RequestMapping(value = "/event/edit", method = RequestMethod.GET)
+	public String edit(Principal principal, @RequestParam("event_id") long eventId, Model model)
+			 {
+		Event entity = repository.findById(eventId);
+
+		EventForm eventForm = new EventForm();
+		eventForm.setId(entity.getId());
+
+		boolean isImageLocal = false;
+		if (imageLocal != null) {
+			isImageLocal = new Boolean(imageLocal);
+		}
+
+		eventForm.setPath(entity.getPath());
+		eventForm.setEvent_at(entity.getEvent_at());
+		eventForm.setTitle(entity.getTitle());
+		eventForm.setDescription(entity.getDescription());
+		model.addAttribute("form", eventForm);
+		return "events/edit";
+	}
+
+	@RequestMapping(value = "/event/update", method = RequestMethod.POST)
+	public String update(Principal principal, @Validated @ModelAttribute("form") EventForm form,
+			BindingResult result, Model model, Locale locale, HttpSession session, @RequestParam("id") long eventId,
+			@RequestParam MultipartFile image) throws IOException {
+
+		if (result.hasErrors()) {
+			model.addAttribute("hasMessage", true);
+			model.addAttribute("class", "alert-danger");
+			model.addAttribute("message", messageSource.getMessage("topics.edit.flash.1", new String[] {}, locale));
+			return "events/edit";
+		}
+
+		// 更新処理
+		Event entity = repository.findById(eventId);
+
+		File destFile = null;
+		if (imageLocal != null) {
+			destFile = saveImageLocal(image, entity);
+			entity.setPath(destFile.getAbsolutePath());
+		} else {
+			entity.setPath("");
+		}
+
+		String path = form.getPath();
+		String eventAt = form.getEvent_at();
+		String title = form.getTitle();
+		String description = form.getDescription();
+
+		entity.setEvent_at(eventAt);
+		entity.setTitle(title);
+		entity.setDescription(description);
+
+		repository.saveAndFlush(entity);
+
+		model.addAttribute("hasMessage", true);
+		model.addAttribute("class", "alert-info");
+		model.addAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
+		return "redirect:/events";
+	}
 
 }

@@ -37,7 +37,7 @@ public class Learning extends AbstractEntity implements Serializable {
     private String title;
     
     @Column(nullable = true, length = 1000)
-	public String description;
+	private String description;
 
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
@@ -54,4 +54,5 @@ public class Learning extends AbstractEntity implements Serializable {
     @OneToMany
     @JoinColumn(name = "learningId", insertable = false, updatable = false)
     private List<CommentLearning> comments;
+    
 }

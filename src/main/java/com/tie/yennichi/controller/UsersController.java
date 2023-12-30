@@ -110,7 +110,7 @@ public class UsersController {
 		if (result.hasErrors()) {
 			model.addAttribute("hasMessage", true);
 			model.addAttribute("class", "alert-danger");
-			model.addAttribute("message", messageSource.getMessage("users.create.flash.1", new String[] {}, locale));
+			model.addAttribute("message", messageSource.getMessage("users.edit.flash.1", new String[] {}, locale));
 			return "users/edit";
 		}
 

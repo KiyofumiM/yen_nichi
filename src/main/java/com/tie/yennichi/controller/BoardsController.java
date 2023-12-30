@@ -1,5 +1,6 @@
 package com.tie.yennichi.controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.Principal;
@@ -7,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.MessageSource;
 
 import org.modelmapper.ModelMapper;
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tie.yennichi.entity.Board;
@@ -31,8 +37,9 @@ import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.BoardRepository;
 
 import com.tie.yennichi.entity.GoodBoard;
+import com.tie.yennichi.entity.Learning;
 import com.tie.yennichi.form.GoodBoardForm;
-
+import com.tie.yennichi.form.LearningForm;
 import com.tie.yennichi.entity.CommentBoard;
 import com.tie.yennichi.form.CommentBoardForm;
 
@@ -62,6 +69,7 @@ public class BoardsController {
 			list.add(form);
 		}
 		model.addAttribute("list", list);
+		model.addAttribute("userId", user.getUserId());
 
 		return "board/index";
 	}
@@ -130,6 +138,50 @@ public class BoardsController {
 		redirAttrs.addFlashAttribute("class", "alert-info");
 		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
 
+		return "redirect:/board";
+	}
+	
+	// 登録情報を取得して表示
+	@RequestMapping(value = "/board/edit", method = RequestMethod.GET)
+	public String edite(Principal principal, @RequestParam("board_id") long boardId, Model model)
+			 {
+		Board entity = repository.findById(boardId);
+
+		BoardForm boardForm = new BoardForm();
+		boardForm.setId(entity.getId());
+
+		boardForm.setTitle(entity.getTitle());
+		boardForm.setDescription(entity.getDescription());
+		model.addAttribute("form", boardForm);
+		return "board/edit";
+	}
+
+	@RequestMapping(value = "/board/update", method = RequestMethod.POST)
+	public String update(Principal principal, @Validated @ModelAttribute("form") BoardForm form,
+			BindingResult result, Model model, Locale locale, HttpSession session, @RequestParam("id") long boardId)
+			 throws IOException {
+
+		if (result.hasErrors()) {
+			model.addAttribute("hasMessage", true);
+			model.addAttribute("class", "alert-danger");
+			model.addAttribute("message", messageSource.getMessage("topics.edit.flash.1", new String[] {}, locale));
+			return "board/edit";
+		}
+
+		// 更新処理
+		Board entity = repository.findById(boardId);
+
+		String title = form.getTitle();
+		String description = form.getDescription();
+
+		entity.setTitle(title);
+		entity.setDescription(description);
+
+		repository.saveAndFlush(entity);
+
+		model.addAttribute("hasMessage", true);
+		model.addAttribute("class", "alert-info");
+		model.addAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
 		return "redirect:/board";
 	}
 

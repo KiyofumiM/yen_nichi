@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.modelmapper.ModelMapper;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
@@ -39,7 +41,6 @@ import com.tie.yennichi.form.LearningForm;
 import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.LearningRepository;
 
-import java.util.Locale;
 import org.springframework.context.MessageSource;
 
 import com.tie.yennichi.entity.GoodLearning;
@@ -57,7 +58,7 @@ public class LearningController {
 
 	@Autowired
 	private MessageSource messageSource;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -82,7 +83,8 @@ public class LearningController {
 			list.add(form);
 		}
 		model.addAttribute("list", list);
-		
+		model.addAttribute("userId", user.getUserId());
+
 		return "learning/index";
 	}
 
@@ -92,10 +94,11 @@ public class LearningController {
 				.addMappings(mapper -> mapper.skip(LearningForm::setUser));
 		modelMapper.typeMap(Learning.class, LearningForm.class)
 				.addMappings(mapper -> mapper.skip(LearningForm::setFavorites));
-		modelMapper.typeMap(Learning.class, LearningForm.class).addMappings(mapper -> mapper.skip(LearningForm::setComments));
+		modelMapper.typeMap(Learning.class, LearningForm.class)
+				.addMappings(mapper -> mapper.skip(LearningForm::setComments));
 		modelMapper.typeMap(FavoriteLearning.class, FavoriteLearningForm.class)
 				.addMappings(mapper -> mapper.skip(FavoriteLearningForm::setLearning));
-		
+
 		boolean isImageLocal = false;
 		if (imageLocal != null) {
 			isImageLocal = new Boolean(imageLocal);
@@ -125,15 +128,14 @@ public class LearningController {
 
 		List<GoodLearningForm> goods = new ArrayList<GoodLearningForm>();
 		for (GoodLearning favoriteLearningEntity : entity.getGoods()) {
-			GoodLearningForm good_learning = modelMapper.map(favoriteLearningEntity,
-					GoodLearningForm.class);
+			GoodLearningForm good_learning = modelMapper.map(favoriteLearningEntity, GoodLearningForm.class);
 			goods.add(good_learning);
 			if (user.getUserId().equals(favoriteLearningEntity.getUserId())) {
 				form.setGood(good_learning);
 			}
 		}
 		form.setGoods(goods);
-		
+
 		List<FavoriteLearningForm> favorites = new ArrayList<FavoriteLearningForm>();
 		for (FavoriteLearning favoriteLearningEntity : entity.getFavorites()) {
 			FavoriteLearningForm favorite_learning = modelMapper.map(favoriteLearningEntity,
@@ -144,7 +146,7 @@ public class LearningController {
 			}
 		}
 		form.setFavorites(favorites);
-		
+
 		List<CommentLearningForm> comments = new ArrayList<CommentLearningForm>();
 		for (CommentLearning commentLearningEntity : entity.getComments()) {
 			CommentLearningForm comment = modelMapper.map(commentLearningEntity, CommentLearningForm.class);
@@ -180,8 +182,8 @@ public class LearningController {
 
 	@RequestMapping(value = "/learning", method = RequestMethod.POST)
 	public String create(Principal principal, @Validated @ModelAttribute("form") LearningForm form,
-			BindingResult result, Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs, Locale locale)
-			throws IOException {
+			BindingResult result, Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs,
+			Locale locale) throws IOException {
 		if (result.hasErrors()) {
 			model.addAttribute("hasMessage", true);
 			model.addAttribute("class", "alert-danger");
@@ -211,7 +213,8 @@ public class LearningController {
 
 		redirAttrs.addFlashAttribute("hasMessage", true);
 		redirAttrs.addFlashAttribute("class", "alert-info");
-		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("message",
+				messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
 
 		return "redirect:/learning";
 	}
@@ -232,4 +235,62 @@ public class LearningController {
 		return destFile;
 	}
 
+	// 登録情報を取得して表示
+	@RequestMapping(value = "/learning/edit", method = RequestMethod.GET)
+	public String edite(Principal principal, @RequestParam("learning_id") long learningId, Model model)
+			 {
+		Learning entity = repository.findById(learningId);
+
+		LearningForm learningForm = new LearningForm();
+		learningForm.setId(entity.getId());
+
+		boolean isImageLocal = false;
+		if (imageLocal != null) {
+			isImageLocal = new Boolean(imageLocal);
+		}
+
+		learningForm.setPath(entity.getPath());
+		learningForm.setTitle(entity.getTitle());
+		learningForm.setDescription(entity.getDescription());
+		model.addAttribute("form", learningForm);
+		return "learning/edit";
+	}
+
+	@RequestMapping(value = "/learning/update", method = RequestMethod.POST)
+	public String update(Principal principal, @Validated @ModelAttribute("form") LearningForm form,
+			BindingResult result, Model model, Locale locale, HttpSession session, @RequestParam("id") long learningId,
+			@RequestParam MultipartFile image) throws IOException {
+
+		if (result.hasErrors()) {
+			model.addAttribute("hasMessage", true);
+			model.addAttribute("class", "alert-danger");
+			model.addAttribute("message", messageSource.getMessage("topics.edit.flash.1", new String[] {}, locale));
+			return "learning/edit";
+		}
+
+		// 更新処理
+		Learning entity = repository.findById(learningId);
+
+		File destFile = null;
+		if (imageLocal != null) {
+			destFile = saveImageLocal(image, entity);
+			entity.setPath(destFile.getAbsolutePath());
+		} else {
+			entity.setPath("");
+		}
+
+		String path = form.getPath();
+		String title = form.getTitle();
+		String description = form.getDescription();
+
+		entity.setTitle(title);
+		entity.setDescription(description);
+
+		repository.saveAndFlush(entity);
+
+		model.addAttribute("hasMessage", true);
+		model.addAttribute("class", "alert-info");
+		model.addAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
+		return "redirect:/learning";
+	}
 }

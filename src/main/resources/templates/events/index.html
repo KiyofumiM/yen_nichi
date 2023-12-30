@@ -60,7 +60,27 @@
 								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
 							</a>
 							<span class="count" th:text="${#lists.size(event.comments)}">0</span>
+
+							<!-- スペースを挿入 -->
+							<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+
+							<!-- ここでログインユーザーのIDを取得 -->
+							<div th:if="${userId == event.getUser().getId()}">
+								<!-- edit -->
+								<a class="btn w-20 btn-outline-success mb-1"
+									th:href="@{'/event/edit'(event_id=${event.id})}" th:data-event_id="${event.id}"
+									th:text="#{topics.edit.title}">編集</a>
+
+								<!-- スペースを挿入 -->
+								<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+								<!-- delete -->
+								<a class="btn w-20 btn-outline-danger mb-1"
+									th:href="@{'/event/delete'(event_id=${event.id})}" th:data-event_id="${event.id}"
+									th:text="#{topics.delete.submit}">削除</a>
+							</div>
 						</div>
+
+						<br>
 						
 						<!-- コメント表示 -->
 						<div class="comments">
@@ -71,12 +91,13 @@
 								<br>
 							</ul>
 						</div>
-						
+
 						<!-- 一覧に戻るボタン -->
 						<div class="col-md-11" align="right">
 							<a class="btn w-55 btn-outline-light" href="/calendars">
 								<img src="/images/icons/calendar2.png" th:src="@{/images/icons/calendar2.png}">
-								<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84" th:text="#{event.back_index}">
+								<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84"
+									th:text="#{event.back_index}">
 									一覧に戻る
 								</h6>
 							</a>

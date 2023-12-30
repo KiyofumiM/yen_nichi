@@ -69,6 +69,24 @@
 								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
 							</a>
 							<span class="count" th:text="${#lists.size(learning.comments)}">0</span>
+
+							<!-- スペースを挿入 -->
+							<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+
+							<!-- ここでログインユーザーのIDを取得 -->
+							<div th:if="${userId == learning.getUser().getId()}">
+								<!-- edit -->
+								<a class="btn w-20 btn-outline-success mb-1"
+									th:href="@{'/learning/edit'(learning_id=${learning.id})}"
+									th:data-learning_id="${learning.id}" th:text="#{topics.edit.title}">編集</a>
+
+								<!-- スペースを挿入 -->
+								<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+								<!-- delete -->
+								<a class="btn w-20 btn-outline-danger mb-1"
+									th:href="@{'/learning/delete'(learning_id=${learning.id})}"
+									th:data-learning_id="${learning.id}" th:text="#{topics.delete.submit}">削除</a>
+							</div>
 						</div>
 
 						<br>

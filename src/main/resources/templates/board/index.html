@@ -51,13 +51,34 @@
 								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
 							</a>
 							<span class="count" th:text="${#lists.size(board.comments)}">0</span>
+
+
+							<!-- スペースを挿入 -->
+							<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+
+							<!-- ここでログインユーザーのIDを取得 -->
+							<div th:if="${userId == board.getUser().getId()}">
+								<!-- edit -->
+								<a class="btn w-20 btn-outline-success mb-1"
+									th:href="@{'/board/edit'(board_id=${board.id})}" th:data-board_id="${board.id}"
+									th:text="#{topics.edit.title}">編集</a>
+
+								<!-- スペースを挿入 -->
+								<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+								<!-- delete -->
+								<a class="btn w-20 btn-outline-danger mb-1"
+									th:href="@{'/board/delete'(board_id=${board.id})}" th:data-board_id="${board.id}"
+									th:text="#{topics.delete.submit}">削除</a>
+							</div>
 						</div>
+
+						<br>
 
 						<!-- コメント表示 -->
 						<div class="comments">
 							<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
 							<ul th:each="comment : ${board.comments}">
-								<h4 class="author" th:text="${comment.user.name}"></h4>
+								<h5 class="author" th:text="${comment.user.name}"></h5>
 								<pre class="description" th:text="${comment.description}"></pre>
 								<br>
 							</ul>
