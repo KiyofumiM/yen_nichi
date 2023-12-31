@@ -9,7 +9,7 @@ import com.tie.yennichi.entity.User;
 @Repository
 public interface LearningRepository extends JpaRepository<Learning, Long> {
 
-    Iterable<Learning> findAllByOrderByUpdatedAtDesc();
+    Iterable<Learning> findByDeletedFalseOrderByUpdatedAtDesc();
     
     Learning findById(long id);
 }

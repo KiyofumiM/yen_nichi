@@ -39,6 +39,9 @@ public class Learning extends AbstractEntity implements Serializable {
     @Column(nullable = true, length = 1000)
 	private String description;
 
+    @Column(nullable = false)
+    private boolean deleted;
+    
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;

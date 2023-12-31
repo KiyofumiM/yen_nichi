@@ -1,7 +1,6 @@
 package com.tie.yennichi.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class ViewEventsController {
     public String getEvents() {
         String jsonMsg = null;
         try {
-            Iterable<Event> events = repository.findAll();
+            Iterable<Event> events = repository.findByDeletedFalse();
             List<ViewEventFrom> form = new ArrayList<ViewEventFrom>();
             
             for (Event entity : events) {

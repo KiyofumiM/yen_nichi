@@ -36,6 +36,8 @@ public class EventForm {
     
     @Size(max = 1000)
     private String description;
+    
+    private boolean deleted;
 
     private UserForm user;
 

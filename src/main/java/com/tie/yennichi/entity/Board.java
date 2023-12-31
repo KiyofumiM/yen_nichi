@@ -40,6 +40,9 @@ public class Board extends AbstractEntity implements Serializable {
 	@Column(nullable = false, length = 1000)
 	private String description;
 	
+    @Column(nullable = false)
+    private boolean deleted;
+    
     @OneToMany
     @JoinColumn(name = "boardId", insertable = false, updatable = false)
     private List<GoodBoard> goods;

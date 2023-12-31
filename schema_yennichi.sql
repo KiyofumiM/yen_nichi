@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS learning (
   path VARCHAR(255) NOT NULL,
   title VARCHAR(20) NOT NULL,
   description VARCHAR(1000),
+  deleted bool NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   PRIMARY KEY (id)
@@ -43,6 +44,7 @@ CREATE TABLE IF NOT EXISTS event (
   event_at VARCHAR(10) NOT NULL,
   title VARCHAR(20) NOT NULL,
   description VARCHAR(1000),
+  deleted bool NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   PRIMARY KEY (id)
@@ -55,6 +57,7 @@ CREATE TABLE IF NOT EXISTS board (
   user_id INT NOT NULL,
   title VARCHAR(30) NOT NULL,
   description VARCHAR(1000) NOT NULL,
+  deleted bool NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   PRIMARY KEY (id)

@@ -21,6 +21,8 @@ public class BoardForm {
     @NotEmpty
     @Size(max = 1000)
     private String description;
+    
+    private boolean deleted;
 
     private List<GoodBoardForm> goods;
     

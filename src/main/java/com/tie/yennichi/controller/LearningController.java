@@ -76,7 +76,7 @@ public class LearningController {
 		Authentication authentication = (Authentication) principal;
 		UserInf user = (UserInf) authentication.getPrincipal();
 
-		List<Learning> learning = (List<Learning>) repository.findAllByOrderByUpdatedAtDesc();
+		List<Learning> learning = (List<Learning>) repository.findByDeletedFalseOrderByUpdatedAtDesc();
 		List<LearningForm> list = new ArrayList<>();
 		for (Learning entity : learning) {
 			LearningForm form = getLearning(user, entity);
@@ -209,6 +209,7 @@ public class LearningController {
 		}
 		entity.setTitle(form.getTitle());
 		entity.setDescription(form.getDescription());
+		entity.setDeleted(false);
 		repository.saveAndFlush(entity);
 
 		redirAttrs.addFlashAttribute("hasMessage", true);
@@ -291,6 +292,23 @@ public class LearningController {
 		model.addAttribute("hasMessage", true);
 		model.addAttribute("class", "alert-info");
 		model.addAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
+		return "redirect:/learning";
+	}
+	
+	@RequestMapping(value = "/learning/delete", method = RequestMethod.GET)
+	public String delete(Principal principal, Model model, Locale locale, HttpSession session, @RequestParam("learning_id") long learningId
+			) throws IOException {
+
+		// 更新処理
+		Learning entity = repository.findById(learningId);
+
+		entity.setDeleted(true);
+
+		repository.saveAndFlush(entity);
+
+		model.addAttribute("hasMessage", true);
+		model.addAttribute("class", "alert-info");
+		model.addAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
 		return "redirect:/learning";
 	}
 }

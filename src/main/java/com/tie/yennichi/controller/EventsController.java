@@ -78,7 +78,7 @@ public class EventsController {
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
 
-        Iterable<Event> events = (List<Event>) repository.findAllByOrderByUpdatedAtDesc();
+        Iterable<Event> events = (List<Event>) repository.findByDeletedFalseOrderByUpdatedAtDesc();
         List<EventForm> list = new ArrayList<>();
         for (Event entity : events) {
             EventForm form = getEvent(user, entity);
@@ -216,6 +216,7 @@ public class EventsController {
         entity.setEvent_at(form.getEvent_at());
         entity.setTitle(form.getTitle());
         entity.setDescription(form.getDescription());
+        entity.setDeleted(false);
         repository.saveAndFlush(entity);
         
         redirAttrs.addFlashAttribute("hasMessage", true);
@@ -303,4 +304,20 @@ public class EventsController {
 		return "redirect:/events";
 	}
 
+	@RequestMapping(value = "/event/delete", method = RequestMethod.GET)
+	public String delete(Principal principal, Model model, Locale locale, HttpSession session, @RequestParam("event_id") long eventId
+			) throws IOException {
+
+		// 更新処理
+		Event entity = repository.findById(eventId);
+
+		entity.setDeleted(true);
+
+		repository.saveAndFlush(entity);
+
+		model.addAttribute("hasMessage", true);
+		model.addAttribute("class", "alert-info");
+		model.addAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
+		return "redirect:/event";
+	}
 }

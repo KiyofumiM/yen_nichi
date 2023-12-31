@@ -9,7 +9,9 @@ import com.tie.yennichi.entity.Learning;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    Iterable<Event> findAllByOrderByUpdatedAtDesc();
+    Iterable<Event> findByDeletedFalseOrderByUpdatedAtDesc();
+    
+    Iterable<Event> findByDeletedFalse();
     
     Event findById(long id);
 }
