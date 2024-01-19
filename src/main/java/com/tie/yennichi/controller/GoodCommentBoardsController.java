@@ -15,61 +15,60 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.tie.yennichi.entity.GoodLearning;
+import com.tie.yennichi.entity.GoodCommentBoard;
 import com.tie.yennichi.entity.UserInf;
-import com.tie.yennichi.repository.GoodLearningRepository;
+import com.tie.yennichi.repository.GoodCommentBoardRepository;
 
 @Controller
-public class GoodsLearningController {
+public class GoodCommentBoardsController {
 	@Autowired
     private MessageSource messageSource;
 
     @Autowired
-    private GoodLearningRepository repository;
-
-    @Autowired
-    private LearningController learningController;
-
-    @RequestMapping(value = "/good_learning", method = RequestMethod.POST)
-    public String create(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,
+    private GoodCommentBoardRepository repository;
+    
+    @RequestMapping(value = "/good_comment_board", method = RequestMethod.POST)
+    public String create(Principal principal, @RequestParam("comment_board_id") long commentBoardId, RedirectAttributes redirAttrs,
             Locale locale) {
- 
-    	Authentication authentication = (Authentication) principal;
+    	
+        Authentication authentication = (Authentication) principal;
+        
         UserInf user = (UserInf) authentication.getPrincipal();
         Long userId = user.getUserId();
-        List<GoodLearning> results = repository.findByUserIdAndLearningId(userId, learningId);
+        
+        List<GoodCommentBoard> results = repository.findByUserIdAndCommentBoardId(userId, commentBoardId);
+        
         if (results.size() == 0) {
-            GoodLearning entity = new GoodLearning();
+            GoodCommentBoard entity = new GoodCommentBoard();
             entity.setUserId(userId);
-            entity.setLearningId(learningId);
+            entity.setCommentBoardId(commentBoardId);
             repository.saveAndFlush(entity);
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", messageSource.getMessage("goods.create.flash", new String[] {}, locale));
+            redirAttrs.addFlashAttribute("message",
+                    messageSource.getMessage("goods.create.flash", new String[] {}, locale));
         }
-
-        return "redirect:/learning";
+        return "redirect:/board";
     }
 
-    @RequestMapping(value = "/good_learning", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/good_comment_board", method = RequestMethod.DELETE)
     @Transactional
-    public String destroy(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,
+    public String destroy(Principal principal, @RequestParam("comment_board_id") long commentBoardId, RedirectAttributes redirAttrs,
             Locale locale) {
-    	
+
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
         Long userId = user.getUserId();
-        List<GoodLearning> results = repository.findByUserIdAndLearningId(userId, learningId);;
-        
+        List<GoodCommentBoard> results = repository.findByUserIdAndCommentBoardId(userId, commentBoardId);
         if (results.size() == 1) {
-            repository.deleteByUserIdAndLearningId(user.getUserId(), learningId);
+            repository.deleteByUserIdAndCommentBoardId(user.getUserId(), commentBoardId);
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", messageSource.getMessage("goods.destroy.flash", new String[] {}, locale));
+            redirAttrs.addFlashAttribute("message",
+                    messageSource.getMessage("goods.destroy.flash", new String[] {}, locale));
         }
-        return "redirect:/learning";
+        return "redirect:/board";
     }
-
 }

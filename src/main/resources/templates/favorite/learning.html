@@ -46,16 +46,12 @@
 
 						<div class="comments">
 							<h4 class="text-center">コメント</h4>
-							<ul th:each="comment : ${learning.comments}">
-								<li>
-									<h4>
-										<pre class="description" th:text="${comment.user.name}"></pre>
-									</h4>
-								</li>
-								<li>
+							<div th:each="comment : ${learning.comments}">
+								<div class="comment">
+									<h5 class="author" th:text="${comment.user.name}"></h5>
 									<pre class="description" th:text="${comment.description}"></pre>
-								</li>
-							</ul>
+								</div>
+							</div>
 						</div>
 
 					</main>

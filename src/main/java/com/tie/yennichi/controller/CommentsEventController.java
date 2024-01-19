@@ -56,6 +56,7 @@ public class CommentsEventController {
         UserInf user = (UserInf) authentication.getPrincipal();
         entity.setEventId(eventId);
         entity.setUserId(user.getUserId());
+        entity.setDeleted(false);
         repository.saveAndFlush(entity);
 
         redirAttrs.addFlashAttribute("hasMessage", true);

@@ -47,4 +47,9 @@ public class LearningForm {
     private FavoriteLearningForm favorite;
     
     private List<CommentLearningForm> comments;
+    
+    private List<GoodCommentLearningForm> goodComments;
+    
+    private GoodCommentLearningForm goodComment;
+
 }

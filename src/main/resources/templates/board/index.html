@@ -77,11 +77,31 @@
 						<!-- コメント表示 -->
 						<div class="comments">
 							<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
-							<ul th:each="comment : ${board.comments}">
-								<h5 class="author" th:text="${comment.user.name}"></h5>
-								<pre class="description" th:text="${comment.description}"></pre>
+							<div th:each="comment : ${board.comments}">
+								<div class="comment">
+									<h5 class="author" th:text="${comment.user.name}"></h5>
+									<pre class="description" th:text="${comment.description}"></pre>
+									
+									
+									<div class="icons">
+									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+									
+									<a th:if="${comment.goodComment.userId != null}" rel="nofollow" class="icon convert" data-method="delete" href="/good?comment_board_id=1" th:href="@{'/good_comment_board'}" th:data-comment_board_id="${comment.id}" th:data-_csrf="${_csrf.token}">
+											<img class="good-on" src="/images/icons/good_white.png"
+												th:src="@{/images/icons/good_white.png}" />
+									</a>
+									<span>&nbsp;</span>
+									<a th:if="${comment.goodComment.userId == null}" rel="nofollow" class="icon convert" data-method="post" href="/good?comment_board_id=1" th:href="@{'/good_comment_board'}" th:data-comment_board_id="${comment.id}" th:data-_csrf="${_csrf.token}">
+											<img src="/images/icons/good_black.png"
+												th:src="@{/images/icons/good_black.png}" />
+									</a>
+									
+									<span class="count" th:text="${#lists.size(comment.goodComments)}">0</span>
+									
+									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+								</div>
 								<br>
-							</ul>
+							</div>
 						</div>
 					</main>
 				</div>

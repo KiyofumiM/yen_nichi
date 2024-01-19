@@ -7,4 +7,6 @@ import com.tie.yennichi.entity.CommentLearning;
 
 @Repository
 public interface CommentLearningRepository extends JpaRepository<CommentLearning, Long> {
+
+	CommentLearning findById(long id);
 }

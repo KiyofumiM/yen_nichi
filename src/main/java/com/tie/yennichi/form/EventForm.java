@@ -50,4 +50,9 @@ public class EventForm {
     private FavoriteEventForm favorite;
     
     private List<CommentEventForm> comments;
+    
+    private List<GoodCommentEventForm> goodComments;
+    
+    private GoodCommentEventForm goodComment;
 }
+

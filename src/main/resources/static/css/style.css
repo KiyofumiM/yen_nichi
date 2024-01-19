@@ -157,8 +157,12 @@ nav.navbar {
       word-wrap: break-word;
       background-color: #FAFFF5;
       border: none; }
-    .topics-index-wrapper main .comments ul li {
-      list-style: none; }
+    .topics-index-wrapper main .comments .author {
+      margin: 20px;
+      padding: 0 40px; }
+    .topics-index-wrapper main .comments .description {
+      margin: 20px;
+      padding: 0 50px; }
 
 .events-new-wrapper {
   padding-top: 80px;
@@ -231,8 +235,12 @@ nav.navbar {
       word-wrap: break-word;
       background-color: #FAFFF5;
       border: none; }
-    .events-index-wrapper main .comments ul li {
-      list-style: none; }
+    .events-index-wrapper main .comments .author {
+      margin: 20px;
+      padding: 0 40px; }
+    .events-index-wrapper main .comments .description {
+      margin: 20px;
+      padding: 0 50px; }
 
 .fc-direction-ltr {
   padding-top: 40px; }
@@ -315,8 +323,12 @@ nav.navbar {
       white-space: pre-wrap;
       word-wrap: break-word;
       border: none; }
-    .board-index-wrapper main .comments ul li {
-      list-style: none; }
+    .board-index-wrapper main .comments .author {
+      margin: 20px;
+      padding: 0 40px; }
+    .board-index-wrapper main .comments .description {
+      margin: 20px;
+      padding: 0 50px; }
 
 .board-new-wrapper {
   padding-top: 80px;

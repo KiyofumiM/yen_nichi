@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Yen Nichi Comments</title>
+</head>
+
+<body>
+	<div class="topics-new-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+					<br>
+					<br>
+					<h1 class="text-center" th:text="#{comments.edit.title}">コメントの編集</h1>
+					
+					<br>
+					
+					<form class="edit_comment" id="edit_comment"
+						th:action="@{/learning/__${form.learningId}__/comment_learning}" th:object="${form}">
+						<div layout:replace="~{layouts/common::messages}"></div>
+						<div class="mb-3">
+							<label class="form-label text-black" for="comment_learning_description" th:text="#{comments.new.description}">内容</label>
+							<textarea class="form-control" th:field="*{description}" rows="10"
+								th:errorclass="error-field"></textarea>
+							<p th:if="${#fields.hasErrors('description')}" class="error-message"
+								th:errors="*{description}"></p>
+						</div>
+						
+						<br>
+						
+						<input type="submit" value="更新" class="btn w-100 btn-outline-success" th:value="#{comments.update.submit}"/>
+					</form>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+	</div>
+
+</body>
+
+</html>

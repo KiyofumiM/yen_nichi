@@ -3,14 +3,12 @@
 	layout:decorate="~{layouts/layout}">
 
 <head>
-	<title>YenNichi learning</title>
+	<title>Yen Nichi learning</title>
 </head>
 
 <body>
 	<div class="topics-index-wrapper" layout:fragment="contents">
 		<div class="container">
-
-			<!-- 新規投稿ボタン -->
 			<div class="col-md-9" align="right">
 				<a class="btn w-55 btn-outline-light" href="/learning/new">
 					<img src="/images/icons/posting.png" th:src="@{/images/icons/posting.png}">
@@ -20,88 +18,116 @@
 					</h6>
 				</a>
 			</div>
-
-			<!-- 学習部分 -->
+			
 			<div class="row" th:each="learning : ${list}">
 				<div class="col-md-6 mx-auto">
-
-					<!-- 内容表示部分 -->
+					
 					<main>
 						<h2 class="author" th:text="${learning.user.name}"></h2>
+						
 						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${learning.imageData}"
 							class="image" />
+							
 						<h3 class="title" th:text="${learning.title}"></h3>
+						
 						<pre class="description" th:text="${learning.description}"></pre>
-						<!-- リアクション部分 -->
+						
 						<div class="icons">
-							<!-- goods -->
 							<a th:if="${learning.good != null}" rel="nofollow" class="icon convert" data-method="delete"
-								href="/favorite?learning_id=1" th:href="@{'/goodL'}"
+								href="/good_learning?learning_id=1" th:href="@{'/good_learning'}"
 								th:data-learning_id="${learning.id}" th:data-_csrf="${_csrf.token}">
 								<img class="good-on" src="/images/icons/good_white.png"
 									th:src="@{/images/icons/good_white.png}" />
 							</a>
+							
 							<a th:if="${learning.good == null}" rel="nofollow" class="icon convert" data-method="post"
-								href="/favorite?learning_id=1" th:href="@{'/goodL'}"
+								href="/good_learning?learning_id=1" th:href="@{'/good_learning'}"
 								th:data-learning_id="${learning.id}" th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/good_black.png" th:src="@{/images/icons/good_black.png}" />
 							</a>
+							
+							<span>&nbsp;</span>
+							
 							<span class="count" th:text="${#lists.size(learning.goods)}">0</span>
-
-							<!-- favorites -->
+							
 							<a th:if="${learning.favorite != null}" rel="nofollow" class="icon convert"
-								data-method="delete" href="/favorite?learning_id=1" th:href="@{'/favorite'}"
+								data-method="delete" href="/favorite_learning?learning_id=1" th:href="@{'/favorite'}"
 								th:data-learning_id="${learning.id}" th:data-_csrf="${_csrf.token}">
 								<img class="favorite-on" src="/images/icons/heart.png"
 									th:src="@{/images/icons/heart.png}" />
 							</a>
+							
 							<a th:if="${learning.favorite == null}" rel="nofollow" class="icon convert"
-								data-method="post" href="/favorite?learning_id=1" th:href="@{'/favorite'}"
+								data-method="post" href="/favorite_learning?learning_id=1" th:href="@{'/favorite'}"
 								th:data-learning_id="${learning.id}" th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/heart-black.png" th:src="@{/images/icons/heart-black.png}" />
 							</a>
+							
 							<span class="count" th:text="${#lists.size(learning.favorites)}">0</span>
-
-							<!-- comments -->
+							
 							<a href="/learning/1/comments_learning"
 								th:href="@{'/learning/{id}/comments_learning/new'(id=${learning.id})}" class="icon"
 								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
 							</a>
+							
+							<span>&nbsp;</span>
+							
 							<span class="count" th:text="${#lists.size(learning.comments)}">0</span>
-
-							<!-- スペースを挿入 -->
+							
 							<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-
-							<!-- ここでログインユーザーのIDを取得 -->
+							
 							<div th:if="${userId == learning.getUser().getId()}">
-								<!-- edit -->
 								<a class="btn w-20 btn-outline-success mb-1"
 									th:href="@{'/learning/edit'(learning_id=${learning.id})}"
 									th:data-learning_id="${learning.id}" th:text="#{topics.edit.title}">編集</a>
-
-								<!-- スペースを挿入 -->
-								<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-								<!-- delete -->
+								
+								<span>&nbsp;</span>
+								
 								<a class="btn w-20 btn-outline-danger mb-1"
 									th:href="@{'/learning/delete'(learning_id=${learning.id})}"
 									th:data-learning_id="${learning.id}" th:text="#{topics.delete.submit}">削除</a>
+								
 							</div>
 						</div>
-
 						<br>
-
-						<!-- コメント表示 -->
 						<div class="comments">
+							
 							<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
-							<ul th:each="comment : ${learning.comments}">
-								<h4 class="author" th:text="${comment.user.name}"></h4>
+							
+							<div th:each="comment : ${learning.comments}">
+								<h5 class="author" th:text="${comment.user.name}"></h5>
 								<pre class="description" th:text="${comment.description}"></pre>
-
-								<br>
-							</ul>
+								<div class="icons">
+									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+									
+									<a th:if="${comment.goodComment.userId != null}" rel="nofollow" class="icon convert" data-method="delete" href="/good?comment_learning_id=1" th:href="@{'/good_comment_learning'}" th:data-comment_learning_id="${comment.id}" th:data-_csrf="${_csrf.token}">
+											<img class="good-on" src="/images/icons/good_white.png"
+												th:src="@{/images/icons/good_white.png}" />
+									</a>
+									<span>&nbsp;</span>
+									<a th:if="${comment.goodComment.userId == null}" rel="nofollow" class="icon convert" data-method="post" href="/good?comment_learning_id=1" th:href="@{'/good_comment_learning'}" th:data-comment_learning_id="${comment.id}" th:data-_csrf="${_csrf.token}">
+											<img src="/images/icons/good_black.png"
+												th:src="@{/images/icons/good_black.png}" />
+									</a>
+									
+									<span class="count" th:text="${#lists.size(comment.goodComments)}">0</span>
+									
+									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+									
+									<div th:if="${userId == comment.getUser().getId()}">
+										<a class="btn w-20 btn-outline-success mb-1" th:text="#{topics.edit.title}"
+											>編集</a>
+										
+										<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+										
+										<a class="btn w-20 btn-outline-danger mb-1" th:text="#{topics.delete.submit}">削除</a>
+									</div>
+								<br><br>
+								</div>
+							</div>
+							
 						</div>
-
 					</main>
 				</div>
 			</div>

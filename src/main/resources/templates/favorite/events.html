@@ -38,7 +38,24 @@
 								<img src="/images/icons/heart-black.png" th:src="@{/images/icons/heart-black.png}" />
 							</a>
 							<span class="count" th:text="${#lists.size(event.favorites)}">0</span>
+							<!-- comments -->
+							<a href="/event/1/comments/event"
+								th:href="@{'/event/{id}/comments_event/new'(id=${event.id})}" class="icon"
+								th:data-_csrf="${_csrf.token}">
+								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
+							</a>
+							<span class="count" th:text="${#lists.size(event.comments)}">0</span>
 
+						</div>
+
+						<div class="comments">
+							<h4 class="text-center">コメント</h4>
+							<div th:each="comment : ${event.comments}">
+								<div class="comment">
+									<h5 class="author" th:text="${comment.user.name}"></h5>
+									<pre class="description" th:text="${comment.description}"></pre>
+								</div>
+							</div>
 						</div>
 					</main>
 				</div>

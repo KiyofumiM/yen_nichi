@@ -56,6 +56,7 @@ public class CommentsBoardController {
         UserInf user = (UserInf) authentication.getPrincipal();
         entity.setBoardId(boardId);
         entity.setUserId(user.getUserId());
+        entity.setDeleted(false);
         repository.saveAndFlush(entity);
 
         redirAttrs.addFlashAttribute("hasMessage", true);

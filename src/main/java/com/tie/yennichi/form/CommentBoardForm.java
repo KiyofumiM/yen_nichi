@@ -1,5 +1,7 @@
 package com.tie.yennichi.form;
 
+import java.util.List;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -17,5 +19,10 @@ public class CommentBoardForm {
     @NotEmpty
     @Size(max = 1000)
     private String description;
+    
+    private boolean deleted;
 
+    private List<GoodCommentBoardForm> goodComments;
+
+    private GoodCommentBoardForm goodComment;
 }

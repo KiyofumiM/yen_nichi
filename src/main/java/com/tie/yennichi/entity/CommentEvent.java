@@ -1,6 +1,7 @@
 package com.tie.yennichi.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -34,7 +36,15 @@ public class CommentEvent extends AbstractEntity implements Serializable {
 	@ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
+	
+    @Column(nullable = false)
+    private boolean deleted;
 
 	@Column(nullable = false, length = 1000)
 	private String description;
+	
+	
+	@OneToMany
+	@JoinColumn(name = "commentEventId", insertable = false, updatable = false)
+	private List<GoodCommentEvent> goodComments;
 }

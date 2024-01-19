@@ -182,10 +182,13 @@ nav.navbar {
       border: none;
     }
     .comments {
-      ul{
-        li {
-          list-style: none;
-        }
+      .author {
+        margin: 20px;
+        padding: 0 40px;
+      }
+      .description {
+		margin: 20px;
+        padding: 0 50px;
       }
     }
   }
@@ -273,10 +276,13 @@ nav.navbar {
       border: none;
     }
     .comments {
-      ul{
-        li {
-          list-style: none;
-        }
+      .author {
+        margin: 20px;
+        padding: 0 40px;
+      }
+      .description {
+		margin: 20px;
+        padding: 0 50px;
       }
     }
   }
@@ -373,11 +379,15 @@ nav.navbar {
       border: none;
     }
     .comments {
-      ul{
-        li {
-          list-style: none;
-        }
+      .author {
+        margin: 20px;
+        padding: 0 40px;
       }
+      .description {
+		margin: 20px;
+        padding: 0 50px;
+    }
+     
     }
   }
 }

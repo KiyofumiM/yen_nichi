@@ -14,6 +14,9 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+import java.util.List;
+import javax.persistence.OneToMany;
+
 @Entity
 @Table(name = "comment_learning")
 @Data
@@ -34,7 +37,14 @@ public class CommentLearning extends AbstractEntity implements Serializable {
 	@ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
+	
+    @Column(nullable = false)
+    private boolean deleted;
 
 	@Column(nullable = false, length = 1000)
 	private String description;
+	
+	@OneToMany
+	@JoinColumn(name = "commentLearningId", insertable = false, updatable = false)
+	private List<GoodCommentLearning> goodComments;
 }

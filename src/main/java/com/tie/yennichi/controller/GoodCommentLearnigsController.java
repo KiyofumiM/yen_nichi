@@ -15,61 +15,60 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.tie.yennichi.entity.GoodLearning;
+import com.tie.yennichi.entity.GoodCommentLearning;
 import com.tie.yennichi.entity.UserInf;
-import com.tie.yennichi.repository.GoodLearningRepository;
+import com.tie.yennichi.repository.GoodCommentLearningRepository;
 
 @Controller
-public class GoodsLearningController {
+public class GoodCommentLearnigsController {
 	@Autowired
     private MessageSource messageSource;
 
     @Autowired
-    private GoodLearningRepository repository;
-
-    @Autowired
-    private LearningController learningController;
-
-    @RequestMapping(value = "/good_learning", method = RequestMethod.POST)
-    public String create(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,
+    private GoodCommentLearningRepository repository;
+    
+    @RequestMapping(value = "/good_comment_learning", method = RequestMethod.POST)
+    public String create(Principal principal, @RequestParam("comment_learning_id") long commentLearningId, RedirectAttributes redirAttrs,
             Locale locale) {
- 
-    	Authentication authentication = (Authentication) principal;
+    	
+        Authentication authentication = (Authentication) principal;
+        
         UserInf user = (UserInf) authentication.getPrincipal();
         Long userId = user.getUserId();
-        List<GoodLearning> results = repository.findByUserIdAndLearningId(userId, learningId);
+        
+        List<GoodCommentLearning> results = repository.findByUserIdAndCommentLearningId(userId, commentLearningId);
+        
         if (results.size() == 0) {
-            GoodLearning entity = new GoodLearning();
+            GoodCommentLearning entity = new GoodCommentLearning();
             entity.setUserId(userId);
-            entity.setLearningId(learningId);
+            entity.setCommentLearningId(commentLearningId);
             repository.saveAndFlush(entity);
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", messageSource.getMessage("goods.create.flash", new String[] {}, locale));
+            redirAttrs.addFlashAttribute("message",
+                    messageSource.getMessage("goods.create.flash", new String[] {}, locale));
         }
-
         return "redirect:/learning";
     }
 
-    @RequestMapping(value = "/good_learning", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/good_comment_learning", method = RequestMethod.DELETE)
     @Transactional
-    public String destroy(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,
+    public String destroy(Principal principal, @RequestParam("comment_learning_id") long commentLearningId, RedirectAttributes redirAttrs,
             Locale locale) {
-    	
+
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
         Long userId = user.getUserId();
-        List<GoodLearning> results = repository.findByUserIdAndLearningId(userId, learningId);;
-        
+        List<GoodCommentLearning> results = repository.findByUserIdAndCommentLearningId(userId, commentLearningId);
         if (results.size() == 1) {
-            repository.deleteByUserIdAndLearningId(user.getUserId(), learningId);
+            repository.deleteByUserIdAndCommentLearningId(user.getUserId(), commentLearningId);
 
             redirAttrs.addFlashAttribute("hasMessage", true);
             redirAttrs.addFlashAttribute("class", "alert-info");
-            redirAttrs.addFlashAttribute("message", messageSource.getMessage("goods.destroy.flash", new String[] {}, locale));
+            redirAttrs.addFlashAttribute("message",
+                    messageSource.getMessage("goods.destroy.flash", new String[] {}, locale));
         }
         return "redirect:/learning";
     }
-
 }

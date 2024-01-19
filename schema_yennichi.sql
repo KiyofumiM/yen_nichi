@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS good_comment_learning CASCADE;
+DROP TABLE IF EXISTS good_comment_event CASCADE;
+DROP TABLE IF EXISTS good_comment_board CASCADE;
 DROP TABLE IF EXISTS comment_learning CASCADE;
 DROP TABLE IF EXISTS comment_event CASCADE;
 DROP TABLE IF EXISTS comment_board CASCADE;
@@ -143,6 +146,7 @@ CREATE TABLE IF NOT EXISTS comment_learning (
   user_id INT NOT NULL,
   learning_id INT NOT NULL,
   description VARCHAR(1000) NOT NULL,
+  deleted bool NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   PRIMARY KEY (id)
@@ -156,6 +160,7 @@ CREATE TABLE IF NOT EXISTS comment_event (
   user_id INT NOT NULL,
   event_id INT NOT NULL,
   description VARCHAR(1000) NOT NULL,
+  deleted bool NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   PRIMARY KEY (id)
@@ -169,6 +174,7 @@ CREATE TABLE IF NOT EXISTS comment_board (
   user_id INT NOT NULL,
   board_id INT NOT NULL,
   description VARCHAR(1000) NOT NULL,
+  deleted bool NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
   PRIMARY KEY (id)
@@ -176,6 +182,42 @@ CREATE TABLE IF NOT EXISTS comment_board (
 
 ALTER TABLE comment_board ADD CONSTRAINT FK_comment_board_users FOREIGN KEY (user_id) REFERENCES users;
 ALTER TABLE comment_board ADD CONSTRAINT FK_comment_board_board FOREIGN KEY (board_id) REFERENCES board;
+
+CREATE TABLE IF NOT EXISTS good_comment_learning (
+  id SERIAL NOT NULL,
+  user_id INT NOT NULL,
+  comment_learning_id INT NOT NULL,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  PRIMARY KEY (id)
+);
+
+ALTER TABLE good_comment_learning ADD CONSTRAINT FK_good_comment_learning_users FOREIGN KEY (user_id) REFERENCES users;
+ALTER TABLE good_comment_learning ADD CONSTRAINT FK_good_comment_learning_comment_learning FOREIGN KEY (comment_learning_id) REFERENCES comment_learning;
+
+CREATE TABLE IF NOT EXISTS good_comment_event (
+  id SERIAL NOT NULL,
+  user_id INT NOT NULL,
+  comment_event_id INT NOT NULL,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  PRIMARY KEY (id)
+);
+
+ALTER TABLE good_comment_event ADD CONSTRAINT FK_good_comment_event_users FOREIGN KEY (user_id) REFERENCES users;
+ALTER TABLE good_comment_event ADD CONSTRAINT FK_good_comment_event_comment_event FOREIGN KEY (comment_event_id) REFERENCES comment_event;
+
+CREATE TABLE IF NOT EXISTS good_comment_board (
+  id SERIAL NOT NULL,
+  user_id INT NOT NULL,
+  comment_board_id INT NOT NULL,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  PRIMARY KEY (id)
+);
+
+ALTER TABLE good_comment_board ADD CONSTRAINT FK_good_comment_board_users FOREIGN KEY (user_id) REFERENCES users;
+ALTER TABLE good_comment_board ADD CONSTRAINT FK_good_comment_board_comment_board FOREIGN KEY (comment_board_id) REFERENCES comment_board;
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO yennichi;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO yennichi;

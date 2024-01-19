@@ -1,6 +1,5 @@
 package com.tie.yennichi.controller;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.Principal;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tie.yennichi.entity.Board;
@@ -37,12 +35,14 @@ import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.BoardRepository;
 
 import com.tie.yennichi.entity.GoodBoard;
-import com.tie.yennichi.entity.Learning;
 import com.tie.yennichi.form.GoodBoardForm;
-import com.tie.yennichi.form.LearningForm;
+
 import com.tie.yennichi.entity.CommentBoard;
-import com.tie.yennichi.entity.Event;
 import com.tie.yennichi.form.CommentBoardForm;
+
+
+import com.tie.yennichi.entity.GoodCommentBoard;
+import com.tie.yennichi.form.GoodCommentBoardForm;
 
 @Controller
 public class BoardsController {
@@ -110,7 +110,20 @@ public class BoardsController {
 		List<CommentBoardForm> comments = new ArrayList<CommentBoardForm>();
 		for (CommentBoard commentBoardEntity : entity.getComments()) {
 			CommentBoardForm comment = modelMapper.map(commentBoardEntity, CommentBoardForm.class);
-			comments.add(comment);
+			comments.add(comment);		
+
+			// 投稿されたコメントに対する「いいね！」の数を取得してセット
+			List<GoodCommentBoardForm> goodComments = new ArrayList<GoodCommentBoardForm>();
+		
+			for (GoodCommentBoard goodCommentEntity : commentBoardEntity.getGoodComments()) {
+				GoodCommentBoardForm goodComment = modelMapper.map(goodCommentEntity, GoodCommentBoardForm.class);
+
+				if (user.getUserId().equals(goodCommentEntity.getUserId())) {
+					
+					comment.setGoodComment(goodComment);
+				}
+				goodComments.add(goodComment);
+			}
 		}
 		form.setComments(comments);
 		

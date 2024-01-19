@@ -22,7 +22,7 @@
 
 						<h3 class="title" th:text="${event.title}"></h3>
 						<pre class="description" th:text="${event.description}"></pre>
-
+						
 						<!-- リアクション部分 -->
 						<div class="icons">
 							<!-- goods -->
@@ -37,8 +37,11 @@
 								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/good_black.png" th:src="@{/images/icons/good_black.png}" />
 							</a>
+							
+							<span>&nbsp;</span>
+							
 							<span class="count" th:text="${#lists.size(event.goods)}">0</span>
-
+							
 							<!-- favorites -->
 							<a th:if="${event.favorite != null}" rel="nofollow" class="icon convert"
 								data-method="delete" href="/favorite_event?learning_id=1" th:href="@{'/favorite_event'}"
@@ -51,16 +54,22 @@
 								th:data-learning_id="${event.id}" th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/heart-black.png" th:src="@{/images/icons/heart-black.png}" />
 							</a>
+							
+							<span>&nbsp;</span>
+							
 							<span class="count" th:text="${#lists.size(event.favorites)}">0</span>
-
+							
 							<!-- comments -->
 							<a href="/event/1/comments/event"
 								th:href="@{'/event/{id}/comments_event/new'(id=${event.id})}" class="icon"
 								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
 							</a>
+							
+							<span>&nbsp;</span>
+							
 							<span class="count" th:text="${#lists.size(event.comments)}">0</span>
-
+							
 							<!-- スペースを挿入 -->
 							<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 
@@ -70,26 +79,46 @@
 								<a class="btn w-20 btn-outline-success mb-1"
 									th:href="@{'/event/edit'(event_id=${event.id})}" th:data-event_id="${event.id}"
 									th:text="#{topics.edit.title}">編集</a>
-
+								
 								<!-- スペースを挿入 -->
-								<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+								<span>&nbsp;</span>
 								<!-- delete -->
 								<a class="btn w-20 btn-outline-danger mb-1"
 									th:href="@{'/event/delete'(event_id=${event.id})}" th:data-event_id="${event.id}"
 									th:text="#{topics.delete.submit}">削除</a>
 							</div>
 						</div>
-
-						<br>
 						
+						
+						<br>
+
 						<!-- コメント表示 -->
 						<div class="comments">
 							<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
-							<ul th:each="comment : ${event.comments}">
-								<h4 class="author" th:text="${comment.user.name}"></h4>
-								<pre class="description" th:text="${comment.description}"></pre>
-								<br>
-							</ul>
+							<div th:each="comment : ${event.comments}">
+								<div class="comment">
+									<h4 class="author" th:text="${comment.user.name}"></h4>
+									<pre class="description" th:text="${comment.description}"></pre>
+									
+									<div class="icons">
+									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+									
+									<a th:if="${comment.goodComment.userId != null}" rel="nofollow" class="icon convert" data-method="delete" href="/good?comment_event_id=1" th:href="@{'/good_comment_event'}" th:data-comment_event_id="${comment.id}" th:data-_csrf="${_csrf.token}">
+											<img class="good-on" src="/images/icons/good_white.png"
+												th:src="@{/images/icons/good_white.png}" />
+									</a>
+									<span>&nbsp;</span>
+									<a th:if="${comment.goodComment.userId == null}" rel="nofollow" class="icon convert" data-method="post" href="/good?comment_event_id=1" th:href="@{'/good_comment_event'}" th:data-comment_event_id="${comment.id}" th:data-_csrf="${_csrf.token}">
+											<img src="/images/icons/good_black.png"
+												th:src="@{/images/icons/good_black.png}" />
+									</a>
+									
+									<span class="count" th:text="${#lists.size(comment.goodComments)}">0</span>
+									
+									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+									<br>
+								</div>
+							</div>
 						</div>
 
 						<!-- 一覧に戻るボタン -->

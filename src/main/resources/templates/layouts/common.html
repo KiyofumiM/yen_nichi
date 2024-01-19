@@ -31,7 +31,7 @@
 							<div class="dropdown">
 								<a class="btn w-55 btn-outline-light dropdown-toggle" href="#" role="button"
 									id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-									<img scr="/images/icons/learning" th:src="@{/images/icons/learning.png}">
+									<img src="/images/icons/learning" th:src="@{/images/icons/learning.png}">
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 									<li><a class="dropdown-item" href="learning" th:text="#{contents.learning}">言葉を広げる</a></li>
@@ -46,7 +46,7 @@
 							<div class="dropdown">
 								<a class="btn w-55 btn-outline-light dropdown-toggle" href="#" role="button"
 									id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-									<img scr="/images/icons/heart_bar" th:src="@{/images/icons/heart_bar.png}">
+									<img src="/images/icons/heart_bar" th:src="@{/images/icons/heart_bar.png}">
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 									<li><a class="dropdown-item" href="favorite_learning" th:text="#{contents.learning}">言葉を広げる</a></li>
@@ -64,8 +64,8 @@
 
 						<!-- 使い方にリンク -->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/infomation" target="_blank">
-								<img scr="/images/icons/question.png" th:src="@{/images/icons/question.png}">
+							<a class="btn w-55 btn-outline-light" href="/infomation/logging_in" target="_blank">
+								<img src="/images/icons/question.png" th:src="@{/images/icons/question.png}">
 							</a>
 						</li>
 
@@ -86,6 +86,12 @@
 					</th:block>
 
 					<th:block sec:authorize="!isAuthenticated()">
+						<!-- 使い方にリンク -->
+						<li class="nav-item">
+							<a class="btn w-55 btn-outline-light" href="/infomation/logging_out" target="_blank">
+								<img src="/images/icons/question.png" th:src="@{/images/icons/question.png}">
+							</a>
+						</li>
 						<!-- 新規登録 -->
 						<li class="nav-item">
 							<a class="btn w-55 btn-outline-light" href="/users/new">

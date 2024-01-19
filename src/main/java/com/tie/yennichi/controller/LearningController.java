@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
@@ -52,8 +51,12 @@ import com.tie.yennichi.form.FavoriteLearningForm;
 import com.tie.yennichi.entity.CommentLearning;
 import com.tie.yennichi.form.CommentLearningForm;
 
+import com.tie.yennichi.entity.GoodCommentLearning;
+import com.tie.yennichi.form.GoodCommentLearningForm;
+
 @Controller
 public class LearningController {
+
 	protected static Logger log = LoggerFactory.getLogger(LearningController.class);
 
 	@Autowired
@@ -71,29 +74,38 @@ public class LearningController {
 	@Value("${image.local:false}")
 	private String imageLocal;
 
+	// 投稿処理
 	@GetMapping(path = "/learning")
 	public String index(Principal principal, Model model) throws IOException {
+		
 		Authentication authentication = (Authentication) principal;
 		UserInf user = (UserInf) authentication.getPrincipal();
-
+		
 		List<Learning> learning = (List<Learning>) repository.findByDeletedFalseOrderByUpdatedAtDesc();
+		
 		List<LearningForm> list = new ArrayList<>();
+		
 		for (Learning entity : learning) {
 			LearningForm form = getLearning(user, entity);
 			list.add(form);
 		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute("userId", user.getUserId());
+
 
 		return "learning/index";
 	}
 
+	// 投稿内容を取得
 	public LearningForm getLearning(UserInf user, Learning entity) throws FileNotFoundException, IOException {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.typeMap(Learning.class, LearningForm.class)
 				.addMappings(mapper -> mapper.skip(LearningForm::setUser));
+
 		modelMapper.typeMap(Learning.class, LearningForm.class)
 				.addMappings(mapper -> mapper.skip(LearningForm::setFavorites));
+
 		modelMapper.typeMap(Learning.class, LearningForm.class)
 				.addMappings(mapper -> mapper.skip(LearningForm::setComments));
 		modelMapper.typeMap(FavoriteLearning.class, FavoriteLearningForm.class)
@@ -126,6 +138,7 @@ public class LearningController {
 		UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);
 		form.setUser(userForm);
 
+		// 投稿に対する「いいね！」を取得してセット
 		List<GoodLearningForm> goods = new ArrayList<GoodLearningForm>();
 		for (GoodLearning favoriteLearningEntity : entity.getGoods()) {
 			GoodLearningForm good_learning = modelMapper.map(favoriteLearningEntity, GoodLearningForm.class);
@@ -136,6 +149,7 @@ public class LearningController {
 		}
 		form.setGoods(goods);
 
+		// 投稿に対する「お気に入り！」を取得してセット
 		List<FavoriteLearningForm> favorites = new ArrayList<FavoriteLearningForm>();
 		for (FavoriteLearning favoriteLearningEntity : entity.getFavorites()) {
 			FavoriteLearningForm favorite_learning = modelMapper.map(favoriteLearningEntity,
@@ -147,12 +161,28 @@ public class LearningController {
 		}
 		form.setFavorites(favorites);
 
+		//　投稿に対するコメントを取得してセット
 		List<CommentLearningForm> comments = new ArrayList<CommentLearningForm>();
 		for (CommentLearning commentLearningEntity : entity.getComments()) {
 			CommentLearningForm comment = modelMapper.map(commentLearningEntity, CommentLearningForm.class);
 			comments.add(comment);
+			
+			// 投稿されたコメントに対する「いいね！」の数を取得してセット
+			List<GoodCommentLearningForm> goodComments = new ArrayList<GoodCommentLearningForm>();
+		
+			for (GoodCommentLearning goodCommentEntity : commentLearningEntity.getGoodComments()) {
+				GoodCommentLearningForm goodComment = modelMapper.map(goodCommentEntity, GoodCommentLearningForm.class);
+
+				if (user.getUserId().equals(goodCommentEntity.getUserId())) {
+					
+					comment.setGoodComment(goodComment);
+				}
+				goodComments.add(goodComment);
+			}
+			comment.setGoodComments(goodComments);
 		}
 		form.setComments(comments);
+		
 		return form;
 	}
 
@@ -174,12 +204,14 @@ public class LearningController {
 		return mimeType;
 	}
 
+	// 新規投稿
 	@GetMapping(path = "/learning/new")
 	public String newTopic(Model model) {
 		model.addAttribute("form", new LearningForm());
 		return "learning/new";
 	}
 
+	// 投稿処理をリクエスト
 	@RequestMapping(value = "/learning", method = RequestMethod.POST)
 	public String create(Principal principal, @Validated @ModelAttribute("form") LearningForm form,
 			BindingResult result, Model model, @RequestParam MultipartFile image, RedirectAttributes redirAttrs,
@@ -216,7 +248,7 @@ public class LearningController {
 		redirAttrs.addFlashAttribute("class", "alert-info");
 		redirAttrs.addFlashAttribute("message",
 				messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
-
+		
 		return "redirect:/learning";
 	}
 
@@ -238,8 +270,7 @@ public class LearningController {
 
 	// 登録情報を取得して表示
 	@RequestMapping(value = "/learning/edit", method = RequestMethod.GET)
-	public String edite(Principal principal, @RequestParam("learning_id") long learningId, Model model)
-			 {
+	public String edite(Principal principal, @RequestParam("learning_id") long learningId, Model model) {
 		Learning entity = repository.findById(learningId);
 
 		LearningForm learningForm = new LearningForm();
@@ -257,6 +288,7 @@ public class LearningController {
 		return "learning/edit";
 	}
 
+	// 投稿内容を更新
 	@RequestMapping(value = "/learning/update", method = RequestMethod.POST)
 	public String update(Principal principal, @Validated @ModelAttribute("form") LearningForm form,
 			BindingResult result, Model model, Locale locale, HttpSession session, @RequestParam("id") long learningId,
@@ -294,10 +326,11 @@ public class LearningController {
 		model.addAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
 		return "redirect:/learning";
 	}
-	
+
+	// 投稿内容を削除する
 	@RequestMapping(value = "/learning/delete", method = RequestMethod.GET)
-	public String delete(Principal principal, Model model, Locale locale, HttpSession session, @RequestParam("learning_id") long learningId
-			) throws IOException {
+	public String delete(Principal principal, Model model, Locale locale, HttpSession session,
+			@RequestParam("learning_id") long learningId) throws IOException {
 
 		// 更新処理
 		Learning entity = repository.findById(learningId);

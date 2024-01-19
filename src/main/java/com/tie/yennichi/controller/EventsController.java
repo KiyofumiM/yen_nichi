@@ -44,15 +44,16 @@ import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.EventRepository;
 
 import com.tie.yennichi.entity.GoodEvent;
-import com.tie.yennichi.entity.Learning;
 import com.tie.yennichi.form.GoodEventForm;
-import com.tie.yennichi.form.LearningForm;
 import com.tie.yennichi.entity.FavoriteEvent;
+import com.tie.yennichi.entity.GoodCommentLearning;
 import com.tie.yennichi.form.FavoriteEventForm;
-
+import com.tie.yennichi.form.GoodCommentLearningForm;
 import com.tie.yennichi.entity.CommentEvent;
 import com.tie.yennichi.form.CommentEventForm;
 
+import com.tie.yennichi.entity.GoodCommentEvent;
+import com.tie.yennichi.form.GoodCommentEventForm;
 @Controller
 public class EventsController {
 
@@ -155,6 +156,19 @@ public class EventsController {
 		for (CommentEvent commentEventEntity : entity.getComments()) {
 			CommentEventForm comment = modelMapper.map(commentEventEntity, CommentEventForm.class);
 			comments.add(comment);
+			
+			// 投稿されたコメントに対する「いいね！」の数を取得してセット
+			List<GoodCommentEventForm> goodComments = new ArrayList<GoodCommentEventForm>();
+		
+			for (GoodCommentEvent goodCommentEntity : commentEventEntity.getGoodComments()) {
+				GoodCommentEventForm goodComment = modelMapper.map(goodCommentEntity, GoodCommentEventForm.class);
+
+				if (user.getUserId().equals(goodCommentEntity.getUserId())) {
+					
+					comment.setGoodComment(goodComment);
+				}
+				goodComments.add(goodComment);
+			}
 		}
 		form.setComments(comments);
 		
@@ -318,6 +332,6 @@ public class EventsController {
 		model.addAttribute("hasMessage", true);
 		model.addAttribute("class", "alert-info");
 		model.addAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
-		return "redirect:/event";
+		return "redirect:/events";
 	}
 }

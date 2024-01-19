@@ -29,4 +29,8 @@ public class BoardForm {
     private GoodBoardForm good;
     
     private List<CommentBoardForm> comments;
+    
+    private List<GoodCommentBoardForm> goodComments;
+    
+    private GoodCommentBoardForm goodComment;
 }
