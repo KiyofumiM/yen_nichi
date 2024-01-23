@@ -1,5 +1,6 @@
 package com.tie.yennichi.form;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
@@ -7,6 +8,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tie.yennichi.entity.CommentLearning;
 import com.tie.yennichi.validation.constraints.ImageByte;
 import com.tie.yennichi.validation.constraints.ImageNotEmpty;
 
@@ -51,5 +53,17 @@ public class LearningForm {
     private List<GoodCommentLearningForm> goodComments;
     
     private GoodCommentLearningForm goodComment;
+    
+    public List<CommentLearningForm> getValidComments() {
+
+    	List<CommentLearningForm> src = comments;
+    	List<CommentLearningForm> ret = new ArrayList<CommentLearningForm>();
+    	for (CommentLearningForm item : src) {
+    		if (!item.isDeleted()) {
+    			ret.add(item);
+    		}
+    	}
+    	return ret;
+    }
 
 }

@@ -24,4 +24,5 @@ public class CommentLearningForm {
     private List<GoodCommentLearningForm> goodComments;
 
     private GoodCommentLearningForm goodComment;
+  
 }

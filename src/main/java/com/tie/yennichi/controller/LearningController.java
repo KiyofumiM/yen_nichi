@@ -292,7 +292,7 @@ public class LearningController {
 	@RequestMapping(value = "/learning/update", method = RequestMethod.POST)
 	public String update(Principal principal, @Validated @ModelAttribute("form") LearningForm form,
 			BindingResult result, Model model, Locale locale, HttpSession session, @RequestParam("id") long learningId,
-			@RequestParam MultipartFile image) throws IOException {
+			@RequestParam MultipartFile image, RedirectAttributes redirAttrs) throws IOException {
 
 		if (result.hasErrors()) {
 			model.addAttribute("hasMessage", true);
@@ -321,16 +321,16 @@ public class LearningController {
 
 		repository.saveAndFlush(entity);
 
-		model.addAttribute("hasMessage", true);
-		model.addAttribute("class", "alert-info");
-		model.addAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("hasMessage", true);
+		redirAttrs.addFlashAttribute("class", "alert-info");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
 		return "redirect:/learning";
 	}
 
 	// 投稿内容を削除する
 	@RequestMapping(value = "/learning/delete", method = RequestMethod.GET)
 	public String delete(Principal principal, Model model, Locale locale, HttpSession session,
-			@RequestParam("learning_id") long learningId) throws IOException {
+			@RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs) throws IOException {
 
 		// 更新処理
 		Learning entity = repository.findById(learningId);
@@ -339,9 +339,9 @@ public class LearningController {
 
 		repository.saveAndFlush(entity);
 
-		model.addAttribute("hasMessage", true);
-		model.addAttribute("class", "alert-info");
-		model.addAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("hasMessage", true);
+		redirAttrs.addFlashAttribute("class", "alert-info");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
 		return "redirect:/learning";
 	}
 }

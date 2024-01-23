@@ -1,5 +1,6 @@
 package com.tie.yennichi.form;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
@@ -33,4 +34,16 @@ public class BoardForm {
     private List<GoodCommentBoardForm> goodComments;
     
     private GoodCommentBoardForm goodComment;
+    
+    public List<CommentBoardForm> getValidComments() {
+
+    	List<CommentBoardForm> src = comments;
+    	List<CommentBoardForm> ret = new ArrayList<CommentBoardForm>();
+    	for (CommentBoardForm item : src) {
+    		if (!item.isDeleted()) {
+    			ret.add(item);
+    		}
+    	}
+    	return ret;
+    }
 }

@@ -68,12 +68,11 @@
 							
 							<span>&nbsp;</span>
 							
-							<span class="count" th:text="${#lists.size(event.comments)}">0</span>
+							<span class="count" th:text="${#lists.size(event.getValidComments())}">0</span>
 							
 							<!-- スペースを挿入 -->
 							<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 
-							<!-- ここでログインユーザーのIDを取得 -->
 							<div th:if="${userId == event.getUser().getId()}">
 								<!-- edit -->
 								<a class="btn w-20 btn-outline-success mb-1"
@@ -95,7 +94,7 @@
 						<!-- コメント表示 -->
 						<div class="comments">
 							<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
-							<div th:each="comment : ${event.comments}">
+							<div th:each="comment : ${event.getValidComments()}">
 								<div class="comment">
 									<h4 class="author" th:text="${comment.user.name}"></h4>
 									<pre class="description" th:text="${comment.description}"></pre>
@@ -116,11 +115,24 @@
 									<span class="count" th:text="${#lists.size(comment.goodComments)}">0</span>
 									
 									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+									
+									<div th:if="${userId == comment.getUser().getId()}">
+										<a class="btn w-20 btn-outline-success mb-1" th:href="@{'/comment_event/edit' (comment_event_id=${comment.id})}"
+											th:data-comment_event_id="${comment.id}" th:text="#{comments.edit.title}"
+											>編集</a>
+										
+										<span>&nbsp;</span>
+										
+										<a class="btn w-20 btn-outline-danger mb-1"  th:href="@{'/comment_event/delete'(comment_event_id=${comment.id})}"
+											th:data-comment_event_id="${comment.id}" th:text="#{comments.delete.submit}">削除</a>
+									</div>
 									<br>
 								</div>
 							</div>
 						</div>
 
+						<br>
+						
 						<!-- 一覧に戻るボタン -->
 						<div class="col-md-11" align="right">
 							<a class="btn w-55 btn-outline-light" href="/calendars">

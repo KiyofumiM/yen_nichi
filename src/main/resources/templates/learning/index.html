@@ -73,7 +73,7 @@
 							
 							<span>&nbsp;</span>
 							
-							<span class="count" th:text="${#lists.size(learning.comments)}">0</span>
+							<span class="count" th:text="${#lists.size(learning.getValidComments())}">0</span>
 							
 							<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 							
@@ -90,12 +90,12 @@
 								
 							</div>
 						</div>
-						<br>
+						<br><br>
 						<div class="comments">
 							
 							<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
 							
-							<div th:each="comment : ${learning.comments}">
+							<div th:each="comment : ${learning.getValidComments()}" >
 								<h5 class="author" th:text="${comment.user.name}"></h5>
 								<pre class="description" th:text="${comment.description}"></pre>
 								<div class="icons">
@@ -113,15 +113,17 @@
 									
 									<span class="count" th:text="${#lists.size(comment.goodComments)}">0</span>
 									
-									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 									
 									<div th:if="${userId == comment.getUser().getId()}">
-										<a class="btn w-20 btn-outline-success mb-1" th:text="#{topics.edit.title}"
+										<a class="btn w-20 btn-outline-success mb-1" th:href="@{'/comment_learning/edit' (comment_learning_id=${comment.id})}"
+											th:data-comment_learning_id="${comment.id}" th:text="#{comments.edit.title}"
 											>編集</a>
 										
-										<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+										<span>&nbsp;</span>
 										
-										<a class="btn w-20 btn-outline-danger mb-1" th:text="#{topics.delete.submit}">削除</a>
+										<a class="btn w-20 btn-outline-danger mb-1"  th:href="@{'/comment_learning/delete'(comment_learning_id=${comment.id})}"
+											th:data-comment_learning_id="${comment.id}" th:text="#{comments.delete.submit}">削除</a>
 									</div>
 								<br><br>
 								</div>

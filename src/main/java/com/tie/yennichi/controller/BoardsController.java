@@ -173,7 +173,7 @@ public class BoardsController {
 
 	@RequestMapping(value = "/board/update", method = RequestMethod.POST)
 	public String update(Principal principal, @Validated @ModelAttribute("form") BoardForm form,
-			BindingResult result, Model model, Locale locale, HttpSession session, @RequestParam("id") long boardId)
+			BindingResult result, Model model, Locale locale, HttpSession session, @RequestParam("id") long boardId, RedirectAttributes redirAttrs)
 			 throws IOException {
 
 		if (result.hasErrors()) {
@@ -194,14 +194,14 @@ public class BoardsController {
 
 		repository.saveAndFlush(entity);
 
-		model.addAttribute("hasMessage", true);
-		model.addAttribute("class", "alert-info");
-		model.addAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("hasMessage", true);
+		redirAttrs.addFlashAttribute("class", "alert-info");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
 		return "redirect:/board";
 	}
 
 	@RequestMapping(value = "/board/delete", method = RequestMethod.GET)
-	public String delete(Principal principal, Model model, Locale locale, HttpSession session, @RequestParam("board_id") long boardId
+	public String delete(Principal principal, Model model, Locale locale, HttpSession session, @RequestParam("board_id") long boardId, RedirectAttributes redirAttrs
 			) throws IOException {
 
 		// 更新処理
@@ -211,9 +211,9 @@ public class BoardsController {
 
 		repository.saveAndFlush(entity);
 
-		model.addAttribute("hasMessage", true);
-		model.addAttribute("class", "alert-info");
-		model.addAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("hasMessage", true);
+		redirAttrs.addFlashAttribute("class", "alert-info");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
 		return "redirect:/board";
 	}
 }

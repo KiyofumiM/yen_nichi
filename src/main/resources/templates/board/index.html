@@ -42,6 +42,9 @@
 								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/good_black.png" th:src="@{/images/icons/good_black.png}" />
 							</a>
+							
+							<span>&nbsp;</span>
+							
 							<span class="count" th:text="${#lists.size(board.goods)}">0</span>
 
 							<!-- comments -->
@@ -50,7 +53,10 @@
 								th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
 							</a>
-							<span class="count" th:text="${#lists.size(board.comments)}">0</span>
+							
+							<span>&nbsp;</span>
+							
+							<span class="count" th:text="${#lists.size(board.getValidComments())}">0</span>
 
 
 							<!-- スペースを挿入 -->
@@ -81,28 +87,45 @@
 								<div class="comment">
 									<h5 class="author" th:text="${comment.user.name}"></h5>
 									<pre class="description" th:text="${comment.description}"></pre>
-									
-									
+
+
 									<div class="icons">
-									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-									
-									<a th:if="${comment.goodComment.userId != null}" rel="nofollow" class="icon convert" data-method="delete" href="/good?comment_board_id=1" th:href="@{'/good_comment_board'}" th:data-comment_board_id="${comment.id}" th:data-_csrf="${_csrf.token}">
+										<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+
+										<a th:if="${comment.goodComment.userId != null}" rel="nofollow"
+											class="icon convert" data-method="delete" href="/good?comment_board_id=1"
+											th:href="@{'/good_comment_board'}" th:data-comment_board_id="${comment.id}"
+											th:data-_csrf="${_csrf.token}">
 											<img class="good-on" src="/images/icons/good_white.png"
 												th:src="@{/images/icons/good_white.png}" />
-									</a>
-									<span>&nbsp;</span>
-									<a th:if="${comment.goodComment.userId == null}" rel="nofollow" class="icon convert" data-method="post" href="/good?comment_board_id=1" th:href="@{'/good_comment_board'}" th:data-comment_board_id="${comment.id}" th:data-_csrf="${_csrf.token}">
+										</a>
+										<span>&nbsp;</span>
+										<a th:if="${comment.goodComment.userId == null}" rel="nofollow"
+											class="icon convert" data-method="post" href="/good?comment_board_id=1"
+											th:href="@{'/good_comment_board'}" th:data-comment_board_id="${comment.id}"
+											th:data-_csrf="${_csrf.token}">
 											<img src="/images/icons/good_black.png"
 												th:src="@{/images/icons/good_black.png}" />
-									</a>
-									
-									<span class="count" th:text="${#lists.size(comment.goodComments)}">0</span>
-									
-									<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+										</a>
+
+										<span class="count" th:text="${#lists.size(comment.goodComments)}">0</span>
+
+										<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+
+										<div th:if="${userId == comment.getUser().getId()}">
+										<a class="btn w-20 btn-outline-success mb-1" th:href="@{'/comment_board/edit' (comment_board_id=${comment.id})}"
+											th:data-comment_board_id="${comment.id}" th:text="#{comments.edit.title}"
+											>編集</a>
+										
+										<span>&nbsp;</span>
+										
+										<a class="btn w-20 btn-outline-danger mb-1"  th:href="@{'/comment_board/delete'(comment_board_id=${comment.id})}"
+											th:data-comment_board_id="${comment.id}" th:text="#{comments.delete.submit}">削除</a>
+									</div>
+									</div>
+									<br>
 								</div>
-								<br>
 							</div>
-						</div>
 					</main>
 				</div>
 			</div>

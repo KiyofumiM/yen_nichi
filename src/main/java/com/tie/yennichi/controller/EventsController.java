@@ -281,7 +281,7 @@ public class EventsController {
 	@RequestMapping(value = "/event/update", method = RequestMethod.POST)
 	public String update(Principal principal, @Validated @ModelAttribute("form") EventForm form,
 			BindingResult result, Model model, Locale locale, HttpSession session, @RequestParam("id") long eventId,
-			@RequestParam MultipartFile image) throws IOException {
+			@RequestParam MultipartFile image, RedirectAttributes redirAttrs) throws IOException {
 
 		if (result.hasErrors()) {
 			model.addAttribute("hasMessage", true);
@@ -312,14 +312,14 @@ public class EventsController {
 
 		repository.saveAndFlush(entity);
 
-		model.addAttribute("hasMessage", true);
-		model.addAttribute("class", "alert-info");
-		model.addAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("hasMessage", true);
+		redirAttrs.addFlashAttribute("class", "alert-info");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.edit.flash.2", new String[] {}, locale));
 		return "redirect:/events";
 	}
 
 	@RequestMapping(value = "/event/delete", method = RequestMethod.GET)
-	public String delete(Principal principal, Model model, Locale locale, HttpSession session, @RequestParam("event_id") long eventId
+	public String delete(Principal principal, Model model, Locale locale, HttpSession session, @RequestParam("event_id") long eventId, RedirectAttributes redirAttrs
 			) throws IOException {
 
 		// 更新処理
@@ -329,9 +329,9 @@ public class EventsController {
 
 		repository.saveAndFlush(entity);
 
-		model.addAttribute("hasMessage", true);
-		model.addAttribute("class", "alert-info");
-		model.addAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("hasMessage", true);
+		redirAttrs.addFlashAttribute("class", "alert-info");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
 		return "redirect:/events";
 	}
 }

@@ -1,6 +1,7 @@
 package com.tie.yennichi.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -23,6 +23,7 @@ import lombok.Data;
 public class Learning extends AbstractEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    
     @Id
     @SequenceGenerator(name = "learning_id_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,5 +59,6 @@ public class Learning extends AbstractEntity implements Serializable {
     @OneToMany
     @JoinColumn(name = "learningId", insertable = false, updatable = false)
     private List<CommentLearning> comments;
+
     
 }
