@@ -11,6 +11,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * イベント情報のシェアにて投稿されたコメントに対する「いいね！」を表すエンティティクラス。
+ * good_comment_eventテーブルと対応
+ */
 @Entity
 @Table(name = "good_comment_event")
 @Data

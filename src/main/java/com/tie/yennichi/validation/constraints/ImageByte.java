@@ -9,6 +9,9 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
 
+/**
+ * 画像のバイトサイズが指定された最大値以下であるかどうかを検証するためのカスタムバリデーションアノテーション
+ */
 @Documented
 @Constraint(validatedBy = ImageByteValidator.class)
 @Target({ ElementType.FIELD })
@@ -16,11 +19,12 @@ import javax.validation.ReportAsSingleViolation;
 @ReportAsSingleViolation
 public @interface ImageByte {
 
-    String message() default "{com.tie.yennichi.validation.constraints.ImageSize.message}";
+	String message() default "{com.tie.yennichi.validation.constraints.ImageSize.message}";
 
-    Class<?>[] groups() default {};
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	Class<? extends Payload>[] payload() default {};
 
-    int max();
+	// 画像の最大バイトサイズを指定
+	int max();
 }

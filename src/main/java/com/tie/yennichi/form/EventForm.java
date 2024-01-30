@@ -13,6 +13,10 @@ import com.tie.yennichi.validation.constraints.ImageNotEmpty;
 
 import lombok.Data;
 
+/**
+ * 「登録されたイベント情報」を受け取るためのフォームクラス。
+ * 入力フォームと対応しています。
+ */
 @Data
 public class EventForm {
 
@@ -42,30 +46,41 @@ public class EventForm {
 
     private UserForm user;
 
-    private List<GoodEventForm> goods;
+    // 「いいね！」一覧
+    private List<GoodEventForm> goodList;
     
+    // 各「いいね！」情報
     private GoodEventForm good;
     
-    private List<FavoriteEventForm> favorites;
+    // 「お気に入り！」一覧
+    private List<FavoriteEventForm> favoriteList;
     
+    // 各「お気に入り！」情報
     private FavoriteEventForm favorite;
     
-    private List<CommentEventForm> comments;
+    // コメント一覧
+    private List<CommentEventForm> commentList;
     
-    private List<GoodCommentEventForm> goodComments;
+    // コメントに対する「いいね！」一覧
+    private List<GoodCommentEventForm> goodCommentList;
     
+    // 各コメントに対する「いいね！」情報
     private GoodCommentEventForm goodComment;
     
+    /**
+     * 論理削除されていないコメントを表示する
+     * @return 論理削除されていないコメント情報
+     */
     public List<CommentEventForm> getValidComments() {
 
-    	List<CommentEventForm> src = comments;
-    	List<CommentEventForm> ret = new ArrayList<CommentEventForm>();
-    	for (CommentEventForm item : src) {
+    	List<CommentEventForm> listComment = commentList;
+    	List<CommentEventForm> retList = new ArrayList<CommentEventForm>();
+    	for (CommentEventForm item : listComment) {
     		if (!item.isDeleted()) {
-    			ret.add(item);
+    			retList.add(item);
     		}
     	}
-    	return ret;
+    	return retList;
     }
 }
 

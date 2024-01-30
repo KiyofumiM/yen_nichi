@@ -16,6 +16,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * イベント情報を表すエンティティクラス。
+ * eventテーブルと対応
+ */
 @Entity
 @Table(name = "event")
 @Data
@@ -45,20 +49,23 @@ public class Event extends AbstractEntity implements Serializable {
     @Column(nullable = false)
     private boolean deleted;
 
+    // ユーザ情報と紐づけ
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
     
+    // 「いいね！」情報と紐づけ
     @OneToMany
     @JoinColumn(name = "eventId", insertable = false, updatable = false)
-    private List<GoodEvent> goods;
+    private List<GoodEvent> goodList;
     
-    
+    // 「お気に入り！」情報と紐づけ
     @OneToMany
     @JoinColumn(name = "eventId", insertable = false, updatable = false)
-    private List<FavoriteEvent> favorites;
+    private List<FavoriteEvent> favoriteList;
     
+    // 投稿に対するコメントと紐づけ
     @OneToMany
     @JoinColumn(name = "eventId", insertable = false, updatable = false)
-    private List<CommentEvent> comments;
+    private List<CommentEvent> commentList;
 }

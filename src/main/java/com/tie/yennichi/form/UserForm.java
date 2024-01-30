@@ -8,6 +8,10 @@ import com.tie.yennichi.validation.constraints.PasswordEquals;
 
 import lombok.Data;
 
+/**
+ * ユーザー情報を受け取るためのフォームクラス
+ * 入力フォームと対応しています。
+ */
 @Data
 @PasswordEquals
 public class UserForm {

@@ -19,6 +19,9 @@ import com.tie.yennichi.entity.GoodLearning;
 import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.repository.GoodLearningRepository;
 
+/**
+* 言葉を広げるで投稿された内容に対する「いいね！」に関係するcontroller群
+*/
 @Controller
 public class GoodsLearningController {
 	@Autowired
@@ -30,6 +33,12 @@ public class GoodsLearningController {
     @Autowired
     private LearningController learningController;
 
+	/**
+	 * 投稿内容に対して「いいね！」をする
+	 * @param  Principal, learning_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_learning", method = RequestMethod.POST)
     public String create(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,
             Locale locale) {
@@ -52,6 +61,12 @@ public class GoodsLearningController {
         return "redirect:/learning";
     }
 
+	/**
+	 * 投稿内容に対して「いいね！」をやめる
+	 * @param  Principal, learning_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_learning", method = RequestMethod.DELETE)
     @Transactional
     public String destroy(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,

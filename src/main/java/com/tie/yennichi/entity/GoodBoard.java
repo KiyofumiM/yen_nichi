@@ -14,6 +14,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 掲示板に投稿された内容に対する「いいね！」を表すエンティティクラス。
+ * boardテーブルと対応
+ */
 @Entity
 @Table(name = "good_board")
 @Data
@@ -31,6 +35,7 @@ public class GoodBoard  extends AbstractEntity implements Serializable {
     @Column(nullable = false)
     private Long boardId;
 
+    // 掲示板に投稿された情報と紐づけ
     @ManyToOne
     @JoinColumn(name = "boardId", insertable = false, updatable = false)
     private Board board;

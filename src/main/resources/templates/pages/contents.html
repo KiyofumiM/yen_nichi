@@ -11,40 +11,43 @@
 	<div class="contents-index-wrapper text-center" layout:fragment="contents">
 		<div class="container">
 			<br>
-			<h3 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; font-weight: 900; color: #e83929">
+			<h2 style="font-family: 'ＭＳ Ｐ明朝'">
 				<!-- 時間に合わせたメッセージの表示 -->
 				<div id="message1"></div>
+			</h2>
+
+			<br>
+
+			<h3 style="font-family: 'ＭＳ Ｐ明朝'">
+				<!-- 時間に合わせたメッセージの表示 -->
+				<div id="message2"></div>
 			</h3>
 
 			<br>
 
-			<h4 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; font-weight: 700; color: #e83929">
-				<!-- 時間に合わせたメッセージの表示 -->
-				<div id="message2"></div>
-			</h4>
-
-			<br>
-
-			<a class="btn w-55 btn-outline-light" href="/learning">
+			<a class="btn w-55 btn-outline-light" href="/learning/list">
 				<img src="/images/icons/go_top.png" th:src="@{/images/icons/learning.png}">
-				<h4 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #223a70" th:text="#{contents.learning}">
-					言葉を広げる</h4>
+				<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{contents.learning}">
+					言葉を広げる
+				</h5>
 			</a>
 
 			<span>&nbsp;</span>
 
-			<a class="btn w-55 btn-outline-light" href="/calendars">
+			<a class="btn w-55 btn-outline-light" href="/calendar/events">
 				<img src="/images/icons/go_top.png" th:src="@{/images/icons/calendar.png}">
-				<h4 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #223a70;" th:text="#{contents.event}">
-					イベントの共有</h4>
+				<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{contents.event}">
+					イベントの共有
+				</h5>
 			</a>
 
 			<span>&nbsp;</span>
 
 			<a class="btn w-55 btn-outline-light" href="/board">
 				<img src="/images/icons/go_top.png" th:src="@{/images/icons/board.png}">
-				<h4 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #223a70;" th:text="#{contents.board}">掲示板
-				</h4>
+				<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{contents.board}">
+					掲示板
+				</h5>
 			</a>
 
 

@@ -3,12 +3,12 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <body>
-	<nav class="navbar navbar-expand-lg fixed-top navbar-primary" layout:fragment="nav">
+	<nav class="navbar navbar-expand-lg fixed-top navbar-light" layout:fragment="nav">
 		<div class="container">
 
 			<!-- アプリロゴ -->
 			<a class="navbar-brand" th:href="@{/contents}">
-				<img src="/images/icons/logo.png" th:src="@{/images/icons/logo.png}" class="brand">
+				<img src="/images/icons/logo2.png" th:src="@{/images/icons/logo2.png}" class="brand">
 			</a>
 
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -34,8 +34,10 @@
 									<img src="/images/icons/learning" th:src="@{/images/icons/learning.png}">
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-									<li><a class="dropdown-item" href="/learning" th:text="#{contents.learning}">言葉を広げる</a></li>
-									<li><a class="dropdown-item" href="/calendars" th:text="#{contents.event}">イベント共有</a></li>
+									<li><a class="dropdown-item" href="/learning/list"
+											th:text="#{contents.learning}">言葉を広げる</a></li>
+									<li><a class="dropdown-item" href="/calendar/events"
+											th:text="#{contents.event}">イベント共有</a></li>
 									<li><a class="dropdown-item" href="/board" th:text="#{contents.board}">掲示板</a></li>
 								</ul>
 							</div>
@@ -49,8 +51,10 @@
 									<img src="/images/icons/heart_bar" th:src="@{/images/icons/heart_bar.png}">
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-									<li><a class="dropdown-item" href="/favorite_learning" th:text="#{contents.learning}">言葉を広げる</a></li>
-									<li><a class="dropdown-item" href="/favorite_event" th:text="#{contents.event}">イベント共有</a></li>
+									<li><a class="dropdown-item" href="/favorite_learning"
+											th:text="#{contents.learning}">言葉を広げる</a></li>
+									<li><a class="dropdown-item" href="/favorite_event"
+											th:text="#{contents.event}">イベント共有</a></li>
 								</ul>
 							</div>
 						</li>
@@ -64,7 +68,7 @@
 
 						<!-- 使い方にリンク -->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/infomation/logging_in" target="_blank">
+							<a class="btn w-55 btn-outline-light" href="/information/logging_in" target="_blank">
 								<img src="/images/icons/question.png" th:src="@{/images/icons/question.png}">
 							</a>
 						</li>
@@ -88,10 +92,11 @@
 					<th:block sec:authorize="!isAuthenticated()">
 						<!-- 使い方にリンク -->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/infomation/logging_out" target="_blank">
+							<a class="btn w-55 btn-outline-light" href="/information/logging_out" target="_blank">
 								<img src="/images/icons/question.png" th:src="@{/images/icons/question.png}">
 							</a>
 						</li>
+						
 						<!-- 新規登録 -->
 						<li class="nav-item">
 							<a class="btn w-55 btn-outline-light" href="/users/new">

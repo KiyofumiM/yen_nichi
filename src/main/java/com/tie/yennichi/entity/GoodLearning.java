@@ -14,6 +14,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 投稿された言葉に対する「いいね！」を表すエンティティクラス。
+ * good_learningテーブルと対応
+ */
 @Entity
 @Table(name = "good_learning")
 @Data
@@ -31,6 +35,7 @@ public class GoodLearning extends AbstractEntity implements Serializable {
     @Column(nullable = false)
     private Long learningId;
 
+    // learningと紐づけ
     @ManyToOne
     @JoinColumn(name = "learningId", insertable = false, updatable = false)
     private Learning learning;

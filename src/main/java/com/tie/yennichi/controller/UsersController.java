@@ -12,9 +12,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tie.yennichi.entity.User;
 import com.tie.yennichi.entity.UserInf;
@@ -22,6 +22,7 @@ import com.tie.yennichi.entity.User.Authority;
 import com.tie.yennichi.form.UserForm;
 import com.tie.yennichi.repository.UserRepository;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import java.util.Locale;
@@ -31,6 +32,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
+/**
+* ユーザ情報の処理用controller群
+*/
 @Controller
 public class UsersController {
 
@@ -43,14 +47,24 @@ public class UsersController {
 	@Autowired
 	private UserRepository repository;
 
-	// ユーザ登録画面にリンク
+	/**
+	* ユーザ情報登録画面にリンクする
+	* @param  Model
+	* @return ページアドレス /users/new
+	* @throws なし
+	*/
 	@GetMapping(path = "/users/new")
 	public String newUser(Model model) {
 		model.addAttribute("form", new UserForm());
 		return "users/new";
 	}
 
-	// 新規登録
+	/**
+	* ユーザ情報登録処理
+	* @param  form : UserForm、BindingResult、Model,　locale
+	* @return layouts/complete
+	* @throws なし
+	*/
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String create(@Validated @ModelAttribute("form") UserForm form, BindingResult result, Model model,
 			Locale locale) {
@@ -80,7 +94,12 @@ public class UsersController {
 		return "layouts/complete";
 	}
 
-	// ユーザ情報を取得して表示
+	/**
+	 * 参照したユーザ情報の詳細を取得して表示
+	 * @param  Principal、Model
+	 * @return ページアドレス /users/edit
+	 * @throws なし
+	 */
 	@RequestMapping(value = "/user/edit", method = RequestMethod.GET)
 	public String edite(Principal principal, Model model) {
 		Authentication authentication = (Authentication) principal;
@@ -94,10 +113,15 @@ public class UsersController {
 		return "users/edit";
 	}
 
-	// ユーザ情報を更新
+	/**
+	* ユーザ情報の更新処理
+	* @param  Principal、form : UserForm、BindingResult、Model、MultipartFile、RedirectAttributes、locale、id
+	* @return redirect:/learning
+	* @throws なし
+	*/
 	@RequestMapping(value = "/user/edit", method = RequestMethod.POST)
 	public String update(Principal principal, @Validated @ModelAttribute("form") UserForm form, BindingResult result,
-			Model model, Locale locale, HttpSession session) {
+			Model model, Locale locale, RedirectAttributes redirAttrs) {
 
 		Authentication authentication = (Authentication) principal;
 		UserInf userInf = (UserInf) authentication.getPrincipal();
@@ -126,9 +150,9 @@ public class UsersController {
 				authentication.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
-		model.addAttribute("hasMessage", true);
-		model.addAttribute("class", "alert-info");
-		model.addAttribute("message", messageSource.getMessage("users.edit.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("hasMessage", true);
+		redirAttrs.addFlashAttribute("class", "alert-info");
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("users.edit.flash.2", new String[] {}, locale));
 		return "redirect:/contents";
 
 	}

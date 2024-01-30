@@ -7,6 +7,7 @@ h1, h2, h3, h4, h5, h6 {
 .form-control, form-control-file {
   height: 45px;
 }
+
 .alert {
   margin-bottom: 0px;
   position: fixed;
@@ -33,9 +34,9 @@ h1, h2, h3, h4, h5, h6 {
 .error-field {
   background-color: rgba(255,192,203,0.5);
 }
+
 nav.navbar {
-  background-color: rgba(253,239,242,0.5);
-  border: 1px solid transparent;
+  background-color: rgba(253,239,242,0.6);
   border-color:#0095d9;
   border-width: 0 0 1px;
   margin-bottom: 0px ;
@@ -44,9 +45,18 @@ nav.navbar {
     color: #19448e;
   }
   img {
-    height: 60px;
+    height: 50px;
   }
 }
+.navbar-light .navbar-toggler {
+  color: #1e50a2;
+  border-color: #1e50a2;
+}
+.navbar-light .navbar-toggler-icon {
+  -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+  filter: invert(24%) sepia(21%) saturate(5480%) hue-rotate(202deg) brightness(95%) contrast(91%);
+}
+
 .pages-index-wrapper {
   width: 100vw;
   height: 100vh;
@@ -60,18 +70,24 @@ nav.navbar {
     padding-top: 80px;
     h1 {
       font-size: 56px;
+      color: #ea5506;
+      font-weight: 900;
       margin-bottom: 20px;
+      margin-bottom: 2rem;
     }
     h2 {
       margin-bottom: 60px;
+      color: #ea5506;
+      font-weight: 900;
     }
   }
 }
+
 .users-new-wrapper {
   width: 100vw;
   height: 100vh;
   background-image: url('/images/TokyoSkiTree.png');
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -81,6 +97,7 @@ nav.navbar {
     padding-top: 80px;
   }
 }
+
 .contents-index-wrapper {
   width: 100vw;
   height: 100vh;
@@ -93,16 +110,69 @@ nav.navbar {
   
   .container {
     padding-top: 80px;
-    h3 {
+    h2 {
       font-size: 36px;
+      color: #e83929;
+      font-weight: 900;
       margin-bottom: 10px;
     }
-    h4 {
+    h3 {
       margin-bottom: 30px;
+      color: #e83929;
+      font-weight: 700;
+    }
+    h5 {
+	  color: #223a70;
+	}
+  }
+}
+
+.learning-list-wrapper {
+  padding: 80px 0 20px;
+  background-image: url('/images/maple.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fafafa;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  main {
+    background-color: #FAFFF5;
+    padding: 20px 0;
+    margin-top: 30px;
+    border: 1px solid #e6ecf0;
+    border-radius: 6px;
+    .image {
+      margin: -6px 50px;
+      width: 25%;
+    }
+    .title {
+      padding: 10px 40px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: #ea5506;
+      background-color: #FAFFF5;
+      border: none;
+    }
+    .title2 {
+      padding: 10px 60px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: #164a84;
+      background-color: #FAFFF5;
+      border: none;
+    }
+    .subtitle {
+      padding: 10px 40px;
+      margin-top: 22px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border: none;
     }
   }
 }
-.topics-new-wrapper{
+.learning-new-wrapper{
   padding-top: 80px;
   background-image: url('/images/maple.png'); 
   background-position: center;
@@ -112,8 +182,11 @@ nav.navbar {
   background-color: #fafafa;
   min-height: calc(100vh - 180px);
   overflow: hidden;
+  #description {
+    height: 100px;
+  }
 }
-.topics-index-wrapper {
+.learning-index-wrapper {
   padding: 80px 0 20px;
   background-image: url('/images/maple.png');
   background-position: center;
@@ -135,7 +208,7 @@ nav.navbar {
     }
     .image {
       margin: 10px 0;
-      width: 100%;
+      width: 95%;
     }
     .icons {
       display: flex;
@@ -180,6 +253,8 @@ nav.navbar {
       word-wrap: break-word;
       background-color: #FAFFF5;
       border: none;
+      margin-bottom: 2rem;
+      font-weight : bold;
     }
     .comments {
       .author {
@@ -189,10 +264,16 @@ nav.navbar {
       .description {
 		margin: 20px;
         padding: 0 50px;
+        margin-bottom: 2rem;
+        font-weight : bold;
       }
     }
+    h6 {
+	  color: #164a84;
+	}
   }
 }
+
 .events-new-wrapper {
   padding-top: 80px;
   background-image: url('/images/KiyomizuTemple.png');
@@ -204,7 +285,7 @@ nav.navbar {
   min-height: calc(100vh - 180px);
   overflow: hidden;
   #description {
-    height: 80px;
+    height: 140px;
   }
 }
 .events-index-wrapper {
@@ -229,7 +310,7 @@ nav.navbar {
     }
     .image {
       margin: 10px 0;
-      width: 100%;
+      width: 95%;
     }
     .icons {
       display: flex;
@@ -274,6 +355,8 @@ nav.navbar {
       word-wrap: break-word;
       background-color: #FAFFF5;
       border: none;
+      margin-bottom: 2rem;
+      font-weight : bold;
     }
     .comments {
       .author {
@@ -283,19 +366,31 @@ nav.navbar {
       .description {
 		margin: 20px;
         padding: 0 50px;
+        margin-bottom: 2rem;
+        font-weight : bold;
       }
     }
+    h6 {
+	  color: #164a84;
+	}
   }
 }
 .fc-direction-ltr {
   padding-top: 40px;
 }
+.fc .fc-header-toolbar .fc-button-primary  {
+  background-color: #007bbb;
+  border-color: #007bbb;
+}
 #calendar {
   color: #9E202E;
   text-decoration: none;
-  background-color: rgba(245, 245, 255, 0.3);
+  background-color: rgba(245, 245, 255, 0.4);
   max-width: 1100px;
   margin: 40px auto;
+  .fc-toolbar-title {
+  font-weight: 800;
+  }
 }
 #calendar a {
   color: #1e50a2;
@@ -313,6 +408,7 @@ nav.navbar {
   padding-top: 90px;
   padding-bottom: 30px;
 }
+
 .board-index-wrapper {
   padding: 80px 0 20px;
   background-image: url('/images/Bomboo.png');
@@ -324,10 +420,10 @@ nav.navbar {
   min-height: calc(100vh - 180px);
   overflow: hidden;
   main {
-    background-color:  rgba(240, 245, 240, 0.6);
+    background-color:  rgba(250, 255, 255, 0.6);
     padding: 20px 0;
     margin-top: 30px;
-    border: 1px solid  rgba(240, 245, 240, 0.6);
+    border: 1px solid  rgba(250, 255, 255, 0.6);
     border-radius: 6px;
     .author {
       margin: 10px;
@@ -359,7 +455,6 @@ nav.navbar {
     }
     .author {
       padding: 10px 30px;
-      overflow: auto;
       white-space: pre-wrap;
       word-wrap: break-word;
       border: none;
@@ -370,6 +465,7 @@ nav.navbar {
       white-space: pre-wrap;
       word-wrap: break-word;
       border: none;
+      font-weight : bold;
     }
     .description {
       padding: 5px 40px;
@@ -377,6 +473,8 @@ nav.navbar {
       white-space: pre-wrap;
       word-wrap: break-word;
       border: none;
+      margin-bottom: 2rem;
+      font-weight : bold;
     }
     .comments {
       .author {
@@ -386,16 +484,23 @@ nav.navbar {
       .description {
 		margin: 20px;
         padding: 0 50px;
+        margin-bottom: 2rem;
+        font-weight : bold;
+      }
     }
-     
-    }
+  }
+  h6 {
+	  color: #164a84;
   }
 }
 .board-new-wrapper{
   padding-top: 80px;
   background-image: url('/images/Bomboo.png'); 
   background-color: #fafafa;
+  background-attachment: fixed;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
   #description {
-    height: 80px;
+    height: 100px;
   }
 }

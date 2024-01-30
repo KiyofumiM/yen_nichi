@@ -13,6 +13,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * お問い合わせを表すエンティティクラス。
+ * contactテーブルと対応
+ */
 @Entity
 @Table(name = "contact")
 @Data
@@ -33,6 +37,7 @@ public class Contact extends AbstractEntity implements Serializable  {
     @Column(nullable = true, length = 1000)
 	public String description;
 
+    // ユーザ情報と紐づけ
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;

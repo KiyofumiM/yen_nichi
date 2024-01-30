@@ -5,6 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.tie.yennichi.entity.CommentEvent;
 
+/**
+ * CommentEventエンティティの永続化と取得を行うリポジトリクラス。
+ * データベースアクセスと対応しています。
+ */
 @Repository
 public interface CommentEventRepository extends JpaRepository<CommentEvent, Long> {
 	

@@ -15,48 +15,59 @@
 					<main>
 						<h2 class="author" th:text="${event.user.name}"></h2>
 						<h4 class="title" th:text="${event.event_at}"></h4>
-						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${event.imageData}"
-							class="image" />
-						<img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${event.path}"
-							class="image" />
-
+						<div align="center">
+							<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${event.imageData}"
+								class="image" border="1">
+						</div>
 						<h3 class="title" th:text="${event.title}"></h3>
 						<pre class="description" th:text="${event.description}"></pre>
 
 						<!-- リアクション部分 -->
 						<div class="icons">
 							<!-- favorites -->
-							<a th:if="${event.favorite != null}" rel="nofollow" class="icon convert"
+							<a th:if="${event.favorite.userId != null}" rel="nofollow" class="icon convert"
 								data-method="delete" href="/favorite_event?learning_id=1" th:href="@{'/favorite_event'}"
 								th:data-event_id="${event.id}" th:data-_csrf="${_csrf.token}">
 								<img class="favorite-on" src="/images/icons/heart.png"
 									th:src="@{/images/icons/heart.png}" />
 							</a>
-							<a th:if="${event.favorite == null}" rel="nofollow" class="icon convert" data-method="post"
-								href="/favorite_event?event_id=1" th:href="@{'/favorite_event'}"
+							<a th:if="${event.favorite.userId == null}" rel="nofollow" class="icon convert"
+								data-method="post" href="/favorite_event?event_id=1" th:href="@{'/favorite_event'}"
 								th:data-learning_id="${event.id}" th:data-_csrf="${_csrf.token}">
 								<img src="/images/icons/heart-black.png" th:src="@{/images/icons/heart-black.png}" />
 							</a>
-							<span class="count" th:text="${#lists.size(event.favorites)}">0</span>
+
+							<span>&nbsp;</span>
+
+							<span class="count" th:text="${#lists.size(event.favoriteList)}">0</span>
+
 							<!-- comments -->
-							<a href="/event/1/comments/event"
-								th:href="@{'/event/{id}/comments_event/new'(id=${event.id})}" class="icon"
-								th:data-_csrf="${_csrf.token}">
-								<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
-							</a>
-							<span class="count" th:text="${#lists.size(event.comments)}">0</span>
+							<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" class="icon">
+
+							<span>&nbsp;</span>
+
+							<span class="count" th:text="${#lists.size(event.getValidComments())}">0</span>
 
 						</div>
 
+
+						<br><br>
+
+						<!-- コメント表示 -->
 						<div class="comments">
-							<h4 class="text-center">コメント</h4>
-							<div th:each="comment : ${event.comments}">
+							<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
+							<div th:each="comment : ${event.getValidComments()}">
 								<div class="comment">
-									<h5 class="author" th:text="${comment.user.name}"></h5>
+									<h4 class="author" th:text="${comment.user.name}"></h4>
 									<pre class="description" th:text="${comment.description}"></pre>
+
+									<br>
 								</div>
 							</div>
 						</div>
+
+						<br>
+
 					</main>
 				</div>
 			</div>

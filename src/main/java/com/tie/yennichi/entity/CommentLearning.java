@@ -17,6 +17,10 @@ import lombok.Data;
 import java.util.List;
 import javax.persistence.OneToMany;
 
+/**
+ * 投稿された言葉に対するコメントを表すエンティティクラス。
+ * comment_learningテーブルと対応
+ */
 @Entity
 @Table(name = "comment_learning")
 @Data
@@ -34,6 +38,7 @@ public class CommentLearning extends AbstractEntity implements Serializable {
 	@Column(nullable = false)
     private Long userId;
 	
+	// ユーザ情報と紐づけ
 	@ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
@@ -44,7 +49,8 @@ public class CommentLearning extends AbstractEntity implements Serializable {
 	@Column(nullable = false, length = 1000)
 	private String description;
 	
+	// コメントに対する「いいね！」と紐づけ
 	@OneToMany
 	@JoinColumn(name = "commentLearningId", insertable = false, updatable = false)
-	private List<GoodCommentLearning> goodComments;
+	private List<GoodCommentLearning> goodCommentList;
 }

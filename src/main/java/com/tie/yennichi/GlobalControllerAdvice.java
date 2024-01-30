@@ -11,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+* サーバーでの処理中のエラー発生時に、エラーメッセージを外部に表示しないためのクラス
+*/
 // @ControllerAdvice
 // @Component
 public class GlobalControllerAdvice {

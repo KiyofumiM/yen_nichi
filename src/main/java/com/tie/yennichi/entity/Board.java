@@ -16,6 +16,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 掲示板情報を表すエンティティクラス。
+ * boardテーブルと対応
+ */
 @Entity
 @Table(name = "board")
 @Data
@@ -43,12 +47,13 @@ public class Board extends AbstractEntity implements Serializable {
     @Column(nullable = false)
     private boolean deleted;
     
+    // 「いいね！」情報と紐づけ
     @OneToMany
     @JoinColumn(name = "boardId", insertable = false, updatable = false)
-    private List<GoodBoard> goods;
+    private List<GoodBoard> goodList;
     
-    
+    // 投稿に対するコメントを紐づけ
     @OneToMany
     @JoinColumn(name = "boardId", insertable = false, updatable = false)
-    private List<CommentBoard> comments;
+    private List<CommentBoard> commentList;
 }

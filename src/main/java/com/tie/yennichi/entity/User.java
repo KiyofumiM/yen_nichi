@@ -11,8 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,13 +20,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 
-
+/**
+ * ユーザー情報を表すエンティティクラス。
+ * usersテーブルと対応
+ */
 @Entity
 @Table(name = "users")
 @Data
 public class User extends AbstractEntity implements UserDetails, UserInf {
     private static final long serialVersionUID = 1L;
 
+    // ロール設定
     public enum Authority {
         ROLE_USER, ROLE_ADMIN
     };
@@ -37,6 +39,7 @@ public class User extends AbstractEntity implements UserDetails, UserInf {
         super();
     }
 
+    // ユーザ情報
     public User(String email, String name, String password, Authority authority) {
         this.username = email;
         this.name = name;

@@ -15,6 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.tie.yennichi.entity.User;
 import com.tie.yennichi.repository.UserRepository;
 
+/**
+ * ユーザーのフォーム認証を処理し、具体的にはユーザー名とパスワードの認証を行うためのクラス
+ */
 @Configuration
 public class FormAuthenticationProvider implements AuthenticationProvider {
 

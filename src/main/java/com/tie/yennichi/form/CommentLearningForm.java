@@ -6,6 +6,10 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 import java.util.List;
 
+/**
+ * 投稿された言葉に対するコメント情報を受け取るためのフォームクラス。
+ * 入力フォームと対応しています。
+ */
 @Data
 public class CommentLearningForm {
 
@@ -21,8 +25,10 @@ public class CommentLearningForm {
     
     private boolean deleted;
     
-    private List<GoodCommentLearningForm> goodComments;
+    // 投稿されたコメントに対する「いいね！」一覧
+    private List<GoodCommentLearningForm> goodCommentList;
 
+    // 投稿されたコメントに対する各「いいね！」情報
     private GoodCommentLearningForm goodComment;
   
 }

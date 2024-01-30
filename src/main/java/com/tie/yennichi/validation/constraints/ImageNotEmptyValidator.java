@@ -5,6 +5,9 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+* ImageNotEmptyアノテーションで指定された条件に基づいて、MultipartFile（Spring FrameworkのMultipartFileはファイルアップロード用のオブジェクト）が空でないかどうかを検証するためのバリデータ
+*/
 public class ImageNotEmptyValidator implements ConstraintValidator<ImageNotEmpty, MultipartFile> {
 
     @Override

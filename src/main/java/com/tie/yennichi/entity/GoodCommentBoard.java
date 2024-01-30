@@ -11,6 +11,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 掲示板にて投稿されたコメントに対する「いいね！」を表すエンティティクラス。
+ * god_comment_boardテーブルと対応
+ */
 @Entity
 @Table(name = "good_comment_board")
 @Data

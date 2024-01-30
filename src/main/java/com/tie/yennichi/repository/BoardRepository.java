@@ -4,8 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.tie.yennichi.entity.Board;
-import com.tie.yennichi.entity.Learning;
 
+/**
+ * Boardエンティティの永続化と取得を行うリポジトリクラス。
+ * データベースアクセスと対応しています。
+ */
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
 

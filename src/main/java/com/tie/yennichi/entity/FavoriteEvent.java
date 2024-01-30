@@ -14,6 +14,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 投稿されたイベント情報に対する「おきにいり！」を表すエンティティクラス。
+ * favorite_eventテーブルと対応
+ */
 @Entity
 @Table(name = "favorite_event")
 @Data
@@ -31,6 +35,7 @@ public class FavoriteEvent extends AbstractEntity implements Serializable {
     @Column(nullable = false)
     private Long eventId;
 
+    // イベント情報と紐づけ
     @ManyToOne
     @JoinColumn(name = "eventId", insertable = false, updatable = false)
     private Event event;

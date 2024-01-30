@@ -8,6 +8,10 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 
+/**
+ * 掲示板に投稿された内容を受け取るためのフォームクラス。
+ * 入力フォームと対応しています。
+ */
 @Data
 public class BoardForm {
 
@@ -25,25 +29,34 @@ public class BoardForm {
     
     private boolean deleted;
 
-    private List<GoodBoardForm> goods;
+    // 投稿に対する「いいね！」一覧
+    private List<GoodBoardForm> goodList;
     
+    // 各「いいね！」情報
     private GoodBoardForm good;
     
-    private List<CommentBoardForm> comments;
+    // 投稿に対するコメント一覧
+    private List<CommentBoardForm> commentList;
     
-    private List<GoodCommentBoardForm> goodComments;
+    // 各コメント情報
+    private List<GoodCommentBoardForm> goodCommentList;
     
+    // コメントに対する「いいね！」
     private GoodCommentBoardForm goodComment;
     
+    /**
+     * 論理削除されていないコメントを表示する
+     * @return 論理削除されていないコメント情報
+     */
     public List<CommentBoardForm> getValidComments() {
 
-    	List<CommentBoardForm> src = comments;
-    	List<CommentBoardForm> ret = new ArrayList<CommentBoardForm>();
-    	for (CommentBoardForm item : src) {
+    	List<CommentBoardForm> listComment = commentList;
+    	List<CommentBoardForm> retList = new ArrayList<CommentBoardForm>();
+    	for (CommentBoardForm item : listComment) {
     		if (!item.isDeleted()) {
-    			ret.add(item);
+    			retList.add(item);
     		}
     	}
-    	return ret;
+    	return retList;
     }
 }

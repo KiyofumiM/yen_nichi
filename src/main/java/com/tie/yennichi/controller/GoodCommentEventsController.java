@@ -19,6 +19,9 @@ import com.tie.yennichi.entity.GoodCommentEvent;
 import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.repository.GoodCommentEventRepository;
 
+/**
+* イベント情報のシェアで投稿されたコメントに対する「いいね！」に関係するcontroller群
+*/
 @Controller
 public class GoodCommentEventsController {
 	@Autowired
@@ -27,6 +30,12 @@ public class GoodCommentEventsController {
     @Autowired
     private GoodCommentEventRepository repository;
     
+	/**
+	 * コメントに対して「いいね！」をする
+	 * @param  Principal, comment_event_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_comment_event", method = RequestMethod.POST)
     public String create(Principal principal, @RequestParam("comment_event_id") long commentEventId, RedirectAttributes redirAttrs,
             Locale locale) {
@@ -52,6 +61,12 @@ public class GoodCommentEventsController {
         return "redirect:/events";
     }
 
+	/**
+	 * コメントに対して「いいね！」をやめる
+	 * @param  Principal, comment_event_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_comment_event", method = RequestMethod.DELETE)
     @Transactional
     public String destroy(Principal principal, @RequestParam("comment_event_id") long commentEventId, RedirectAttributes redirAttrs,

@@ -1,8 +1,6 @@
 package com.tie.yennichi.controller;
 
-import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -21,6 +19,9 @@ import com.tie.yennichi.entity.GoodEvent;
 import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.repository.GoodEventRepository;
 
+/**
+* イベント情報のシェアで投稿された内容に対する「いいね！」に関係するcontroller群
+*/
 @Controller
 public class GoodsEventController {
 	@Autowired
@@ -32,6 +33,12 @@ public class GoodsEventController {
     @Autowired
     private EventsController eventsController;
 
+	/**
+	 * 投稿内容に対して「いいね！」をする
+	 * @param  Principal, event_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_event", method = RequestMethod.POST)
     public String create(Principal principal, @RequestParam("event_id") long eventId, RedirectAttributes redirAttrs,
             Locale locale) {
@@ -53,6 +60,12 @@ public class GoodsEventController {
         return "redirect:/events";
     }
 
+	/**
+	 * 投稿内容に対して「いいね！」をやめる
+	 * @param  Principal, event_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_event", method = RequestMethod.DELETE)
     @Transactional
     public String destroy(Principal principal, @RequestParam("event_id") long eventId, RedirectAttributes redirAttrs,

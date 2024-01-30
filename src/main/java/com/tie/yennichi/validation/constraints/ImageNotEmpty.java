@@ -9,6 +9,9 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
 
+/**
+ * 画像が空かどうかを検証するためのカスタムバリデーションアノテーション
+ */
 @Documented
 @Constraint(validatedBy = ImageNotEmptyValidator.class)
 @Target({ ElementType.FIELD })

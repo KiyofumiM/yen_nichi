@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.tie.yennichi.entity.GoodCommentBoard;
 
+/**
+ * GoodCommentBoardエンティティの永続化と取得を行うリポジトリクラス。
+ * データベースアクセスと対応しています。
+ */
 @Repository
 public interface GoodCommentBoardRepository  extends JpaRepository<GoodCommentBoard, Long>{
 

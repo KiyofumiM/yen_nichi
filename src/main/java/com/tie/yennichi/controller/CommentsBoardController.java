@@ -23,12 +23,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.entity.CommentBoard;
-import com.tie.yennichi.entity.CommentEvent;
-import com.tie.yennichi.entity.CommentLearning;
 import com.tie.yennichi.form.CommentBoardForm;
 import com.tie.yennichi.form.CommentEventForm;
 import com.tie.yennichi.repository.CommentBoardRepository;
 
+/**
+* 掲示板で投稿するコメントの処理用controller群
+*/
 @Controller
 public class CommentsBoardController {
 
@@ -41,6 +42,12 @@ public class CommentsBoardController {
     @Autowired
     private CommentBoardRepository repository;
 
+	/**
+	* 新規投稿画面にリンクする
+	* @param  boardId, Model
+	* @return ページアドレス /comments_board/new
+	* @throws なし
+	*/
     @RequestMapping(value = "/board/{boardId}/comments_board/new")
     public String newComment(@PathVariable("boardId") long boardId, Model model) {
         CommentBoardForm form = new CommentBoardForm();
@@ -49,6 +56,13 @@ public class CommentsBoardController {
         return "comments_board/new";
     }
 
+	/**
+	* 投稿処理
+	* @param  boardId, form : CommentBoardForm,
+            BindingResult, Principal, Model, RedirectAttributes, Locale
+	* @return redirect:/board
+	* @throws なし
+	*/
     @RequestMapping(value = "/board/{boardId}/comments_board")
     public String create(@PathVariable("boardId") long boardId, @Validated @ModelAttribute("form") CommentBoardForm form,
             BindingResult result, Principal principal, Model model, RedirectAttributes redirAttrs, Locale locale) {
@@ -74,7 +88,12 @@ public class CommentsBoardController {
         return "redirect:/board";
     }
     
-    // 登録情報を取得して表示
+	/**
+	 * 参照した投稿内容の詳細を取得して表示
+	 * @param  Principal, comment_board_id, Model
+	 * @return ページアドレス /comments_board/edit
+	 * @throws なし
+	 */
  	@RequestMapping(value = "/comment_board/edit", method = RequestMethod.GET)
  	public String edite(Principal principal, @RequestParam("comment_board_id") long commentBoardId, Model model) {
  		CommentBoard entity = repository.findById(commentBoardId);
@@ -87,7 +106,13 @@ public class CommentsBoardController {
  		return "comments_board/edit";
  	}
      
- 	// 投稿内容を更新
+	/**
+	* 投稿内容の更新処理
+	* @param  rincipal, form : CommentBoardForm,
+			BindingResult, Model, Locale, RedirectAttributes, id
+	* @return redirect:/board
+	* @throws IOException
+	*/
  	@RequestMapping(value = "/comment_board/update", method = RequestMethod.POST)
  	public String update(Principal principal, @Validated @ModelAttribute("form") CommentEventForm form,
  			BindingResult result, Model model, Locale locale, HttpSession session, RedirectAttributes redirAttrs, @RequestParam("id") long commentBoardId 
@@ -115,7 +140,13 @@ public class CommentsBoardController {
  		return "redirect:/board";
  	}
  	
- // 投稿内容を削除する
+	/**
+	* 投稿内容の論理削除処理
+	* @param  rincipal, form : CommentBoardForm,
+			BindingResult, Model, Locale, RedirectAttributes, id
+	* @return redirect:/board
+	* @throws IOException
+	*/
  	@RequestMapping(value = "/comment_board/delete", method = RequestMethod.GET)
  	public String delete(Principal principal, Model model, Locale locale, HttpSession session, RedirectAttributes redirAttrs,
  			@RequestParam("comment_board_id") long commentBoardId) throws IOException {
@@ -129,7 +160,7 @@ public class CommentsBoardController {
 
  		redirAttrs.addFlashAttribute("hasMessage", true);
  		redirAttrs.addFlashAttribute("class", "alert-info");
- 		redirAttrs.addFlashAttribute("message", messageSource.getMessage("comments.delete.flash.2", new String[] {}, locale));
+ 		redirAttrs.addFlashAttribute("message", messageSource.getMessage("comments.delete.flash", new String[] {}, locale));
  		return "redirect:/board";
  	}
 }

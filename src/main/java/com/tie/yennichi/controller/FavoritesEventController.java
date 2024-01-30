@@ -26,6 +26,9 @@ import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.form.EventForm;
 import com.tie.yennichi.repository.FavoriteEventRepository;
 
+/**
+* イベント情報のシェアで投稿されたコメントに対する「お気に入り！」に関係するcontroller群
+*/
 @Controller
 public class FavoritesEventController {
 	@Autowired
@@ -37,6 +40,12 @@ public class FavoritesEventController {
     @Autowired
     private EventsController eventController;
 
+	/**
+	 * 「お気に入り！」に登録した内容を表示する
+	 * @param  Principal, Model
+	 * @return favorite/events
+	 * @throws IOException
+	 */
     @GetMapping(path = "/favorite_event")
     public String index(Principal principal, Model model) throws IOException {
         Authentication authentication = (Authentication) principal;
@@ -53,6 +62,12 @@ public class FavoritesEventController {
         return "favorite/events";
     }
 
+	/**
+	 * 投稿内容に対して「お気に入り！」をする
+	 * @param  Principal, event_id, RedirectAttributes, Locale
+	 * @return redirect:/events
+	 * @throws なし
+	 */
     @RequestMapping(value = "/favorite_event", method = RequestMethod.POST)
     public String create(Principal principal, @RequestParam("learning_id") long eventId, RedirectAttributes redirAttrs,
             Locale locale) {
@@ -74,6 +89,12 @@ public class FavoritesEventController {
         return "redirect:/events";
     }
 
+	/**
+	 * 投稿内容に対して「お気に入り！」をやめる
+	 * @param  Principal, event_id, RedirectAttributes, Locale
+	 * @return redirect:/events
+	 * @throws なし
+	 */
     @RequestMapping(value = "/favorite_event", method = RequestMethod.DELETE)
     @Transactional
     public String destroy(Principal principal, @RequestParam("event_id") long eventId, RedirectAttributes redirAttrs,

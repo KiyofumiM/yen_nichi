@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +25,9 @@ import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.form.LearningForm;
 import com.tie.yennichi.repository.FavoriteLearningRepository;
 
+/**
+* 言葉を広げるで投稿されたコメントに対する「お気に入り！」に関係するcontroller群
+*/
 @Controller
 public class FavoritesLearningController {
 	@Autowired
@@ -53,6 +55,12 @@ public class FavoritesLearningController {
         return "favorite/learning";
     }
 
+	/**
+	 * 投稿内容に対して「お気に入り！」をする
+	 * @param  Principal, learning_id, RedirectAttributes, Locale
+	 * @return redirect:/events
+	 * @throws なし
+	 */
     @RequestMapping(value = "/favorite", method = RequestMethod.POST)
     public String create(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,
             Locale locale) {
@@ -74,6 +82,12 @@ public class FavoritesLearningController {
         return "redirect:/learning";
     }
 
+	/**
+	 * 投稿内容に対して「お気に入り！」をやめる
+	 * @param  Principal, learning_id, RedirectAttributes, Locale
+	 * @return redirect:/events
+	 * @throws なし
+	 */
     @RequestMapping(value = "/favorite", method = RequestMethod.DELETE)
     @Transactional
     public String destroy(Principal principal, @RequestParam("learning_id") long learningId, RedirectAttributes redirAttrs,

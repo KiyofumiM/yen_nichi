@@ -1,5 +1,8 @@
 package com.tie.yennichi.entity;
 
+/**
+ * ユーザ情報に関するインターフェース
+ */
 public interface UserInf {
 
     Long getUserId();

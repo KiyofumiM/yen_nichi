@@ -31,6 +31,9 @@ import com.tie.yennichi.repository.ContactRepository;
 import org.thymeleaf.context.Context;
 import com.tie.yennichi.service.SendMailService;
 
+/**
+* 問い合わせの処理用controller群
+*/
 @Controller
 public class ContactsController {
 
@@ -54,6 +57,12 @@ public class ContactsController {
 		return "contact/new";
 	}
 
+	/**
+	 * 各投稿内容の詳細を取得する
+	 * @param  entity : UserInf、entity : Contact
+	 * @return LearningForm
+	 * @throws FileNotFoundException, IOException
+	 */
 	public ContactForm getContact(UserInf user, Contact entity) throws FileNotFoundException, IOException {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.typeMap(Contact.class, ContactForm.class).addMappings(mapper -> mapper.skip(ContactForm::setUser));
@@ -65,6 +74,12 @@ public class ContactsController {
 		return form;
 	}
 
+	/**
+	* 問い合わせ内容投稿画面にリンクする
+	* @param  Model
+	* @return ページアドレス /contact/new
+	* @throws なし
+	*/
 	@RequestMapping(value = "/contact", method = RequestMethod.POST)
 	public String create(Principal principal, @Validated @ModelAttribute("form") ContactForm form, BindingResult result,
 			Model model, RedirectAttributes redirAttrs, Locale locale) throws IOException {
@@ -100,6 +115,12 @@ public class ContactsController {
 		return "contact/success";
 	}
 	
+	/**
+	* お問い合わせ投稿成功画面にリンクする
+	* @param  なし
+	* @return ページアドレス /contact/success
+	* @throws なし
+	*/
     @RequestMapping("contact/success")
     public String close() {
         return "contact/success";

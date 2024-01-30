@@ -19,6 +19,9 @@ import com.tie.yennichi.entity.GoodCommentBoard;
 import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.repository.GoodCommentBoardRepository;
 
+/**
+* 掲示板で投稿されたコメントに対する「いいね！」に関係するcontroller群
+*/
 @Controller
 public class GoodCommentBoardsController {
 	@Autowired
@@ -27,6 +30,12 @@ public class GoodCommentBoardsController {
     @Autowired
     private GoodCommentBoardRepository repository;
     
+	/**
+	 * コメントに対して「いいね！」をする
+	 * @param  Principal, comment_board_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_comment_board", method = RequestMethod.POST)
     public String create(Principal principal, @RequestParam("comment_board_id") long commentBoardId, RedirectAttributes redirAttrs,
             Locale locale) {
@@ -52,6 +61,12 @@ public class GoodCommentBoardsController {
         return "redirect:/board";
     }
 
+	/**
+	 * コメントに対して「いいね！」をやめる
+	 * @param  Principal, comment_board_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_comment_board", method = RequestMethod.DELETE)
     @Transactional
     public String destroy(Principal principal, @RequestParam("comment_board_id") long commentBoardId, RedirectAttributes redirAttrs,

@@ -8,12 +8,15 @@ import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tie.yennichi.entity.CommentLearning;
 import com.tie.yennichi.validation.constraints.ImageByte;
 import com.tie.yennichi.validation.constraints.ImageNotEmpty;
 
 import lombok.Data;
 
+/**
+ * 「登録された言葉」を受け取るためのフォームクラス。
+ * 入力フォームと対応しています。
+ */
 @Data
 public class LearningForm {
 
@@ -40,30 +43,41 @@ public class LearningForm {
     
     private UserForm user;
 
-    private List<GoodLearningForm> goods;
+    // 「いいね！」一覧
+    private List<GoodLearningForm> goodList;
     
+    // 各「いいね！」情報
     private GoodLearningForm good;
     
-    private List<FavoriteLearningForm> favorites;
+    // 「お気に入り！」一覧
+    private List<FavoriteLearningForm> favoriteList;
     
+    // 各「お気に入り！」情報
     private FavoriteLearningForm favorite;
     
-    private List<CommentLearningForm> comments;
+    // コメント一覧
+    private List<CommentLearningForm> commentList;
     
-    private List<GoodCommentLearningForm> goodComments;
+    // 各コメント情報
+    private List<GoodCommentLearningForm> goodCommentList;
     
+    // コメントに対する「いいね！」フォーム
     private GoodCommentLearningForm goodComment;
-    
+     
+    /**
+     * 論理削除されていないコメントを表示する
+     * @return 論理削除されていないコメント情報
+     */
     public List<CommentLearningForm> getValidComments() {
 
-    	List<CommentLearningForm> src = comments;
-    	List<CommentLearningForm> ret = new ArrayList<CommentLearningForm>();
-    	for (CommentLearningForm item : src) {
+    	List<CommentLearningForm> listComent = commentList;
+    	List<CommentLearningForm> retList = new ArrayList<CommentLearningForm>();
+    	for (CommentLearningForm item : listComent) {
     		if (!item.isDeleted()) {
-    			ret.add(item);
+    			retList.add(item);
     		}
     	}
-    	return ret;
+    	return retList;
     }
 
 }

@@ -44,6 +44,9 @@ import com.tie.yennichi.form.CommentBoardForm;
 import com.tie.yennichi.entity.GoodCommentBoard;
 import com.tie.yennichi.form.GoodCommentBoardForm;
 
+/**
+* 掲示板の処理用controller群
+*/
 @Controller
 public class BoardsController {
 
@@ -58,6 +61,12 @@ public class BoardsController {
 	@Autowired
 	private BoardRepository repository;
 
+	/**
+	 * 投稿内容詳細の表示
+	 * @param  Principal、Model
+	 * @return ページアドレス /board/index
+	 * @throws IOException
+	 */
 	@GetMapping(path = "/board")
 	public String index(Principal principal, Model model) throws IOException {
 		Authentication authentication = (Authentication) principal;
@@ -75,61 +84,79 @@ public class BoardsController {
 		return "board/index";
 	}
 
+	/**
+	* 新規投稿画面にリンクする
+	* @param  Model
+	* @return ページアドレス /board/new
+	* @throws なし
+	*/
 	@GetMapping(path = "/board/new")
 	public String newBoard(Model model) {
 		model.addAttribute("form", new BoardForm());
 		return "board/new";
 	}
 
+	/**
+	 * 各投稿内容の詳細を取得する
+	 * @param  entity : UserInf、entity : board
+	 * @return LearningForm
+	 * @throws FileNotFoundException, IOException
+	 */
 	public BoardForm getBoard(UserInf user, Board entity) throws FileNotFoundException, IOException {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.typeMap(Board.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setUser));
 
-		modelMapper.typeMap(Board.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setGoods));
+		modelMapper.typeMap(Board.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setGoodList));
 		modelMapper.typeMap(GoodBoard.class, GoodBoardForm.class)
 				.addMappings(mapper -> mapper.skip(GoodBoardForm::setBoard));
 
-		modelMapper.typeMap(Board.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setComments));
+		modelMapper.typeMap(Board.class, BoardForm.class).addMappings(mapper -> mapper.skip(BoardForm::setCommentList));
 		
 		BoardForm form = modelMapper.map(entity, BoardForm.class);
 		UserForm userForm = modelMapper.map(entity.getUser(), UserForm.class);
 		form.setUser(userForm);
 
-		List<GoodBoardForm> goods = new ArrayList<GoodBoardForm>();
+		List<GoodBoardForm> goodList = new ArrayList<GoodBoardForm>();
 
-		for (GoodBoard goodBoardEntity : entity.getGoods()) {
+		for (GoodBoard goodBoardEntity : entity.getGoodList()) {
 			GoodBoardForm good = modelMapper.map(goodBoardEntity, GoodBoardForm.class);
-			goods.add(good);
+			goodList.add(good);
 			if (user.getUserId().equals(good.getUserId())) {
 				form.setGood(good);
 			}
 		}
 
-		form.setGoods(goods);
+		form.setGoodList(goodList);
 		
-		List<CommentBoardForm> comments = new ArrayList<CommentBoardForm>();
-		for (CommentBoard commentBoardEntity : entity.getComments()) {
+		List<CommentBoardForm> commentList = new ArrayList<CommentBoardForm>();
+		for (CommentBoard commentBoardEntity : entity.getCommentList()) {
 			CommentBoardForm comment = modelMapper.map(commentBoardEntity, CommentBoardForm.class);
-			comments.add(comment);		
+			commentList.add(comment);		
 
 			// 投稿されたコメントに対する「いいね！」の数を取得してセット
-			List<GoodCommentBoardForm> goodComments = new ArrayList<GoodCommentBoardForm>();
+			List<GoodCommentBoardForm> goodCommentList = new ArrayList<GoodCommentBoardForm>();
 		
-			for (GoodCommentBoard goodCommentEntity : commentBoardEntity.getGoodComments()) {
+			for (GoodCommentBoard goodCommentEntity : commentBoardEntity.getGoodCommentList()) {
 				GoodCommentBoardForm goodComment = modelMapper.map(goodCommentEntity, GoodCommentBoardForm.class);
 
 				if (user.getUserId().equals(goodCommentEntity.getUserId())) {
 					
 					comment.setGoodComment(goodComment);
 				}
-				goodComments.add(goodComment);
+				goodCommentList.add(goodComment);
 			}
 		}
-		form.setComments(comments);
+		form.setCommentList(commentList);
 		
 		return form;
 	}
 
+	/**
+	* 投稿処理
+	* @param  Principal、form : BoardForm、BindingResult、Model、MultipartFile、RedirectAttributes,　locale
+	* @return redirect:/board
+	* @throws IOException
+	*/
 	@RequestMapping(value = "/board", method = RequestMethod.POST)
 	public String create(Principal principal, @Validated @ModelAttribute("form") BoardForm form, BindingResult result,
 			Model model, RedirectAttributes redirAttrs, Locale locale) throws IOException {
@@ -156,7 +183,12 @@ public class BoardsController {
 		return "redirect:/board";
 	}
 	
-	// 登録情報を取得して表示
+	/**
+	 * 参照した投稿内容の詳細を取得して表示
+	 * @param  Principal、board_id、Model
+	 * @return ページアドレス /board/edit
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/board/edit", method = RequestMethod.GET)
 	public String edite(Principal principal, @RequestParam("board_id") long boardId, Model model)
 			 {
@@ -171,6 +203,12 @@ public class BoardsController {
 		return "board/edit";
 	}
 
+	/**
+	* 投稿内容の更新処理
+	* @param  Principal、form : BoardForm、BindingResult、Model、MultipartFile、RedirectAttributes、locale、HttpSession、id
+	* @return redirect:/board
+	* @throws IOException
+	*/
 	@RequestMapping(value = "/board/update", method = RequestMethod.POST)
 	public String update(Principal principal, @Validated @ModelAttribute("form") BoardForm form,
 			BindingResult result, Model model, Locale locale, HttpSession session, @RequestParam("id") long boardId, RedirectAttributes redirAttrs)
@@ -200,8 +238,14 @@ public class BoardsController {
 		return "redirect:/board";
 	}
 
+	/**
+	* 投稿内容の論理削除処理
+	* @param  Principal、form : BoardForm、BindingResult、Model、MultipartFile、RedirectAttributes、locale、id
+	* @return redirect:/board
+	* @throws IOException
+	*/
 	@RequestMapping(value = "/board/delete", method = RequestMethod.GET)
-	public String delete(Principal principal, Model model, Locale locale, HttpSession session, @RequestParam("board_id") long boardId, RedirectAttributes redirAttrs
+	public String delete(Model model, Locale locale, @RequestParam("board_id") long boardId, RedirectAttributes redirAttrs
 			) throws IOException {
 
 		// 更新処理
@@ -213,7 +257,7 @@ public class BoardsController {
 
 		redirAttrs.addFlashAttribute("hasMessage", true);
 		redirAttrs.addFlashAttribute("class", "alert-info");
-		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.delete.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.delete.flash", new String[] {}, locale));
 		return "redirect:/board";
 	}
 }

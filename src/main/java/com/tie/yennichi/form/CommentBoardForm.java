@@ -7,6 +7,10 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 
+/**
+ * 掲示板に投稿された内容に対するコメント情報を受け取るためのフォームクラス。
+ * 入力フォームと対応しています。
+ */
 @Data
 public class CommentBoardForm {
 
@@ -22,7 +26,9 @@ public class CommentBoardForm {
     
     private boolean deleted;
 
-    private List<GoodCommentBoardForm> goodComments;
+    // コメントに対する「いいね！」一覧
+    private List<GoodCommentBoardForm> goodCommentList;
 
+    // コメントに対する各「いいね！」情報
     private GoodCommentBoardForm goodComment;
 }

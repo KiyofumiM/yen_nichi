@@ -5,6 +5,10 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 
+/**
+ *お問い合わせ情報を受け取るためのフォームクラス。
+ * 入力フォームと対応しています。
+ */
 @Data
 public class ContactForm {
 

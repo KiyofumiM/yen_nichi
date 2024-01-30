@@ -4,11 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+* イベント情報のシェアで利用するカレンダにリンクするためのcontrollerクラス
+*/
 @Controller
 public class CalendarsController {
 
-    @GetMapping(path = "/calendars")
-    public String index(Model model) {
-        return "calendars/index";
+    @GetMapping(path = "/calendar/events")
+    public String indexEvent(Model model) {
+        return "calendars/events";
     }
+
 }

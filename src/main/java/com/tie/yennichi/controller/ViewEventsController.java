@@ -14,6 +14,9 @@ import com.tie.yennichi.form.ViewEventFrom;
 import com.tie.yennichi.repository.EventRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+* イベントの共有で用いるカレンダーの処理用controller
+*/
 @RestController
 @RequestMapping("/view_events")
 public class ViewEventsController {
@@ -22,8 +25,9 @@ public class ViewEventsController {
 
     /**
     * イベントカレンダーに表示するEvent情報を取得する。
-    *
+    *　@param　　なし
     * @return Event情報をjsonエンコードした文字列
+    * @throws　なし
     */
     @GetMapping(value = "/all")
     public String getEvents() {

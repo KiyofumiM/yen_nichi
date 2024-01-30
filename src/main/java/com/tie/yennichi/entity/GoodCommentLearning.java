@@ -11,6 +11,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 言葉を広げるにて投稿されたコメントに対する「いいね！」を表すエンティティクラス。
+ * good_comment_learningテーブルと対応
+ */
 @Entity
 @Table(name = "good_comment_learning")
 @Data

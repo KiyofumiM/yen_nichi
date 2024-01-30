@@ -1,7 +1,6 @@
 package com.tie.yennichi.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,6 +16,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * learningを表すエンティティクラス。
+ * learningテーブルと対応
+ */
 @Entity
 @Table(name = "learning")
 @Data
@@ -44,21 +47,25 @@ public class Learning extends AbstractEntity implements Serializable {
     @Column(nullable = false)
     private boolean deleted;
     
+    // ユーザ情報と紐づけ
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
     
+    // 「いいね！」情報と紐づけ
     @OneToMany
     @JoinColumn(name = "learningId", insertable = false, updatable = false)
-    private List<GoodLearning> goods;
+    private List<GoodLearning> goodList;
     
+    // 「お気に入り！」情報と紐づけ
     @OneToMany
     @JoinColumn(name = "learningId", insertable = false, updatable = false)
-    private List<FavoriteLearning> favorites;
+    private List<FavoriteLearning> favoriteList;
     
+    // 投稿情報に対するコメントと紐づけ
     @OneToMany
     @JoinColumn(name = "learningId", insertable = false, updatable = false)
-    private List<CommentLearning> comments;
+    private List<CommentLearning> commentList;
 
     
 }

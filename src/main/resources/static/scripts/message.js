@@ -6,15 +6,15 @@ function showCurrentTime() {
     // 時間に合わせたメッセージを表示
     let message1 = '';
     if (hours < 4) {
-        message1 = '遅くまでお疲れ様です';
+        message1 = '遅くまでお疲れ様です!!';
     } else if (hours < 12) {
         message1 = 'おはようございます!!';
     } else if (hours < 18) {
-        message1 = '学習お疲れ様です！';
+        message1 = 'こんにちは!!';
     } else if (hours < 22) {
-        message1 = 'こんばんは！';
+        message1 = 'こんばんは!!';
     } else {
-        message1 = '遅くまでお疲れ様です！';
+        message1 = '遅くまでお疲れ様です!!';
     }
     document.getElementById('message1').innerText = message1;
 

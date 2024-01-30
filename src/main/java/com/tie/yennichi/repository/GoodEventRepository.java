@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.tie.yennichi.entity.GoodEvent;
 
+/**
+ * GoodEventエンティティの永続化と取得を行うリポジトリクラス。
+ * データベースアクセスと対応しています。
+ */
 @Repository
 public interface GoodEventRepository extends JpaRepository<GoodEvent, Long>{
 

@@ -16,6 +16,9 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+/**
+ * メール送信に関する機能を提供するサービスクラス
+ */
 @Service
 public class SendMailService {
 	@Autowired
@@ -24,6 +27,7 @@ public class SendMailService {
 	@Value("${SPRING_MAIL_USERNAME}")
 	private String springMailUsername;
 	
+	// メールを送信するmethod
 	public void sendMail(Context context) {
 
 		javaMailSender.send(new MimeMessagePreparator() {
@@ -42,12 +46,14 @@ public class SendMailService {
 
 	}
 	
+	// Thymeleafテンプレートエンジンを使用してメールの本文を生成するmethod
 	private String getMailBody(String templateName, Context context) {
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.setTemplateResolver(mailTemplateResolver());
 		return templateEngine.process(templateName, context);
 	}
 	
+	// Thymeleafテンプレートリゾルバの設定を行うmethod
 	private ClassLoaderTemplateResolver mailTemplateResolver() {
 		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 		templateResolver.setTemplateMode(TemplateMode.HTML);

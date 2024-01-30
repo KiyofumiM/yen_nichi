@@ -1,8 +1,6 @@
 package com.tie.yennichi.controller;
 
-import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -10,11 +8,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,11 +17,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tie.yennichi.entity.GoodBoard;
 import com.tie.yennichi.entity.UserInf;
-import com.tie.yennichi.form.BoardForm;
 import com.tie.yennichi.repository.GoodBoardRepository;
 
+/**
+* 掲示板で投稿された内容に対する「いいね！」に関係するcontroller群
+*/
 @Controller
-public class GoodBoardsController {
+public class GoodsBoardController {
 	@Autowired
     private MessageSource messageSource;
 
@@ -36,6 +33,12 @@ public class GoodBoardsController {
     @Autowired
     private BoardsController boarsController;
 
+	/**
+	 * 投稿内容に対して「いいね！」をする
+	 * @param  Principal, board_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_board", method = RequestMethod.POST)
     public String create(Principal principal, @RequestParam("board_id") long boardId, RedirectAttributes redirAttrs,
             Locale locale) {
@@ -57,6 +60,12 @@ public class GoodBoardsController {
         return "redirect:/board";
     }
 
+	/**
+	 * 投稿内容に対して「いいね！」をやめる
+	 * @param  Principal, board_id, RedirectAttributes, Locale
+	 * @return redirect:/learning
+	 * @throws なし
+	 */
     @RequestMapping(value = "/good_board", method = RequestMethod.DELETE)
     @Transactional
     public String destroy(Principal principal, @RequestParam("board_id") long boardId, RedirectAttributes redirAttrs,

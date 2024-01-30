@@ -16,6 +16,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * イベント情報に対するコメントを表すエンティティクラス。
+ * comment_eventテーブルと対応
+ */
 @Entity
 @Table(name = "comment_event")
 @Data
@@ -33,6 +37,7 @@ public class CommentEvent extends AbstractEntity implements Serializable {
 	@Column(nullable = false)
     private Long userId;
 	
+	// ユーザ情報と紐づけ
 	@ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
@@ -43,8 +48,8 @@ public class CommentEvent extends AbstractEntity implements Serializable {
 	@Column(nullable = false, length = 1000)
 	private String description;
 	
-	
+	// コメントに対する「いいね！」と紐づけ
 	@OneToMany
 	@JoinColumn(name = "commentEventId", insertable = false, updatable = false)
-	private List<GoodCommentEvent> goodComments;
+	private List<GoodCommentEvent> goodCommentList;
 }

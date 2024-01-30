@@ -16,6 +16,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 掲示板に投稿された内容に対するコメント情報を表すエンティティクラス。
+ * comment_boardテーブルと対応
+ */
 @Entity
 @Table(name = "comment_board")
 @Data
@@ -33,6 +37,7 @@ public class CommentBoard extends AbstractEntity implements Serializable {
 	@Column(nullable = false)
     private Long userId;
 	
+	// ユーザ情報と紐づけ
 	@ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
@@ -43,8 +48,8 @@ public class CommentBoard extends AbstractEntity implements Serializable {
 	@Column(nullable = false, length = 1000)
 	private String description;
 	
-	
+	// 投稿したコメントに対する「いいね！」と紐づけ
 	@OneToMany
 	@JoinColumn(name = "commentBoardId", insertable = false, updatable = false)
-	private List<GoodCommentBoard> goodComments;
+	private List<GoodCommentBoard> goodCommentList;
 }

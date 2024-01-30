@@ -17,6 +17,9 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import com.tie.yennichi.filter.FormAuthenticationProvider;
 import com.tie.yennichi.repository.UserRepository;
 
+/**
+* Spring Securityの設定を定義するためのクラス
+*/
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -47,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-        http.authorizeRequests().antMatchers("/login", "/logout-complete", "/users/new", "/user").permitAll()
+        http.authorizeRequests().antMatchers("/", "/login", "/logout-complete", "/users/new", "/user", "/information/logging_out").permitAll()
                 .anyRequest().authenticated()
                 // ログアウト処理
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-complete").clearAuthentication(true)

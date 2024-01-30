@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.tie.yennichi.entity.FavoriteLearning;
 
+/**
+ * FavoriteLearningエンティティの永続化と取得を行うリポジトリクラス。
+ * データベースアクセスと対応しています。
+ */
 @Repository
 public interface FavoriteLearningRepository extends JpaRepository<FavoriteLearning, Long> {
 
