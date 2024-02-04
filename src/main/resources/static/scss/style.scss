@@ -28,9 +28,11 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 }
+
 .error-message {
   color: #c9171e;
 }
+
 .error-field {
   background-color: rgba(255,192,203,0.5);
 }
@@ -48,6 +50,7 @@ nav.navbar {
     height: 50px;
   }
 }
+
 .navbar-light .navbar-toggler {
   color: #1e50a2;
   border-color: #1e50a2;
@@ -85,13 +88,13 @@ nav.navbar {
 
 .users-new-wrapper {
   width: 100vw;
-  height: 100vh;
+  min-height: 100%;
   background-image: url('/images/TokyoSkiTree.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-
+  background-color: #fafafa;
   background-color: #a0d8ef;
   main {
     padding-top: 80px;
@@ -100,14 +103,13 @@ nav.navbar {
 
 .contents-index-wrapper {
   width: 100vw;
-  height: 100vh;
+  min-height: 100%;
   background-image: url('/images/cherryblossom.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   background-color: #fef4f4;
-  
   .container {
     padding-top: 80px;
     h2 {
@@ -172,6 +174,7 @@ nav.navbar {
     }
   }
 }
+
 .learning-new-wrapper{
   padding-top: 80px;
   background-image: url('/images/maple.png'); 
@@ -186,6 +189,7 @@ nav.navbar {
     height: 100px;
   }
 }
+
 .learning-index-wrapper {
   padding: 80px 0 20px;
   background-image: url('/images/maple.png');
@@ -288,6 +292,7 @@ nav.navbar {
     height: 140px;
   }
 }
+
 .events-index-wrapper {
   padding: 80px 0 20px;
   background-image: url('/images/KiyomizuTemple.png');
@@ -375,6 +380,7 @@ nav.navbar {
 	}
   }
 }
+
 .fc-direction-ltr {
   padding-top: 40px;
 }
@@ -382,6 +388,7 @@ nav.navbar {
   background-color: #007bbb;
   border-color: #007bbb;
 }
+
 #calendar {
   color: #9E202E;
   text-decoration: none;
@@ -392,11 +399,13 @@ nav.navbar {
   font-weight: 800;
   }
 }
+
 #calendar a {
   color: #1e50a2;
   font-size: 20px;
   text-decoration: none;
 }
+
 #calendar-back {
   background-image: url('/images/KiyomizuTemple.png');
   background-position: center;
@@ -493,6 +502,7 @@ nav.navbar {
 	  color: #164a84;
   }
 }
+
 .board-new-wrapper{
   padding-top: 80px;
   background-image: url('/images/Bomboo.png'); 
@@ -502,5 +512,57 @@ nav.navbar {
   overflow: hidden;
   #description {
     height: 100px;
+  }
+}
+
+.information-index-wrapper {
+  padding: 80px 0 20px;
+  background-image: url('/images/cherryblossom.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fafafa;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  main {
+    background-color: rgba(255,249,249,0.4);
+    padding: 20px 0;
+    margin-top: 30px;
+    border: 1px solid #e6ecf0;
+    border-radius: 6px;
+    .imagePC {
+      margin: 10px 0;
+      width: 95%;
+    }
+    .imageSM {
+      margin: 10px 0;
+      width: 45%;
+    }
+    
+    h2 {
+      font-size: 36px;
+      color: #e83929;
+      font-weight: 900;
+      margin-bottom: 10px;
+      padding: 0 30px;
+    }
+    h3 {
+      color: #e83929;
+      font-weight: 700;
+      padding: 0 30px;
+    }
+    h5 {
+	  color: #164a84;
+	  padding: 0 40px;
+	  font-weight : bold;
+	}
+	.return {
+	  color: #164a84;
+	}
+	.description {
+      padding: 0 50px;
+      font-weight : bold;
+    }
   }
 }

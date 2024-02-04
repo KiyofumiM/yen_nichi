@@ -73,19 +73,20 @@ nav.navbar {
 
 .users-new-wrapper {
   width: 100vw;
-  height: 100vh;
+  min-height: 100%;
   background-image: url("/images/TokyoSkiTree.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  background-color: #fafafa;
   background-color: #a0d8ef; }
   .users-new-wrapper main {
     padding-top: 80px; }
 
 .contents-index-wrapper {
   width: 100vw;
-  height: 100vh;
+  min-height: 100%;
   background-image: url("/images/cherryblossom.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -423,5 +424,47 @@ nav.navbar {
   overflow: hidden; }
   .board-new-wrapper #description {
     height: 100px; }
+
+.information-index-wrapper {
+  padding: 80px 0 20px;
+  background-image: url("/images/cherryblossom.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fafafa;
+  min-height: calc(100vh - 180px);
+  overflow: hidden; }
+  .information-index-wrapper main {
+    background-color: rgba(255, 249, 249, 0.4);
+    padding: 20px 0;
+    margin-top: 30px;
+    border: 1px solid #e6ecf0;
+    border-radius: 6px; }
+    .information-index-wrapper main .imagePC {
+      margin: 10px 0;
+      width: 95%; }
+    .information-index-wrapper main .imageSM {
+      margin: 10px 0;
+      width: 45%; }
+    .information-index-wrapper main h2 {
+      font-size: 36px;
+      color: #e83929;
+      font-weight: 900;
+      margin-bottom: 10px;
+      padding: 0 30px; }
+    .information-index-wrapper main h3 {
+      color: #e83929;
+      font-weight: 700;
+      padding: 0 30px; }
+    .information-index-wrapper main h5 {
+      color: #164a84;
+      padding: 0 40px;
+      font-weight: bold; }
+    .information-index-wrapper main .return {
+      color: #164a84; }
+    .information-index-wrapper main .description {
+      padding: 0 50px;
+      font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */

@@ -62,7 +62,7 @@ public class UsersController {
 	/**
 	* ユーザ情報登録処理
 	* @param  form : UserForm、BindingResult、Model,　locale
-	* @return layouts/complete
+	* @return pages/index
 	* @throws なし
 	*/
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
@@ -91,7 +91,7 @@ public class UsersController {
 		model.addAttribute("hasMessage", true);
 		model.addAttribute("class", "alert-info");
 		model.addAttribute("message", messageSource.getMessage("users.create.flash.2", new String[] {}, locale));
-		return "layouts/complete";
+		return "redirect:/";
 	}
 
 	/**

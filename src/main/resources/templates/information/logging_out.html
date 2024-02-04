@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout2}">
+
+<head>
+	<title>Yen Nichi Information</title>
+	<script th:src="@{/scripts/message.js}" defer></script>
+</head>
+
+<body>
+	<div class="information-index-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="col-md-6 mx-auto">
+				<main>
+					<!-- コンテンツ一覧 -->
+					<h2 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list}"></h2>
+
+					<br>
+
+					<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.list}"></h3>
+					<a href="#PhotoPC">
+						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.pc}"></h5>
+					</a>
+
+					<a href="#PhotoSmartPhone">
+						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.smartPhone}"></h5>
+					</a>
+					<br>
+
+					<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.list}"></h3>
+					<a href="#MovieIndex">
+						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.index}"></h5>
+					</a>
+
+					<a href="#MovieSession">
+						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.session}"></h5>
+					</a>
+
+					<a href="#MovieLanguage">
+						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.language}"></h5>
+					</a>
+
+					<!-- JavaScriptスクリプト -->
+					<script>
+						function closeWindow() {
+							window.close();
+						}
+					</script>
+					<!-- 閉じるボタンを追加 -->
+					<div class="col-md-11" align="right">
+						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
+								一覧に戻る
+							</h6>
+						</<button>
+					</div>
+				</main>
+
+				<br>
+
+				<main>
+					<!-- 画像 -->
+					<h2 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.list}"></h2>
+
+					<!-- PC画面 -->
+					<a name="PhotoPC">
+						<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.pc}"></h3>
+					</a>
+					<div align="center">
+						<img src="/images/information/logging_out_PC.png" class="imagePC">
+					</div>
+
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.1}"></h5>
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.2}"></h5>
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.3}"></h5>
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.4}"></h5>
+
+					<!-- 一覧に戻るボタン -->
+					<div class="col-md-11" align="right">
+						<a class="btn w-55 btn-outline-light btn-sm" href="#">
+							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
+								一覧に戻る
+							</h6>
+						</a>
+						
+						<span>&nbsp;</span>
+
+						<!-- JavaScriptスクリプト -->
+						<script>
+							function closeWindow() {
+								window.close();
+							}
+						</script>
+						<!-- 閉じるボタンを追加 -->
+						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
+								一覧に戻る
+							</h6>
+						</<button>
+					</div>
+
+					<br><br>
+
+					<!-- スマートフォン画面 -->
+					<a name="PhotoSmartPhone">
+						<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.smartPhone}"></h3>
+					</a>
+					<div align="center">
+						<img src="/images/information/logging_out_smartphone.png" class="imageSM">
+						<span>&nbsp;</span><span>&nbsp;</span>
+						<img src="/images/information/logging_out_smartphone_menu.png" class="imageSM">
+					</div>
+
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.1}"></h5>
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.2}"></h5>
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.3}"></h5>
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.4}"></h5>
+
+					<!-- 一覧に戻るボタン -->
+					<div class="col-md-11" align="right">
+						<a class="btn w-55 btn-outline-light btn-sm" href="#">
+							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
+								一覧に戻る
+							</h6>
+						</a>
+						
+						<span>&nbsp;</span>
+
+						<!-- JavaScriptスクリプト -->
+						<script>
+							function closeWindow() {
+								window.close();
+							}
+						</script>
+						<!-- 閉じるボタンを追加 -->
+						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
+								一覧に戻る
+							</h6>
+						</<button>
+					</div>
+				</main>
+				<br>
+
+				<main>
+					<!-- 動画 -->
+					<h2 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.list}"></h2>
+
+					<!-- 縁日とは -->
+					<a name="MovieIndex">
+						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.index}"></h5>
+					</a>
+					<div align="center">
+						<iframe width="95%" height="95%"
+							src="https://www.youtube.com/embed/G0d7S64Af-0?si=h9E1lGfJfZBVGRwt"
+							title="YouTube video player" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen>
+						</iframe>
+					</div>
+
+					<!-- 一覧に戻るボタン -->
+					<div class="col-md-11" align="right">
+						<a class="btn w-55 btn-outline-light btn-sm" href="#">
+							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
+								一覧に戻る
+							</h6>
+						</a>
+						
+						<span>&nbsp;</span>
+
+						<!-- JavaScriptスクリプト -->
+						<script>
+							function closeWindow() {
+								window.close();
+							}
+						</script>
+						<!-- 閉じるボタンを追加 -->
+						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
+								一覧に戻る
+							</h6>
+						</<button>
+					</div>
+					<br>
+
+					<!-- ユーザ情報新規登録、ログイン、ログアウト -->
+					<a name="MovieSession">
+						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.session}"></h5>
+					</a>
+					<div align="center">
+						<iframe width="95%" height="95%"
+							src="https://www.youtube.com/embed/P6z25avX7FY?si=roOBWLHO_1GnzZWL"
+							title="YouTube video player" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen>
+						</iframe>
+					</div>
+
+					<!-- 一覧に戻るボタン -->
+					<div class="col-md-11" align="right">
+						<a class="btn w-55 btn-outline-light btn-sm" href="#">
+							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
+								一覧に戻る
+							</h6>
+						</a>
+
+						<span>&nbsp;</span>
+
+						<!-- JavaScriptスクリプト -->
+						<script>
+							function closeWindow() {
+								window.close();
+							}
+						</script>
+						<!-- 閉じるボタンを追加 -->
+						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
+								一覧に戻る
+							</h6>
+						</<button>
+					</div>
+
+					<br>
+
+					<!-- 言語の切り替え -->
+					<a name="MovieLanguage">
+						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.language}"></h5>
+					</a>
+					<div align="center">
+						<iframe width="95%" height="95%"
+							src="https://www.youtube.com/embed/hAG5YJEJtzM?si=7G20I37mVv01Fr5Q"
+							title="YouTube video player" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen>
+						</iframe>
+					</div>
+
+					<!-- 一覧に戻るボタン -->
+					<div class="col-md-11" align="right">
+						<a class="btn w-55 btn-outline-light btn-sm" href="#">
+							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
+								一覧に戻る
+							</h6>
+						</a>
+
+						<span>&nbsp;</span>
+
+						<!-- JavaScriptスクリプト -->
+						<script>
+							function closeWindow() {
+								window.close();
+							}
+						</script>
+						<!-- 閉じるボタンを追加 -->
+						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
+								一覧に戻る
+							</h6>
+						</<button>
+					</div>
+				</main>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

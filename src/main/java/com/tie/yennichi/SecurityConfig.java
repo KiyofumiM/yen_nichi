@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-        http.authorizeRequests().antMatchers("/", "/login", "/logout-complete", "/users/new", "/user", "/information/logging_out").permitAll()
+        http.authorizeRequests().antMatchers("/", "/login", "/logout-complete", "/users/new", "/user", "/information/logging_out", "/information/logging_in").permitAll()
                 .anyRequest().authenticated()
                 // ログアウト処理
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-complete").clearAuthentication(true)

@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.tie.yennichi.entity.CommentBoard;
+import com.tie.yennichi.entity.CommentLearning;
 
 /**
  * CommentBoardエンティティの永続化と取得を行うリポジトリクラス。
