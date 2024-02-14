@@ -16,7 +16,7 @@ public class InformationsController {
 	*/
     @RequestMapping("/information/logging_out")
     public String index() {
-        return "/information/logging_out";
+        return "information/logging_out";
     }
     
 	/**
@@ -27,6 +27,6 @@ public class InformationsController {
 	*/
     @RequestMapping("/information/logging_in")
     public String content() {
-        return "/information/logging_in";
+        return "information/logging_in";
     }
 }

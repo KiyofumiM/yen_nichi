@@ -40,7 +40,7 @@ public class ViewEventsController {
             	ViewEventFrom event = new ViewEventFrom();
                 event.setTitle(entity.getTitle());
                 event.setStart(entity.getEvent_at());
-                event.setUrl("/events#" + entity.getId());
+                event.setUrl("../events#" + entity.getId());
                 form.add(event);
             }
             ObjectMapper mapper = new ObjectMapper();

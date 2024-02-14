@@ -1,4 +1,4 @@
-package com.tie_japanese.yen_nichi;
+package com.tie.yennichi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

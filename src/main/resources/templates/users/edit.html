@@ -16,35 +16,47 @@
 					<form method="post" th:action="@{/user/edit}" th:object="${form}">
 						<div layout:replace="~{layouts/common::messages}"></div>
 						<div class="mb-3">
-							<label class="form-label text-white" for="user_name" th:text="#{users.new.name}">Name</label>
+							<label class="form-label text-white" for="user_name"
+								th:text="#{users.new.name}">Name</label>
 							<input type="text" class="form-control" th:field="*{name}" />
 							<p th:if="${#fields.hasErrors('name')}" class="error-message" th:errors="*{name}"></p>
 						</div>
 						<div class="mb-3">
-							<label class="form-label text-white" for="user_email" th:text="#{users.new.email}">Email</label>
-							<input type="text" class="form-control" th:field="*{email}" th:placeholder="#{users.new.email.placeholder}"  />
+							<label class="form-label text-white" for="user_email"
+								th:text="#{users.new.email}">Email</label>
+							<input type="text" class="form-control" th:field="*{email}"
+								th:placeholder="#{users.new.email.placeholder}" />
 							<p th:if="${#fields.hasErrors('email')}" class="error-message" th:errors="*{email}"></p>
 						</div>
 						<div class="mb-3">
-							<label class="form-label text-white" for="user_password" th:text="#{users.new.password}">Password</label>
-							<input class="form-control" type="password" th:field="*{password}" th:placeholder="#{users.new.password.placeholder}" />
+							<label class="form-label text-white" for="user_password"
+								th:text="#{users.new.password}">Password</label>
+							<input class="form-control" type="password" th:field="*{password}"
+								th:placeholder="#{users.new.password.placeholder}" />
 							<p th:if="${#fields.hasErrors('password')}" class="error-message" th:errors="*{password}">
 							</p>
 						</div>
 						<div class="mb-3">
-							<label class="form-label text-white" for="user_password_confirmation" th:text="#{users.new.password_confirmation}">Password　confirmation</label>
-							<input type="password" class="form-control" th:field="*{passwordConfirmation}" th:placeholder="#{users.new.password.placeholder}" />
+							<label class="form-label text-white" for="user_password_confirmation"
+								th:text="#{users.new.password_confirmation}">Password　confirmation</label>
+							<input type="password" class="form-control" th:field="*{passwordConfirmation}"
+								th:placeholder="#{users.new.password.placeholder}" />
 							<p th:if="${#fields.hasErrors('passwordConfirmation')}" class="error-message"
 								th:errors="*{passwordConfirmation}"></p>
 						</div>
 
 						<br>
 
-						<input type="submit" value="更新" class="btn w-100 btn-outline-success btn-lg" th:value="#{users.edit.submit}"/>
+						<input type="submit" value="更新" class="btn w-100 btn-outline-success btn-lg"
+							th:value="#{users.edit.submit}" />
 					</form>
 				</main>
 			</div>
-			<br><br>
+			<!-- 画面の調節用 -->
+			<br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br><br>
+			<br><br><br>
 		</div>
 
 	</div>

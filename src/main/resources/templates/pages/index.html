@@ -15,16 +15,16 @@
     <div class="d-none d-lg-block d-xl-block d-xxl-block">
     <div class="row justify-content-center">
       <div class="col-3">
-        <a class="btn w-100 btn-outline-success btn-lg" href="/users/new" th:text="#{pages.index.signup}">Sign up</a>
+        <a class="btn w-100 btn-outline-success btn-lg" th:href="@{users/new}" th:text="#{pages.index.signup}">Sign up</a>
       </div>
       <div class="col-3">
-        <a class="btn w-100 btn-outline-success btn-lg" href="/login" th:text="#{pages.index.login}">Log in</a>
+        <a class="btn w-100 btn-outline-success btn-lg" th:href="@{login}" th:text="#{pages.index.login}">Log in</a>
       </div>
     </div>
     </div>
     <div class="d-block d-lg-none d-xl-none d-xxl-none">
-      <a class="btn w-100 btn-outline-success btn-lg mb-3" href="/users/new" th:text="#{pages.index.signup}">Sign up</a>
-      <a class="btn w-100 btn-outline-success btn-lg mb-3" href="/login" th:text="#{pages.index.login}">Log in</a>
+      <a class="btn w-100 btn-outline-success btn-lg mb-3" th:href="@{users/new}" th:text="#{pages.index.signup}">Sign up</a>
+      <a class="btn w-100 btn-outline-success btn-lg mb-3" th:href="@{login}" th:text="#{pages.index.login}">Log in</a>
     </div>
   </div>
 </div>

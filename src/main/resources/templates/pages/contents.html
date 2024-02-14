@@ -25,7 +25,7 @@
 
 			<br>
 
-			<a class="btn w-55 btn-outline-light" href="/learning/list">
+			<a class="btn w-55 btn-outline-light" th:href="@{learning/list}">
 				<img src="/images/icons/go_top.png" th:src="@{/images/icons/learning.png}">
 				<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{contents.learning}">
 					言葉を広げる
@@ -34,7 +34,7 @@
 
 			<span>&nbsp;</span>
 
-			<a class="btn w-55 btn-outline-light" href="/calendar/events">
+			<a class="btn w-55 btn-outline-light" th:href="@{calendar/events}">
 				<img src="/images/icons/go_top.png" th:src="@{/images/icons/calendar.png}">
 				<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{contents.event}">
 					イベントの共有
@@ -43,7 +43,7 @@
 
 			<span>&nbsp;</span>
 
-			<a class="btn w-55 btn-outline-light" href="/board">
+			<a class="btn w-55 btn-outline-light" th:href="@{board}">
 				<img src="/images/icons/go_top.png" th:src="@{/images/icons/board.png}">
 				<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{contents.board}">
 					掲示板

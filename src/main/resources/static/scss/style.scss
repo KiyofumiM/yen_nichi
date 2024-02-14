@@ -1,6 +1,9 @@
 h1, h2, h3, h4, h5, h6 {
   font-weight: 100;
 }
+h6 {
+	margin-bottom: 0px;
+}
 .p-form-top {
     height: 120px;
 }
@@ -8,6 +11,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 45px;
 }
 
+// Adjust Alert
 .alert {
   margin-bottom: 0px;
   position: fixed;
@@ -15,6 +19,8 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 10000;
   height: 60px;
 }
+
+// Adjust Messages
 #messages {
   ul{
     background: rgba(255, 255, 255, 0.2);
@@ -37,6 +43,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgba(255,192,203,0.5);
 }
 
+// Adjust Navber
 nav.navbar {
   background-color: rgba(253,239,242,0.6);
   border-color:#0095d9;
@@ -60,10 +67,11 @@ nav.navbar {
   filter: invert(24%) sepia(21%) saturate(5480%) hue-rotate(202deg) brightness(95%) contrast(91%);
 }
 
+// Set home page
 .pages-index-wrapper {
   width: 100vw;
   height: 100vh;
-  background-image: url('/images/Asakusa.png');
+  background-image: url('../images/Asakusa.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -86,10 +94,11 @@ nav.navbar {
   }
 }
 
+// Set users new, users edit and log in
 .users-new-wrapper {
   width: 100vw;
   min-height: 100%;
-  background-image: url('/images/TokyoSkiTree.png');
+  background-image: url('../images/TokyoSkiTree.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -101,10 +110,11 @@ nav.navbar {
   }
 }
 
+// Set contents
 .contents-index-wrapper {
   width: 100vw;
   min-height: 100%;
-  background-image: url('/images/cherryblossom.png');
+  background-image: url('../images/cherryblossom.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -129,9 +139,10 @@ nav.navbar {
   }
 }
 
+// Set learning list ( learning top page)
 .learning-list-wrapper {
   padding: 80px 0 20px;
-  background-image: url('/images/maple.png');
+  background-image: url('../images/maple.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -175,9 +186,10 @@ nav.navbar {
   }
 }
 
+// Set learning new, learning edit and comment learning
 .learning-new-wrapper{
   padding-top: 80px;
-  background-image: url('/images/maple.png'); 
+  background-image: url('../images/maple.png'); 
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -190,9 +202,10 @@ nav.navbar {
   }
 }
 
+// Set learning description and favorite learning
 .learning-index-wrapper {
   padding: 80px 0 20px;
-  background-image: url('/images/maple.png');
+  background-image: url('../images/maple.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -278,9 +291,10 @@ nav.navbar {
   }
 }
 
+// Set event new, event edit and comment event
 .events-new-wrapper {
   padding-top: 80px;
-  background-image: url('/images/KiyomizuTemple.png');
+  background-image: url('../images/KiyomizuTemple.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -293,9 +307,10 @@ nav.navbar {
   }
 }
 
+// Set event description and favorite event
 .events-index-wrapper {
   padding: 80px 0 20px;
-  background-image: url('/images/KiyomizuTemple.png');
+  background-image: url('../images/KiyomizuTemple.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -381,6 +396,7 @@ nav.navbar {
   }
 }
 
+// Use event calender
 .fc-direction-ltr {
   padding-top: 40px;
 }
@@ -389,6 +405,7 @@ nav.navbar {
   border-color: #007bbb;
 }
 
+// Set event calender
 #calendar {
   color: #9E202E;
   text-decoration: none;
@@ -407,7 +424,7 @@ nav.navbar {
 }
 
 #calendar-back {
-  background-image: url('/images/KiyomizuTemple.png');
+  background-image: url('../images/KiyomizuTemple.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -418,9 +435,10 @@ nav.navbar {
   padding-bottom: 30px;
 }
 
+// Set bulletin board description
 .board-index-wrapper {
   padding: 80px 0 20px;
-  background-image: url('/images/Bomboo.png');
+  background-image: url('../images/Bomboo.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -503,21 +521,26 @@ nav.navbar {
   }
 }
 
+// Set bulletin board new, bulletin board edit and comment bulletin board
 .board-new-wrapper{
   padding-top: 80px;
-  background-image: url('/images/Bomboo.png'); 
-  background-color: #fafafa;
+  background-image: url('../images/Bomboo.png'); 
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
+  background-color: #a0d8ef;
   min-height: calc(100vh - 180px);
   overflow: hidden;
   #description {
-    height: 100px;
+    height: 140px;
   }
 }
 
+// Set how to use Yen Nichi
 .information-index-wrapper {
   padding: 80px 0 20px;
-  background-image: url('/images/cherryblossom.png');
+  background-image: url('../images/cherryblossom.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -557,12 +580,12 @@ nav.navbar {
 	  padding: 0 40px;
 	  font-weight : bold;
 	}
-	.return {
-	  color: #164a84;
-	}
 	.description {
       padding: 0 50px;
       font-weight : bold;
+    }
+    .btn-outline-primary {
+      border-color: #164a84;
     }
   }
 }

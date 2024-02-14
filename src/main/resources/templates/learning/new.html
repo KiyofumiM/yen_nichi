@@ -19,23 +19,26 @@
 						<div layout:replace="~{layouts/common::messages}"></div>
 						<input type="hidden" th:field="*{id}" />
 						<div class="mb-3">
-							<label class="form-label text-black" for="topic_image" th:text="#{learning.new.image}">画像</label>
+							<label class="form-label text-black" for="topic_image"
+								th:text="#{learning.new.image}">画像</label>
 							<input type="file" class="form-control-file" th:field="*{image}" />
 							<p th:if="${#fields.hasErrors('image')}" class="error-message" th:errors="*{image}"></p>
 						</div>
 						<div class="mb-3">
 							<h3>
-								<label class="form-label text-black" for="learning_title" th:text="#{learning.new.words}">言葉</label>
+								<label class="form-label text-black" for="learning_title"
+									th:text="#{learning.new.words}">言葉</label>
 							</h3>
 							<textarea class="form-control" th:field="*{title}" rows="10"
 								th:errorclass="error-field"></textarea>
 							<p th:if="${#fields.hasErrors('description')}" class="error-message"
 								th:errors="*{description}"></p>
-							
+
 							<br><br>
-							
+
 							<div class="mb-3">
-								<label class="form-label text-black" for="event_description" th:text="#{learning.new.description}">説明</label>
+								<label class="form-label text-black" for="event_description"
+									th:text="#{learning.new.description}">説明</label>
 								<textarea class="form-control" th:field="*{description}" rows="10"
 									th:errorclass="error-field"></textarea>
 								<p th:if="${#fields.hasErrors('description')}" class="error-message"
@@ -44,14 +47,17 @@
 
 							<br>
 							<br>
-							<input type="submit" value="投稿" class="btn w-100 btn-outline-primary btn-lg" th:value="#{topics.new.submit}"/>
+							<input type="submit" value="投稿" class="btn w-100 btn-outline-primary btn-lg"
+								th:value="#{topics.new.submit}" />
+								
 					</form>
 				</div>
+				
+				<!-- 背景画像調節用 -->
+				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			</div>
 		</div>
-		<br>
-		<br>
-		<br>
+
 	</div>
 </body>
 

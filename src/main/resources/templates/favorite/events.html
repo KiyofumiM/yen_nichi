@@ -55,7 +55,9 @@
 
 						<!-- コメント表示 -->
 						<div class="comments">
-							<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
+							<div th:if="${#lists.size(event.getValidComments())}" !=null>
+								<h4 class="text-center" th:text="#{topics.index.comment}">コメント</h4>
+							</div>
 							<div th:each="comment : ${event.getValidComments()}">
 								<div class="comment">
 									<h4 class="author" th:text="${comment.user.name}"></h4>

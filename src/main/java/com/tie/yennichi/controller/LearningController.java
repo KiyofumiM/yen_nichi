@@ -248,10 +248,13 @@ public class LearningController {
 			return "learning/new";
 		}
 
+		/*
 		boolean isImageLocal = false;
 		if (imageLocal != null) {
 			isImageLocal = new Boolean(imageLocal);
 		}
+		*/
+		boolean isImageLocal = true;
 
 		Learning entity = new Learning();
 		Authentication authentication = (Authentication) principal;

@@ -23,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tie.yennichi.entity.UserInf;
 import com.tie.yennichi.entity.CommentEvent;
-import com.tie.yennichi.entity.CommentLearning;
 import com.tie.yennichi.form.CommentEventForm;
 import com.tie.yennichi.repository.CommentEventRepository;
 

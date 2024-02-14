@@ -13,46 +13,49 @@
 			<div class="col-md-6 mx-auto">
 				<main>
 					<!-- コンテンツ一覧 -->
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in}"></h5>
 					<h2 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list}"></h2>
-
+					
 					<br>
 
 					<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.list}"></h3>
 
-					<a href="#PhotoPC">
+					<a href="#photo_pc">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.pc}"></h5>
 					</a>
 
-					<a href="#PhotoSmartPhone">
+					<a href="#photo_smartphone">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.smartPhone}"></h5>
 					</a>
 					<br>
 
 					<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.list}"></h3>
 
-					<a href="#MovieUsers">
+					<a href="#movie_users">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.users}"></h5>
 					</a>
 
-					<a href="#MovieLearning">
+					<a href="#movie_learning">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.learning}"></h5>
 					</a>
 
-					<a href="#MovieEvent">
+					<a href="#movie_event">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.event}"></h5>
 					</a>
 
-					<a href="#MovieBoard">
+					<a href="#movie_board">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.board}"></h5>
 					</a>
 
-					<a href="#MovieAsk">
+					<a href="#movie_ask">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.ask}"></h5>
 					</a>
 
-					<a href="#MovieLanguage">
+					<a href="#movie_language">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.language}"></h5>
 					</a>
+										
+					<br>
 					
 					<!-- JavaScriptスクリプト -->
 					<script>
@@ -64,7 +67,6 @@
 					<div class="col-md-11" align="right">
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
 						</<button>
 					</div>
@@ -75,11 +77,12 @@
 					<h2 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.list}"></h2>
 
 					<!-- PC画面の説明 -->
-					<a name="PhotoPC">
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in}"></h5>
+					<a name="photo_pc">
 						<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.pc}"></h3>
 					</a>
 					<div align="center">
-						<img src="/images/information/logging_in_PC.png" class="imagePC">
+						<img src="/images/information/logging_in_PC.png" th:src="@{/images/information/logging_in_PC.png}" class="imagePC">
 					</div>
 
 					<h5 class="description" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in.1}"></h5>
@@ -93,11 +96,13 @@
 					<h5 class="description" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in.9}"></h5>
 					<h5 class="description" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in.10}"></h5>
 					<h5 class="description" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in.11}"></h5>
-
+					
+					<br>
+					
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 								一覧に戻る
 							</h6>
 						</a>
@@ -121,13 +126,14 @@
 					<br><br>
 
 					<!-- スマートフォン画面の説明 -->
-					<a name="PhotoSmartPhone">
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in}"></h5>
+					<a name="photo_smartphone">
 						<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.smartPhone}"></h3>
 					</a>
 					<div align="center">
-						<img src="/images/information/logging_in_smartphone.png" class="imageSM">
+						<img src="/images/information/logging_in_smartphone.png" th:src="@{/images/information/logging_in_smartphone.png}" class="imageSM">
 						<span>&nbsp;</span><span>&nbsp;</span>
-						<img src="/images/information/logging_in_smartphone_menu.png" class="imageSM">
+						<img src="../images/information/logging_in_smartphone_menu.png" th:src="@{/images/information/logging_in_smartphone_menu.png}" class="imageSM">
 					</div>
 
 					<h5 class="description" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in.1}"></h5>
@@ -142,10 +148,12 @@
 					<h5 class="description" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in.10}"></h5>
 					<h5 class="description" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.in.11}"></h5>
 
+					<br>
+					
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 								一覧に戻る
 							</h6>
 						</a>
@@ -163,7 +171,7 @@
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
 								一覧に戻る
 							</h6>
-						</<button>
+						</br<button>
 					</div>
 				</main>
 
@@ -172,7 +180,7 @@
 					<h2 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.list}"></h2>
 
 					<!-- ユーザ情報更新 -->
-					<a name="MovieUsers">
+					<a name="movie_users">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.users}"></h5>
 					</a>
 
@@ -187,8 +195,8 @@
 
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 								一覧に戻る
 							</h6>
 						</a>
@@ -212,7 +220,7 @@
 					<br>
 
 					<!-- 言葉を広げる -->
-					<a name="MovieLearning">
+					<a name="movie_learning">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.learning}"></h5>
 					</a>
 
@@ -227,9 +235,8 @@
 
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
-								一覧に戻る
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 							</h6>
 						</a>
 						
@@ -244,14 +251,14 @@
 						<!-- 閉じるボタンを追加 -->
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
 						</<button>
 					</div>
+					
 					<br>
 
 					<!-- イベントの共有 -->
-					<a name="MovieEvent">
+					<a name="movie_event">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.event}"></h5>
 					</a>
 
@@ -266,9 +273,8 @@
 
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
-								一覧に戻る
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 							</h6>
 						</a>
 						
@@ -283,14 +289,14 @@
 						<!-- 閉じるボタンを追加 -->
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
 						</<button>
 					</div>
+					
 					<br>
 
 					<!-- 掲示板 -->
-					<a name="MovieBoard">
+					<a name="movie_board">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.board}"></h5>
 					</a>
 
@@ -305,9 +311,8 @@
 
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
-								一覧に戻る
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 							</h6>
 						</a>
 						
@@ -322,14 +327,14 @@
 						<!-- 閉じるボタンを追加 -->
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
 						</<button>
 					</div>
+					
 					<br>
 
 					<!-- お問い合わせ -->
-					<a name="MovieAsk">
+					<a name="movie_ask">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.ask}"></h5>
 					</a>
 
@@ -341,12 +346,11 @@
 							allowfullscreen>
 						</iframe>
 					</div>
-					
+
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
-								一覧に戻る
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 							</h6>
 						</a>
 						
@@ -361,14 +365,14 @@
 						<!-- 閉じるボタンを追加 -->
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
 						</<button>
 					</div>
+					
 					<br>
 
 					<!-- 言語の切り替え -->
-					<a name="MovieLanguage">
+					<a name="movie_language">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.language}"></h5>
 					</a>
 
@@ -380,11 +384,11 @@
 							allowfullscreen>
 						</iframe>
 					</div>
-
+					
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 								一覧に戻る
 							</h6>
 						</a>

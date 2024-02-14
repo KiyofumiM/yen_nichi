@@ -15,7 +15,7 @@
 	<div layout:fragment="contents" id='calendar-back'>
 		<div class="col-md-11" align="right">
 			<!-- 新規投稿ボタン -->
-			<a class="btn w-55 btn-outline-light" href="/events/new">
+			<a class="btn w-55 btn-outline-light" th:href="@{/events/new}">
 				<img src="/images/icons/posting.png" th:src="@{/images/icons/posting.png}" class="icon">
 				<br>
 				<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84" th:text="#{topics.new.title}">
@@ -43,13 +43,17 @@
 						center: 'title',
 						right: 'today next,nextYear'
 					},
-					events: {url: '/view_events/all'}
+					events: {url: '../view_events/all'}
 				});
 				calendar.render();
 
 			});
 		</script>
+		
+		<!-- 背景画像調節用 -->
+		<br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
+	
 </body>
 
 </html>

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 /**
 * サーバーでの処理中のエラー発生時に、エラーメッセージを外部に表示しないためのクラス
 */
-// @ControllerAdvice
-// @Component
+@ControllerAdvice
+@Component
 public class GlobalControllerAdvice {
 
     @Autowired

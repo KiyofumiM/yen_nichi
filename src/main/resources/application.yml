@@ -10,8 +10,8 @@ spring:
   datasource:
    driver-class-name: org.postgresql.Driver
    url: jdbc:postgresql://localhost:5432/yennichi
-   username: ${psql.user}
-   password: ${psql.password}
+   username: ${portfolio.user}
+   password: ${portfolio.password}
    
   mail:
     default-encoding: UTF-8
@@ -29,3 +29,5 @@ spring:
   thymeleaf:
     check-template-location: false
 
+image:
+  local: true

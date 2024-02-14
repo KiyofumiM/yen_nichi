@@ -21,7 +21,7 @@
 
 						<!-- ホームにリンク -->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/contents">
+							<a class="btn w-55 btn-outline-light" th:href="@{/contents}">
 								<img src="/images/icons/go_top.png" th:src="@{/images/icons/go_top.png}">
 							</a>
 						</li>
@@ -34,11 +34,11 @@
 									<img src="/images/icons/learning" th:src="@{/images/icons/learning.png}">
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-									<li><a class="dropdown-item" href="/learning/list"
+									<li><a class="dropdown-item" th:href="@{/learning/list}"
 											th:text="#{contents.learning}">言葉を広げる</a></li>
-									<li><a class="dropdown-item" href="/calendar/events"
+									<li><a class="dropdown-item" th:href="@{/calendar/events}"
 											th:text="#{contents.event}">イベント共有</a></li>
-									<li><a class="dropdown-item" href="/board" th:text="#{contents.board}">掲示板</a></li>
+									<li><a class="dropdown-item" th:href="@{/board}" th:text="#{contents.board}">掲示板</a></li>
 								</ul>
 							</div>
 						</li>
@@ -51,9 +51,9 @@
 									<img src="/images/icons/heart_bar" th:src="@{/images/icons/heart_bar.png}">
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-									<li><a class="dropdown-item" href="/favorite_learning"
+									<li><a class="dropdown-item" th:href="@{/favorite_learning}"
 											th:text="#{contents.learning}">言葉を広げる</a></li>
-									<li><a class="dropdown-item" href="/favorite_event"
+									<li><a class="dropdown-item" th:href="@{/favorite_event}"
 											th:text="#{contents.event}">イベント共有</a></li>
 								</ul>
 							</div>
@@ -61,21 +61,21 @@
 
 						<!-- ユーザ設定にリンク -->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/user/edit">
+							<a class="btn w-55 btn-outline-light" th:href="@{/user/edit}">
 								<img src="/images/icons/setting.png" th:src="@{/images/icons/user2.png}">
 							</a>
 						</li>
 
 						<!-- 使い方にリンク -->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/information/logging_in" target="_blank">
+							<a class="btn w-55 btn-outline-light" th:href="@{/information/logging_in}" target="_blank">
 								<img src="/images/icons/question.png" th:src="@{/images/icons/question.png}">
 							</a>
 						</li>
 
 						<!-- 質問投稿にリンク -->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/contact/new" target="_blank">
+							<a class="btn w-55 btn-outline-light" th:href="@{/contact/new}" target="_blank">
 								<img src="/images/icons/ask.png" th:src="@{/images/icons/ask.png}">
 							</a>
 						</li>
@@ -92,21 +92,21 @@
 					<th:block sec:authorize="!isAuthenticated()">
 						<!-- 使い方にリンク -->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/information/logging_out" target="_blank">
+							<a class="btn w-55 btn-outline-light" th:href="@{/information/logging_out}" target="_blank">
 								<img src="/images/icons/question.png" th:src="@{/images/icons/question.png}">
 							</a>
 						</li>
 						
 						<!-- 新規登録 -->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/users/new">
+							<a class="btn w-55 btn-outline-light" th:href="@{/users/new}">
 								<img src="/images/icons/user.png" th:src="@{/images/icons/user.png}">
 							</a>
 						</li>
 
 						<!-- ログイン　-->
 						<li class="nav-item">
-							<a class="btn w-55 btn-outline-light" href="/login">
+							<a class="btn w-55 btn-outline-light" th:href="@{/login}">
 								<img src="/images/icons/login.png" th:src="@{/images/icons/login.png}">
 							</a>
 						</li>

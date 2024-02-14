@@ -13,33 +13,36 @@
 			<div class="col-md-6 mx-auto">
 				<main>
 					<!-- コンテンツ一覧 -->
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out}"></h5>
 					<h2 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list}"></h2>
-
+					
 					<br>
 
 					<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.list}"></h3>
-					<a href="#PhotoPC">
+					<a href="#photo_pc">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.pc}"></h5>
 					</a>
 
-					<a href="#PhotoSmartPhone">
+					<a href="#photo_smartphone">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.smartPhone}"></h5>
 					</a>
 					<br>
 
 					<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.list}"></h3>
-					<a href="#MovieIndex">
+					<a href="#movie_index">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.index}"></h5>
 					</a>
 
-					<a href="#MovieSession">
+					<a href="#movie_session">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.session}"></h5>
 					</a>
 
-					<a href="#MovieLanguage">
+					<a href="#movie_language">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.language}"></h5>
 					</a>
 
+					<br>
+					
 					<!-- JavaScriptスクリプト -->
 					<script>
 						function closeWindow() {
@@ -50,9 +53,8 @@
 					<div class="col-md-11" align="right">
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
-						</<button>
+							</<button>
 					</div>
 				</main>
 
@@ -63,11 +65,13 @@
 					<h2 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.list}"></h2>
 
 					<!-- PC画面 -->
-					<a name="PhotoPC">
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out}"></h5>
+					<a name="photo_pc">
 						<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.pc}"></h3>
 					</a>
 					<div align="center">
-						<img src="/images/information/logging_out_PC.png" class="imagePC">
+						<img src="/images/information/logging_out_PC.png"
+							th:src="@{/images/information/logging_out_PC.png}" class="imagePC">
 					</div>
 
 					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.1}"></h5>
@@ -75,14 +79,15 @@
 					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.3}"></h5>
 					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.4}"></h5>
 
+					<br>
+					
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
-								一覧に戻る
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 							</h6>
 						</a>
-						
+
 						<span>&nbsp;</span>
 
 						<!-- JavaScriptスクリプト -->
@@ -94,21 +99,23 @@
 						<!-- 閉じるボタンを追加 -->
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
-						</<button>
+							</<button>
 					</div>
 
 					<br><br>
 
 					<!-- スマートフォン画面 -->
-					<a name="PhotoSmartPhone">
+					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out}"></h5>
+					<a name="photo_smartphone">
 						<h3 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.smartPhone}"></h3>
 					</a>
 					<div align="center">
-						<img src="/images/information/logging_out_smartphone.png" class="imageSM">
+						<img src="/images/information/logging_out_smartphone.png"
+							th:src="@{/images/information/logging_out_smartphone.png}" class="imageSM">
 						<span>&nbsp;</span><span>&nbsp;</span>
-						<img src="/images/information/logging_out_smartphone_menu.png" class="imageSM">
+						<img src="/images/information/logging_out_smartphone_menu.png"
+							th:src="@{/images/information/logging_out_smartphone_menu.png}" class="imageSM">
 					</div>
 
 					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.1}"></h5>
@@ -116,14 +123,15 @@
 					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.3}"></h5>
 					<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.photo.out.4}"></h5>
 
+					<br>
+					
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
-								一覧に戻る
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 							</h6>
 						</a>
-						
+
 						<span>&nbsp;</span>
 
 						<!-- JavaScriptスクリプト -->
@@ -135,19 +143,17 @@
 						<!-- 閉じるボタンを追加 -->
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
-						</<button>
+							</<button>
 					</div>
 				</main>
-				<br>
 
 				<main>
 					<!-- 動画 -->
 					<h2 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.list}"></h2>
 
 					<!-- 縁日とは -->
-					<a name="MovieIndex">
+					<a name="movie_index">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.index}"></h5>
 					</a>
 					<div align="center">
@@ -161,12 +167,11 @@
 
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
 							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
-								一覧に戻る
 							</h6>
 						</a>
-						
+
 						<span>&nbsp;</span>
 
 						<!-- JavaScriptスクリプト -->
@@ -178,14 +183,13 @@
 						<!-- 閉じるボタンを追加 -->
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
-						</<button>
+							</<button>
 					</div>
 					<br>
 
 					<!-- ユーザ情報新規登録、ログイン、ログアウト -->
-					<a name="MovieSession">
+					<a name="movie_session">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.session}"></h5>
 					</a>
 					<div align="center">
@@ -199,9 +203,8 @@
 
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
-								一覧に戻る
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 							</h6>
 						</a>
 
@@ -216,15 +219,14 @@
 						<!-- 閉じるボタンを追加 -->
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
-						</<button>
+							</<button>
 					</div>
 
 					<br>
 
 					<!-- 言語の切り替え -->
-					<a name="MovieLanguage">
+					<a name="movie_language">
 						<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.movie.language}"></h5>
 					</a>
 					<div align="center">
@@ -238,9 +240,8 @@
 
 					<!-- 一覧に戻るボタン -->
 					<div class="col-md-11" align="right">
-						<a class="btn w-55 btn-outline-light btn-sm" href="#">
-							<h6 class="return" style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
-								一覧に戻る
+						<a class="btn w-55 btn-outline-primary btn-sm" href="#">
+							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.list.return}">
 							</h6>
 						</a>
 
@@ -255,9 +256,8 @@
 						<!-- 閉じるボタンを追加 -->
 						<button onclick="closeWindow()" class="btn w-55 btn-outline-success btn-sm" href="#">
 							<h6 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{information.close}">
-								一覧に戻る
 							</h6>
-						</<button>
+							</<button>
 					</div>
 				</main>
 			</div>

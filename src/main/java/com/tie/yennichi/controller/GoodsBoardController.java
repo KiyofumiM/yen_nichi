@@ -30,10 +30,7 @@ public class GoodsBoardController {
     @Autowired
     private GoodBoardRepository repository;
 
-    @Autowired
-    private BoardsController boarsController;
-
-	/**
+    /**
 	 * 投稿内容に対して「いいね！」をする
 	 * @param  Principal, board_id, RedirectAttributes, Locale
 	 * @return redirect:/learning

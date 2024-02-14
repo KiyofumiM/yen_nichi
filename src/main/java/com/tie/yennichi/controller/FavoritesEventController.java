@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,9 +49,9 @@ public class FavoritesEventController {
     public String index(Principal principal, Model model) throws IOException {
         Authentication authentication = (Authentication) principal;
         UserInf user = (UserInf) authentication.getPrincipal();
-        List<FavoriteEvent> event = repository.findByUserIdOrderByUpdatedAtDesc(user.getUserId());
+        List<FavoriteEvent> events = repository.findByUserIdOrderByUpdatedAtDesc(user.getUserId());
         List<EventForm> list = new ArrayList<>();
-        for (FavoriteEvent entity : event) {
+        for (FavoriteEvent entity : events) {
             Event EventEntity = entity.getEvent();
             EventForm form = eventController.getEvent(user, EventEntity);
             list.add(form);

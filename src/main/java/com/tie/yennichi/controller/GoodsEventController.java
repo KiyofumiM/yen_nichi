@@ -30,10 +30,7 @@ public class GoodsEventController {
     @Autowired
     private GoodEventRepository repository;
 
-    @Autowired
-    private EventsController eventsController;
-
-	/**
+    /**
 	 * 投稿内容に対して「いいね！」をする
 	 * @param  Principal, event_id, RedirectAttributes, Locale
 	 * @return redirect:/learning

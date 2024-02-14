@@ -246,10 +246,13 @@ public class EventsController {
             return "events/new";
         }
 
+    	/*
         boolean isImageLocal = false;
         if (imageLocal != null) {
             isImageLocal = new Boolean(imageLocal);
         }
+        */
+    	boolean isImageLocal = true;
 
         Event entity = new Event();
         Authentication authentication = (Authentication) principal;

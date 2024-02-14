@@ -15,9 +15,9 @@
 					<h1 class="text-center" th:text="#{topics.edit.title}">投稿内容の更新</h1>
 
 					<br>
-					
-					<form class="edit_board" id="edit_board" method="post" th:action="@{/board/update}" th:object="${form}"
-						enctype="multipart/form-data">
+
+					<form class="edit_board" id="edit_board" method="post" th:action="@{/board/update}"
+						th:object="${form}" enctype="multipart/form-data">
 						<div layout:replace="~{layouts/common::messages}"></div>
 						<input type="hidden" th:field="*{id}" />
 						<div class="mb-3">
@@ -44,7 +44,8 @@
 							th:value="#{topics.edit.submit}" />
 					</form>
 
-					<br><br>
+					<!-- 背景画像調節用 -->
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 				</div>
 			</div>

@@ -1,6 +1,9 @@
 h1, h2, h3, h4, h5, h6 {
   font-weight: 100; }
 
+h6 {
+  margin-bottom: 0px; }
+
 .p-form-top {
   height: 120px; }
 
@@ -52,7 +55,7 @@ nav.navbar {
 .pages-index-wrapper {
   width: 100vw;
   height: 100vh;
-  background-image: url("/images/Asakusa.png");
+  background-image: url("../images/Asakusa.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -74,7 +77,7 @@ nav.navbar {
 .users-new-wrapper {
   width: 100vw;
   min-height: 100%;
-  background-image: url("/images/TokyoSkiTree.png");
+  background-image: url("../images/TokyoSkiTree.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -87,7 +90,7 @@ nav.navbar {
 .contents-index-wrapper {
   width: 100vw;
   min-height: 100%;
-  background-image: url("/images/cherryblossom.png");
+  background-image: url("../images/cherryblossom.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -109,7 +112,7 @@ nav.navbar {
 
 .learning-list-wrapper {
   padding: 80px 0 20px;
-  background-image: url("/images/maple.png");
+  background-image: url("../images/maple.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -149,7 +152,7 @@ nav.navbar {
 
 .learning-new-wrapper {
   padding-top: 80px;
-  background-image: url("/images/maple.png");
+  background-image: url("../images/maple.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -162,7 +165,7 @@ nav.navbar {
 
 .learning-index-wrapper {
   padding: 80px 0 20px;
-  background-image: url("/images/maple.png");
+  background-image: url("../images/maple.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -233,7 +236,7 @@ nav.navbar {
 
 .events-new-wrapper {
   padding-top: 80px;
-  background-image: url("/images/KiyomizuTemple.png");
+  background-image: url("../images/KiyomizuTemple.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -246,7 +249,7 @@ nav.navbar {
 
 .events-index-wrapper {
   padding: 80px 0 20px;
-  background-image: url("/images/KiyomizuTemple.png");
+  background-image: url("../images/KiyomizuTemple.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -337,7 +340,7 @@ nav.navbar {
   text-decoration: none; }
 
 #calendar-back {
-  background-image: url("/images/KiyomizuTemple.png");
+  background-image: url("../images/KiyomizuTemple.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -348,7 +351,7 @@ nav.navbar {
 
 .board-index-wrapper {
   padding: 80px 0 20px;
-  background-image: url("/images/Bomboo.png");
+  background-image: url("../images/Bomboo.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -417,17 +420,20 @@ nav.navbar {
 
 .board-new-wrapper {
   padding-top: 80px;
-  background-image: url("/images/Bomboo.png");
-  background-color: #fafafa;
+  background-image: url("../images/Bomboo.png");
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
+  background-color: #a0d8ef;
   min-height: calc(100vh - 180px);
   overflow: hidden; }
   .board-new-wrapper #description {
-    height: 100px; }
+    height: 140px; }
 
 .information-index-wrapper {
   padding: 80px 0 20px;
-  background-image: url("/images/cherryblossom.png");
+  background-image: url("../images/cherryblossom.png");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -461,10 +467,10 @@ nav.navbar {
       color: #164a84;
       padding: 0 40px;
       font-weight: bold; }
-    .information-index-wrapper main .return {
-      color: #164a84; }
     .information-index-wrapper main .description {
       padding: 0 50px;
       font-weight: bold; }
+    .information-index-wrapper main .btn-outline-primary {
+      border-color: #164a84; }
 
 /*# sourceMappingURL=style.css.map */
