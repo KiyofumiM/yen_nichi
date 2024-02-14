@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout2}">
+
+<head>
+	<title>Yen Nichi contacts</title>
+</head>
+
+<body>
+	<div class="board-new-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+					<h1 class="text-center" th:text="#{contact.new.title}">お問い合わせ</h1>
+					<form class="new_contact" id="new_contact" method="post" th:action="@{/contact}" th:object="${form}"
+						enctype="multipart/form-data">
+						<div layout:replace="~{layouts/common::messages}"></div>
+						
+						<br>
+						
+						<input type="hidden" th:field="*{id}" />
+						<div class="mb-3">
+							<label class="form-label text-black" for="contact_title" th:text="#{contact.new.mailTitle}">タイトル</label>
+							<textarea class="form-control" th:field="*{title}" rows="10"
+								th:errorclass="error-field"></textarea>
+							<p th:if="${#fields.hasErrors('description')}" class="error-message"
+								th:errors="*{description}"></p>
+								
+							<br><br>
+							
+							<label class="form-label text-black" for="contact_description" th:text="#{contact.new.description}">内容</label>
+							<textarea class="form-control" th:field="*{description}" rows="10"
+								th:errorclass="error-field"></textarea>
+							<p th:if="${#fields.hasErrors('description')}" class="error-message"
+								th:errors="*{description}"></p>
+						</div>
+						
+						<br><br>
+						
+						<input type="submit" value="送信" class="btn w-100 btn-outline-success" th:value="#{contact.submit}"/>
+					</form>
+					
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

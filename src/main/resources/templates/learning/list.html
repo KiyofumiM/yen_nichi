@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Yen Nichi learning</title>
+</head>
+
+<body>
+	<div class="learning-list-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="col-md-9" align="right">
+				<!-- 新規投稿ボタン -->
+				<a class="btn w-55 btn-outline-light" th:href="@{/learning/new}">
+					<img src="/images/icons/posting.png" th:src="@{/images/icons/posting.png}" class="icon">
+					<br>
+					<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84" th:text="#{topics.new.title}">
+						新規投稿
+					</h6>
+				</a>
+			</div>
+			
+			<div class="col-md-6 mx-auto">
+				<main>
+					<h1 class="title" th:text="#{contents.learning}">
+						言葉を広げる</h1>
+
+					<h３ class="title2" th:text="#{learning.list}">
+						言葉一覧</h３>
+						
+					<div class="row" th:each="learning : ${list}">
+						<h4 class="subtitle" th:text="${learning.title}"></h4>
+						<a th:href="@{'/learning#' + ${learning.id}}">
+							<img src="" th:if="${@environment.getProperty('image.local')}"
+								th:src="${learning.imageData}" class="image" border="1">
+						</a>
+					</div>
+				</main>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

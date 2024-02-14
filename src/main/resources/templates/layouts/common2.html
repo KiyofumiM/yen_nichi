@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout2">
+
+<body>
+	<nav class="navbar navbar-expand-lg fixed-top navbar-primary" layout:fragment="nav">
+		<div class="container">
+
+			<!-- アプリロゴ -->
+			<img src="/images/icons/logo.png" th:src="@{/images/icons/logo.png}" class="brand">
+						</div>
+		</div>
+	</nav>
+	<div id="messages" layout:fragment="messages" th:if="!${#lists.isEmpty(#fields.detailedErrors())}">
+		<ul>
+			<li th:each="error : ${#fields.detailedErrors()}" class="error-message" th:text="${error.message}" />
+		</ul>
+	</div>
+</body>
+
+</html>

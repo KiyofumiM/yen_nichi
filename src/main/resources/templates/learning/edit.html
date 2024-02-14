@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>YenNichi learning</title>
+</head>
+
+<body>
+	<div class="learning-new-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+					<h1 class="text-center" th:text="#{learning.new.title}">言葉の追加</h1>
+					
+					<br>
+					
+					<h3 class="text-center" th:text="#{topics.edit.title}">投稿内容の更新</h3>
+					
+					<br><br>
+					
+					<form class="edit_learning" id="edit_learning" method="post" th:action="@{/learning/update}"
+						th:object="${form}" enctype="multipart/form-data">
+						<div layout:replace="~{layouts/common::messages}"></div>
+						<input type="hidden" th:field="*{id}" />
+						<div class="mb-3">
+							<label class="form-label text-black" for="topic_image" th:text="#{learning.new.image}">画像</label>
+							<input type="file" class="form-control-file" th:field="*{image}" />
+							<p th:if="${#fields.hasErrors('image')}" class="error-message" th:errors="*{image}"></p>
+						</div>
+						<div class="mb-3">
+							<h3>
+								<label class="form-label text-black" for="learning_title" th:text="#{learning.new.words}">言葉</label>
+							</h3>
+							<textarea class="form-control" th:field="*{title}" rows="10"
+								th:errorclass="error-field"></textarea>
+							<p th:if="${#fields.hasErrors('description')}" class="error-message"
+								th:errors="*{description}"></p>
+							
+							<br><br>
+							
+							<div class="mb-3">
+								<label class="form-label text-black" for="event_description" th:text="#{learning.new.description}">説明</label>
+								<textarea class="form-control" th:field="*{description}" rows="10"
+									th:errorclass="error-field"></textarea>
+								<p th:if="${#fields.hasErrors('description')}" class="error-message"
+									th:errors="*{description}"></p>
+							</div>
+
+							<br>
+							<br>
+							<input type="submit" value="更新" class="btn w-100 btn-outline-success btn-lg" th:value="#{topics.edit.submit}"/>
+					</form>
+				</div>
+				<!-- 背景画像調節用 -->
+				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+	</div>
+</body>
+
+</html>

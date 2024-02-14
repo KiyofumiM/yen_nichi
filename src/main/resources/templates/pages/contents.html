@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Yen Nichi</title>
+	<script th:src="@{/scripts/message.js}" defer></script>
+</head>
+
+<body>
+	<div class="contents-index-wrapper text-center" layout:fragment="contents">
+		<div class="container">
+			<br>
+			<h2 style="font-family: 'ＭＳ Ｐ明朝'">
+				<!-- 時間に合わせたメッセージの表示 -->
+				<div id="message1"></div>
+			</h2>
+
+			<br>
+
+			<h3 style="font-family: 'ＭＳ Ｐ明朝'">
+				<!-- 時間に合わせたメッセージの表示 -->
+				<div id="message2"></div>
+			</h3>
+
+			<br>
+
+			<a class="btn w-55 btn-outline-light" th:href="@{learning/list}">
+				<img src="/images/icons/go_top.png" th:src="@{/images/icons/learning.png}">
+				<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{contents.learning}">
+					言葉を広げる
+				</h5>
+			</a>
+
+			<span>&nbsp;</span>
+
+			<a class="btn w-55 btn-outline-light" th:href="@{calendar/events}">
+				<img src="/images/icons/go_top.png" th:src="@{/images/icons/calendar.png}">
+				<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{contents.event}">
+					イベントの共有
+				</h5>
+			</a>
+
+			<span>&nbsp;</span>
+
+			<a class="btn w-55 btn-outline-light" th:href="@{board}">
+				<img src="/images/icons/go_top.png" th:src="@{/images/icons/board.png}">
+				<h5 style="font-family: 'ＭＳ Ｐ明朝'" th:text="#{contents.board}">
+					掲示板
+				</h5>
+			</a>
+
+
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</div>
+
+</body>
+
+</html>

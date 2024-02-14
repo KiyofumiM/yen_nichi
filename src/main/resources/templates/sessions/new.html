@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/layout}">
+  <head>
+    <title>Yen Nichi</title>
+  </head>
+  <body>
+<div class="users-new-wrapper" layout:fragment="contents">
+  <div class="container">
+    <div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+    <div class="row">
+      <main class="col-md-4 mx-auto">
+        <h1 class="text-center text-white" th:text="#{sessions.new.title}">Log in</h1>
+        <form method="post" th:action="@{/login}">
+          <div class="mb-3">
+            <label class="form-label text-white" for="session_email" th:text="#{sessions.new.email}">Email</label>
+            <input class="form-control" type="text" name="username" id="session_email" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-white" for="session_password" th:text="#{sessions.new.password}">Password</label>
+            <input class="form-control" type="password" name="password" id="session_password"/>
+          </div>
+          
+          <br><br>
+          
+          <input type="submit" value="ログイン" class="btn w-100 btn-outline-primary btn-lg" th:value="#{sessions.new.submit}"/>
+        </form>
+        
+        <!-- 画面の調節用 -->
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      </main>
+    </div>
+  </div>
+</div>
+  </body>
+</html>

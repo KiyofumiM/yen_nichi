@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h2 style="margin-bottom: 20px;" th:inline="text">Yen Nichi 新規問い合わせ</h2>
+    <p>[[${name}]] から問い合わせが来ました。</p>
+    <p>メールアドレス : [[${mailadress}]]</p>
+    
+    <br>
+    <p>タイトル</p>
+    <h2 style="margin-bottom: 20px;" th:inline="text">[[${title}]]</h2>
+    
+    <p>内容</p>
+    <p>[[${description}]]</p>
+</body>
+</html>

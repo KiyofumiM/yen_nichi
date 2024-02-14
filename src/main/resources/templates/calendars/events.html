@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Yen Nichi Events</title>
+	<style>
+      .fc-button-primary  {
+         background-color: #2ca9e1
+      }
+   </style>
+</head>
+
+<body>
+	<div layout:fragment="contents" id='calendar-back'>
+		<div class="col-md-11" align="right">
+			<!-- 新規投稿ボタン -->
+			<a class="btn w-55 btn-outline-light" th:href="@{/events/new}">
+				<img src="/images/icons/posting.png" th:src="@{/images/icons/posting.png}" class="icon">
+				<br>
+				<h6 class="text-color" style="font-family: 'ＭＳ Ｐ明朝'; color: #164a84" th:text="#{topics.new.title}">
+					新規投稿
+				</h6>
+			</a>
+		</div>
+
+		<div id='calendar-container'>
+			<div id='calendar'></div>
+		</div>
+		<link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css" />	
+		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
+		<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@6.1.10/index.global.min.js'></script>
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function () {
+				var calendarEl = document.getElementById('calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					timeZone: 'UTC',
+					themeSystem: 'standard',
+					initialView: 'dayGridMonth',
+					locale: 'ja',
+					headerToolbar: {
+						left: 'prevYear,prev',
+						center: 'title',
+						right: 'today next,nextYear'
+					},
+					events: {url: '../view_events/all'}
+				});
+				calendar.render();
+
+			});
+		</script>
+		
+		<!-- 背景画像調節用 -->
+		<br><br><br><br><br><br><br><br><br><br><br><br>
+	</div>
+	
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Yen Nichi bulletin board</title>
+</head>
+
+<body>
+	<div class="board-new-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+					<h1 class="text-center" th:text="#{board.new.title}">新規投稿</h1>
+					<form class="new_board" id="new_board" method="post" th:action="@{/board}" th:object="${form}"
+						enctype="multipart/form-data">
+						<div layout:replace="~{layouts/common::messages}"></div>
+						<input type="hidden" th:field="*{id}" />
+						<div class="mb-3">
+							
+							<br>
+							
+							<label class="form-label text-black" for="board_title" th:text="#{board.new.topicTitle}">タイトル</label>
+							<textarea class="form-control" th:field="*{title}" rows="10"
+								th:errorclass="error-field"></textarea>
+							<p th:if="${#fields.hasErrors('description')}" class="error-message"
+								th:errors="*{description}"></p>
+								
+							<br><br>
+							
+							<label class="form-label text-black" for="board_description" th:text="#{board.new.description}">内容</label>
+							<textarea class="form-control" th:field="*{description}" rows="10"
+								th:errorclass="error-field"></textarea>
+							<p th:if="${#fields.hasErrors('description')}" class="error-message"
+								th:errors="*{description}"></p>
+						</div>
+						
+						<br>
+						
+						<input type="submit" value="投稿" class="btn w-100 btn-outline-primary btn-lg"  th:value="#{topics.new.submit}"/>
+					</form>
+					
+					
+				</div>
+			</div>
+		</div>
+		<!-- 背景画像調節用 -->
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+	</div>
+</body>
+
+</html>

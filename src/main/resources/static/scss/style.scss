@@ -1,0 +1,591 @@
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+}
+h6 {
+	margin-bottom: 0px;
+}
+.p-form-top {
+    height: 120px;
+}
+.form-control, form-control-file {
+  height: 45px;
+}
+
+// Adjust Alert
+.alert {
+  margin-bottom: 0px;
+  position: fixed;
+  width: 100%;
+  z-index: 10000;
+  height: 60px;
+}
+
+// Adjust Messages
+#messages {
+  ul{
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 4px;
+    color:#203744;
+    li {
+      list-style: none;
+      padding: 4px 8px;
+      font-size: 22px;
+    }
+  }
+}
+
+.error-message {
+  color: #c9171e;
+}
+
+.error-field {
+  background-color: rgba(255,192,203,0.5);
+}
+
+// Adjust Navber
+nav.navbar {
+  background-color: rgba(253,239,242,0.6);
+  border-color:#0095d9;
+  border-width: 0 0 1px;
+  margin-bottom: 0px ;
+  padding: 0;
+  a {
+    color: #19448e;
+  }
+  img {
+    height: 50px;
+  }
+}
+
+.navbar-light .navbar-toggler {
+  color: #1e50a2;
+  border-color: #1e50a2;
+}
+.navbar-light .navbar-toggler-icon {
+  -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+  filter: invert(24%) sepia(21%) saturate(5480%) hue-rotate(202deg) brightness(95%) contrast(91%);
+}
+
+// Set home page
+.pages-index-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../images/Asakusa.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #a0d8ef;
+  .container {
+    padding-top: 80px;
+    h1 {
+      font-size: 56px;
+      color: #ea5506;
+      font-weight: 900;
+      margin-bottom: 20px;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      margin-bottom: 60px;
+      color: #ea5506;
+      font-weight: 900;
+    }
+  }
+}
+
+// Set users new, users edit and log in
+.users-new-wrapper {
+  width: 100vw;
+  min-height: 100%;
+  background-image: url('../images/TokyoSkiTree.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fafafa;
+  background-color: #a0d8ef;
+  main {
+    padding-top: 80px;
+  }
+}
+
+// Set contents
+.contents-index-wrapper {
+  width: 100vw;
+  min-height: 100%;
+  background-image: url('../images/cherryblossom.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fef4f4;
+  .container {
+    padding-top: 80px;
+    h2 {
+      font-size: 36px;
+      color: #e83929;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    h3 {
+      margin-bottom: 30px;
+      color: #e83929;
+      font-weight: 700;
+    }
+    h5 {
+	  color: #223a70;
+	}
+  }
+}
+
+// Set learning list ( learning top page)
+.learning-list-wrapper {
+  padding: 80px 0 20px;
+  background-image: url('../images/maple.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fafafa;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  main {
+    background-color: #FAFFF5;
+    padding: 20px 0;
+    margin-top: 30px;
+    border: 1px solid #e6ecf0;
+    border-radius: 6px;
+    .image {
+      margin: -6px 50px;
+      width: 25%;
+    }
+    .title {
+      padding: 10px 40px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: #ea5506;
+      background-color: #FAFFF5;
+      border: none;
+    }
+    .title2 {
+      padding: 10px 60px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: #164a84;
+      background-color: #FAFFF5;
+      border: none;
+    }
+    .subtitle {
+      padding: 10px 40px;
+      margin-top: 22px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border: none;
+    }
+  }
+}
+
+// Set learning new, learning edit and comment learning
+.learning-new-wrapper{
+  padding-top: 80px;
+  background-image: url('../images/maple.png'); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fafafa;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  #description {
+    height: 100px;
+  }
+}
+
+// Set learning description and favorite learning
+.learning-index-wrapper {
+  padding: 80px 0 20px;
+  background-image: url('../images/maple.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fafafa;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  main {
+    background-color: #FAFFF5;
+    padding: 20px 0;
+    margin-top: 30px;
+    border: 1px solid #e6ecf0;
+    border-radius: 6px;
+    .author {
+      margin: 10px;
+      padding: 0 20px;
+    }
+    .image {
+      margin: 10px 0;
+      width: 95%;
+    }
+    .icons {
+      display: flex;
+      flex-direction: row;
+      .icon {
+        display: block;
+        width: 35px;
+        height: 30px;
+        margin-left: 20px;
+        img {
+          width: 35px;
+          height: 30px;
+        }
+        .good-on {
+          -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+		filter: invert(59%) sepia(64%) saturate(1989%) hue-rotate(167deg) brightness(95%) contrast(86%);
+        }
+        .favorite-on {
+          -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+          filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
+        }
+      }
+      .count {
+        display: flex;
+        width: 10px;
+        height: 30px;
+        align-items: flex-end;
+      }
+    }
+    .title {
+      padding: 10px 20px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background-color: #FAFFF5;
+      border: none;
+    }
+    .description {
+      padding: 10px 30px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background-color: #FAFFF5;
+      border: none;
+      margin-bottom: 2rem;
+      font-weight : bold;
+    }
+    .comments {
+      .author {
+        margin: 20px;
+        padding: 0 40px;
+      }
+      .description {
+		margin: 20px;
+        padding: 0 50px;
+        margin-bottom: 2rem;
+        font-weight : bold;
+      }
+    }
+    h6 {
+	  color: #164a84;
+	}
+  }
+}
+
+// Set event new, event edit and comment event
+.events-new-wrapper {
+  padding-top: 80px;
+  background-image: url('../images/KiyomizuTemple.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #a0d8ef;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  #description {
+    height: 140px;
+  }
+}
+
+// Set event description and favorite event
+.events-index-wrapper {
+  padding: 80px 0 20px;
+  background-image: url('../images/KiyomizuTemple.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #a0d8ef;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  main {
+    background-color: #FAFFF5;
+    padding: 20px 0;
+    margin-top: 30px;
+    border: 1px solid #e6ecf0;
+    border-radius: 6px;
+    .author {
+      margin: 10px;
+      padding: 0 20px;
+    }
+    .image {
+      margin: 10px 0;
+      width: 95%;
+    }
+    .icons {
+      display: flex;
+      flex-direction: row;
+      .icon {
+        display: block;
+        width: 35px;
+        height: 30px;
+        margin-left: 20px;
+        img {
+          width: 35px;
+          height: 30px;
+        }
+        .good-on {
+          -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+          filter: invert(59%) sepia(64%) saturate(1989%) hue-rotate(167deg) brightness(95%) contrast(86%);
+        }
+        .favorite-on {
+          -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+          filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
+        }
+      }
+      .count {
+        display: flex;
+        width: 10px;
+        height: 30px;
+        align-items: flex-end;
+      }
+    }
+    .title {
+      padding: 10px 20px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background-color: #FAFFF5;
+      border: none;
+    }
+    .description {
+      padding: 10px 30px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background-color: #FAFFF5;
+      border: none;
+      margin-bottom: 2rem;
+      font-weight : bold;
+    }
+    .comments {
+      .author {
+        margin: 20px;
+        padding: 0 40px;
+      }
+      .description {
+		margin: 20px;
+        padding: 0 50px;
+        margin-bottom: 2rem;
+        font-weight : bold;
+      }
+    }
+    h6 {
+	  color: #164a84;
+	}
+  }
+}
+
+// Use event calender
+.fc-direction-ltr {
+  padding-top: 40px;
+}
+.fc .fc-header-toolbar .fc-button-primary  {
+  background-color: #007bbb;
+  border-color: #007bbb;
+}
+
+// Set event calender
+#calendar {
+  color: #9E202E;
+  text-decoration: none;
+  background-color: rgba(245, 245, 255, 0.4);
+  max-width: 1100px;
+  margin: 40px auto;
+  .fc-toolbar-title {
+  font-weight: 800;
+  }
+}
+
+#calendar a {
+  color: #1e50a2;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+#calendar-back {
+  background-image: url('../images/KiyomizuTemple.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #a0d8ef;
+  
+  padding-top: 90px;
+  padding-bottom: 30px;
+}
+
+// Set bulletin board description
+.board-index-wrapper {
+  padding: 80px 0 20px;
+  background-image: url('../images/Bomboo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fafafa;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  main {
+    background-color:  rgba(250, 255, 255, 0.6);
+    padding: 20px 0;
+    margin-top: 30px;
+    border: 1px solid  rgba(250, 255, 255, 0.6);
+    border-radius: 6px;
+    .author {
+      margin: 10px;
+      padding: 0 20px;
+    }
+    .icons {
+      display: flex;
+      flex-direction: row;
+      .icon {
+        display: block;
+        width: 35px;
+        height: 30px;
+        margin-left: 20px;
+        img {
+          width: 35px;
+          height: 30px;
+        }
+        .good-on {
+          -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+		filter: invert(59%) sepia(64%) saturate(1989%) hue-rotate(167deg) brightness(95%) contrast(86%);
+        }
+      }
+      .count {
+        display: flex;
+        width: 10px;
+        height: 30px;
+        align-items: flex-end;
+      }
+    }
+    .author {
+      padding: 10px 30px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border: none;
+    }
+    .title {
+      padding: 5px 20px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border: none;
+      font-weight : bold;
+    }
+    .description {
+      padding: 5px 40px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border: none;
+      margin-bottom: 2rem;
+      font-weight : bold;
+    }
+    .comments {
+      .author {
+        margin: 20px;
+        padding: 0 40px;
+      }
+      .description {
+		margin: 20px;
+        padding: 0 50px;
+        margin-bottom: 2rem;
+        font-weight : bold;
+      }
+    }
+  }
+  h6 {
+	  color: #164a84;
+  }
+}
+
+// Set bulletin board new, bulletin board edit and comment bulletin board
+.board-new-wrapper{
+  padding-top: 80px;
+  background-image: url('../images/Bomboo.png'); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #a0d8ef;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  #description {
+    height: 140px;
+  }
+}
+
+// Set how to use Yen Nichi
+.information-index-wrapper {
+  padding: 80px 0 20px;
+  background-image: url('../images/cherryblossom.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #fafafa;
+  min-height: calc(100vh - 180px);
+  overflow: hidden;
+  main {
+    background-color: rgba(255,249,249,0.4);
+    padding: 20px 0;
+    margin-top: 30px;
+    border: 1px solid #e6ecf0;
+    border-radius: 6px;
+    .imagePC {
+      margin: 10px 0;
+      width: 95%;
+    }
+    .imageSM {
+      margin: 10px 0;
+      width: 45%;
+    }
+    
+    h2 {
+      font-size: 36px;
+      color: #e83929;
+      font-weight: 900;
+      margin-bottom: 10px;
+      padding: 0 30px;
+    }
+    h3 {
+      color: #e83929;
+      font-weight: 700;
+      padding: 0 30px;
+    }
+    h5 {
+	  color: #164a84;
+	  padding: 0 40px;
+	  font-weight : bold;
+	}
+	.description {
+      padding: 0 50px;
+      font-weight : bold;
+    }
+    .btn-outline-primary {
+      border-color: #164a84;
+    }
+  }
+}
